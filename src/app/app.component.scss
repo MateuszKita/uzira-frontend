@@ -1,3 +1,8 @@
 .menu-space {
   flex: 1 1 auto;
 }
+
+.container {
+  width: 100%;
+  height: calc(100% - 64px)
+}

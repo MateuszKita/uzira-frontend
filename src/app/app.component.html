@@ -10,4 +10,15 @@
   <span>Text</span>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<mat-drawer-container class="container"
+  [hasBackdrop]="false">
+  <mat-drawer #drawer
+    mode="side">Sidebar menu items</mat-drawer>
+  <mat-drawer-content>
+    <button mat-raised-button
+      (click)="drawer.toggle()">Toggle sidebar</button>
+
+    <router-outlet></router-outlet>
+
+  </mat-drawer-content>
+</mat-drawer-container>
