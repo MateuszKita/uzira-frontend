@@ -1,19 +1,25 @@
 <mat-toolbar>
-  <span>{{ title }}</span>
+  <span class="nav-bar-item main-title">
+    {{ title }}
+  </span>
   <span class="menu-space"></span>
-  <span>Text</span>
   <span class="menu-space"></span>
-  <span>Text</span>
-  <span class="menu-space"></span>
-  <span>Text</span>
-  <span class="menu-space"></span>
-  <span>Text</span>
+  <span class="nav-bar-item">
+    <span>
+      <mat-icon class="user-image">mood</mat-icon>
+    </span>
+    <span class="user-name">
+      User Admin
+    </span>
+  </span>
 </mat-toolbar>
 
 <mat-drawer-container class="container"
   [hasBackdrop]="false">
   <mat-drawer #drawer
-    mode="side" opened="true">Sidebar menu items</mat-drawer>
+    class="sidebar-menu"
+    mode="side"
+    opened="true">Sidebar menu items</mat-drawer>
   <mat-drawer-content>
     <button mat-raised-button
       (click)="drawer.toggle()">Toggle sidebar</button>
