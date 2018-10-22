@@ -1,6 +1,9 @@
 <mat-toolbar class="top-bar-menu">
-  <span class="nav-bar-item main-title">
-    {{ title }}
+  <span class="nav-bar-item image-title-container">
+    <img class="logo" [src]="imagePath">
+    <span class="main-title">
+      {{ title }}
+    </span>
   </span>
   <span class="nav-bar-item">
     <span>
@@ -19,7 +22,8 @@
     mode="side"
     opened="true">Sidebar menu items</mat-drawer>
   <mat-drawer-content>
-    <button class="menu-button" mat-raised-button
+    <button class="menu-button"
+      mat-raised-button
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
