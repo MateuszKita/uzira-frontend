@@ -4,6 +4,23 @@
 
   .sidebar-menu {
     width: 200px;
+
+    .nav-link {
+      color: black;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: blue;
+    }
+
+    .active {
+      color: red;
+
+      .nav-link {
+        color: red;
+      }
+    }
   }
 
   .menu-button {
