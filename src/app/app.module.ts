@@ -13,9 +13,11 @@ import { AppComponent } from './app.component';
 import { BacklogComponent } from './views/backlog/backlog.component';
 import { SprintComponent } from './views/sprint/sprint.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SidebarMenuComponent } from './menu/sidebar-menu/sidebar-menu.component';
+import { TopbarMenuComponent } from './menu/topbar-menu/topbar-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, BacklogComponent, SprintComponent],
+  declarations: [AppComponent, BacklogComponent, SprintComponent, SidebarMenuComponent, TopbarMenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
