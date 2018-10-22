@@ -1,19 +1,5 @@
 <app-topbar-menu></app-topbar-menu>
 
-<mat-drawer-container class="container"
-  [hasBackdrop]="false">
-  <mat-drawer #drawer
-    class="sidebar-menu"
-    mode="side"
-    opened="true">Sidebar menu items</mat-drawer>
-  <mat-drawer-content>
-    <button class="menu-button"
-      mat-raised-button
-      (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
+<app-sidebar-menu>
     <router-outlet></router-outlet>
-
-  </mat-drawer-content>
-</mat-drawer-container>
+</app-sidebar-menu>
