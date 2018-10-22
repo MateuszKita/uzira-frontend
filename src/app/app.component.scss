@@ -26,6 +26,9 @@
 .main-title {
   font-weight: 900;
   font-size: 110%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sidebar-menu {
