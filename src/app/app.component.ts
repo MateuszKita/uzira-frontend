@@ -5,7 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'UZira';
-  imagePath = '../assets/uzira-logo.png';
-}
+export class AppComponent {}

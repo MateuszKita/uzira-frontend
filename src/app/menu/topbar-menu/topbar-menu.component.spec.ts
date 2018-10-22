@@ -21,4 +21,9 @@ describe('TopbarMenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`should have as title 'uzira-frontend'`, () => {
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual('UZira');
+  });
 });
