@@ -21,8 +21,10 @@
     mode="side"
     opened="true">Sidebar menu items</mat-drawer>
   <mat-drawer-content>
-    <button mat-raised-button
-      (click)="drawer.toggle()">Toggle sidebar</button>
+    <button class="menu-button" mat-raised-button
+      (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
 
     <router-outlet></router-outlet>
 
