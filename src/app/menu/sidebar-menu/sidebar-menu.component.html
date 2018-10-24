@@ -1,32 +1,30 @@
 <mat-drawer-container class="container"
   [hasBackdrop]="false">
+
   <mat-drawer #drawer
     class="sidebar-menu"
     mode="side"
     opened="true">
-    <ul class="nav navbar-nav">
-      <li class="nav-item"
-        routerLinkActive='active'>
-        <a class="nav-link"
+    <mat-nav-list>
+      <mat-list-item routerLinkActive='active'>
+        <a matLine class="nav-link"
           routerLink='sprint'>Sprint
         </a>
-      </li>
-      <li class="nav-item"
-        routerLinkActive='active'>
-        <a class="nav-link"
+      </mat-list-item>
+      <mat-list-item routerLinkActive='active'>
+        <a matLine class="nav-link"
           routerLink='backlog'>Backlog
         </a>
-      </li>
-    </ul>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-drawer>
+
   <mat-drawer-content>
     <button class="menu-button"
       mat-raised-button
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-
     <ng-content></ng-content>
-
   </mat-drawer-content>
 </mat-drawer-container>

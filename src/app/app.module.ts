@@ -5,7 +5,8 @@ import {
   MatIconModule,
   MatToolbarModule,
   MatSidenavModule,
-  MatButtonModule
+  MatButtonModule,
+  MatListModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +28,7 @@ import { SprintModule } from './views/sprint/sprint.module';
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
+    MatListModule,
     BacklogModule,
     SprintModule
   ],
