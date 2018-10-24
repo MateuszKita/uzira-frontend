@@ -19,9 +19,14 @@ export class SidebarMenuComponent implements OnInit {
       iconName: 'storage'
     },
     {
-      label: 'Sprint',
+      label: 'Current Sprint',
       path: '/sprint',
       iconName: 'view_week'
+    },
+    {
+      label: 'Team',
+      path: '/team',
+      iconName: 'people'
     }
   ];
 
