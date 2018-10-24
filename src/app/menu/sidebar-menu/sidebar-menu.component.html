@@ -7,7 +7,7 @@
     opened="true">
     <mat-nav-list>
       <mat-list-item routerLinkActive='active' *ngFor='let item of navList' class="nav-item">
-        <!-- <mat-icon>menu</mat-icon> -->
+        <mat-icon>{{item.iconName}}</mat-icon>
         <a matLine class="nav-link"
           [routerLink]='item.path'>{{item.label}}
         </a>
