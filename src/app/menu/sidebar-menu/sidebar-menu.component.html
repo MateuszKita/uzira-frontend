@@ -6,14 +6,9 @@
     mode="side"
     opened="true">
     <mat-nav-list>
-      <mat-list-item routerLinkActive='active'>
+      <mat-list-item routerLinkActive='active' *ngFor='let item of navList'>
         <a matLine class="nav-link"
-          routerLink='sprint'>Sprint
-        </a>
-      </mat-list-item>
-      <mat-list-item routerLinkActive='active'>
-        <a matLine class="nav-link"
-          routerLink='backlog'>Backlog
+          [routerLink]='item.path'>{{item.label}}
         </a>
       </mat-list-item>
     </mat-nav-list>
