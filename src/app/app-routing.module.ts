@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BacklogComponent } from './views/backlog/backlog.component';
 import { SprintComponent } from './views/sprint/sprint.component';
+import { LoginComponent } from './views/login/login.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'backlog',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'backlog',

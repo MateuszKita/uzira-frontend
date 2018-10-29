@@ -1,5 +1,5 @@
-import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
+import { InjectionToken, Injectable, Inject } from '@angular/core';
 
 export const AUTH_CONFIG_URL = new InjectionToken<string>('Auth config url');
 
@@ -13,6 +13,7 @@ interface AuthConfig {
 })
 export class SecurityService {
   private token: string;
+
   constructor(@Inject(AUTH_CONFIG_URL) private config: AuthConfig) {}
 
   authorize(): void {
@@ -26,7 +27,7 @@ export class SecurityService {
 
     const url = `${auth_url}?${p.toString()}`;
     sessionStorage.removeItem('token');
-    location.replace(url);
+    // location.replace(url);
   }
 
   getToken(): string {
@@ -43,6 +44,7 @@ export class SecurityService {
     if (!this.token) {
       this.authorize();
     }
+    this.token = 'testowy token';
     return this.token;
   }
 }

@@ -1,5 +1,11 @@
-<app-topbar-menu></app-topbar-menu>
+<ng-container *ngIf="!token; else tokenCorrect">
 
-<app-sidebar-menu>
+</ng-container>
+
+<ng-template #tokenCorrect>
+  <app-topbar-menu></app-topbar-menu>
+
+  <app-sidebar-menu>
     <router-outlet></router-outlet>
-</app-sidebar-menu>
+  </app-sidebar-menu>
+</ng-template>

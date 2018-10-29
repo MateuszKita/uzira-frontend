@@ -17,9 +17,15 @@ import { TopbarMenuComponent } from './menu/topbar-menu/topbar-menu.component';
 import { BacklogModule } from './views/backlog/backlog.module';
 import { SprintModule } from './views/sprint/sprint.module';
 import { LoginComponent } from './views/login/login.component';
+import { SecurityModule } from './security/security.module';
 
 @NgModule({
-  declarations: [AppComponent, SidebarMenuComponent, TopbarMenuComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    SidebarMenuComponent,
+    TopbarMenuComponent,
+    LoginComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +37,8 @@ import { LoginComponent } from './views/login/login.component';
     MatButtonModule,
     MatListModule,
     BacklogModule,
-    SprintModule
+    SprintModule,
+    SecurityModule
   ],
   providers: [],
   bootstrap: [AppComponent]

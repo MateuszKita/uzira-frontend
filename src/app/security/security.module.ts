@@ -21,7 +21,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   ]
 })
 export class SecurityModule {
-  constructor(private security: SecurityService) {
+  constructor(private readonly security: SecurityService) {
     this.security.getToken();
   }
 }

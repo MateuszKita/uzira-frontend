@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   auth_config: {
-    auth_url: 'https://accounts.spotify.com/authorize/',
+    auth_url: '',
     response_type: 'token'
   }
 };
