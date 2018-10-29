@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SecurityService, AUTH_CONFIG_URL } from './security.service';
 import { environment } from 'src/environments/environment';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { AUTH_CONFIG_URL, SecurityService } from './security.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [CommonModule],

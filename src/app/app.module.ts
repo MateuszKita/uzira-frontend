@@ -16,9 +16,10 @@ import { SidebarMenuComponent } from './menu/sidebar-menu/sidebar-menu.component
 import { TopbarMenuComponent } from './menu/topbar-menu/topbar-menu.component';
 import { BacklogModule } from './views/backlog/backlog.module';
 import { SprintModule } from './views/sprint/sprint.module';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarMenuComponent, TopbarMenuComponent],
+  declarations: [AppComponent, SidebarMenuComponent, TopbarMenuComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
