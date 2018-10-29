@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  auth_config: {
+    auth_url: 'https://accounts.spotify.com/authorize/',
+    response_type: 'token'
+  }
 };
 
 /*
