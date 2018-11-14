@@ -18,6 +18,9 @@ import { BacklogModule } from './views/backlog/backlog.module';
 import { SprintModule } from './views/sprint/sprint.module';
 import { LoginComponent } from './views/login/login.component';
 import { SecurityModule } from './security/security.module';
+import { HELLO_WORLD_URL } from './shared/hello-world.service';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,9 +41,15 @@ import { SecurityModule } from './security/security.module';
     MatListModule,
     BacklogModule,
     SprintModule,
-    SecurityModule
+    SecurityModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HELLO_WORLD_URL,
+      useValue: environment.api_url
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
