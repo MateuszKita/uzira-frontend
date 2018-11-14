@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HelloWorldService } from '../../shared/hello-world.service';
 
 @Component({
   selector: 'app-backlog',
@@ -6,7 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./backlog.component.scss']
 })
 export class BacklogComponent implements OnInit {
-  constructor() {}
+  constructor(private readonly helloWorldService: HelloWorldService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.helloWorldService.getHelloWorld().subscribe(
+      res => {
+        console.log('res');
+      },
+      error => {
+        console.log('error');
+      }
+    );
+  }
 }

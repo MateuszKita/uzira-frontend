@@ -1,0 +1,21 @@
+import { Injectable, Inject, InjectionToken } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export const HELLO_WORLD_URL = new InjectionToken<string>(
+  'localhost:8000/hello-world'
+);
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HelloWorldService {
+  constructor(
+    @Inject(HELLO_WORLD_URL) private api_url: string,
+    private http: HttpClient
+  ) {}
+
+  getHelloWorld(): Observable<any> {
+    return this.http.get<any>(this.api_url);
+  }
+}

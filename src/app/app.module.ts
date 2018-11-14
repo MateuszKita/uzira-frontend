@@ -16,9 +16,19 @@ import { SidebarMenuComponent } from './menu/sidebar-menu/sidebar-menu.component
 import { TopbarMenuComponent } from './menu/topbar-menu/topbar-menu.component';
 import { BacklogModule } from './views/backlog/backlog.module';
 import { SprintModule } from './views/sprint/sprint.module';
+import { LoginComponent } from './views/login/login.component';
+import { SecurityModule } from './security/security.module';
+import { HELLO_WORLD_URL } from './shared/hello-world.service';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, SidebarMenuComponent, TopbarMenuComponent],
+  declarations: [
+    AppComponent,
+    SidebarMenuComponent,
+    TopbarMenuComponent,
+    LoginComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,9 +40,16 @@ import { SprintModule } from './views/sprint/sprint.module';
     MatButtonModule,
     MatListModule,
     BacklogModule,
-    SprintModule
+    SprintModule,
+    SecurityModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HELLO_WORLD_URL,
+      useValue: environment.api_url
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
