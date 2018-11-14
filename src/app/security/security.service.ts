@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { InjectionToken, Injectable, Inject } from '@angular/core';
+import { Observable, Subject, of } from 'rxjs';
 
 export const AUTH_CONFIG_URL = new InjectionToken<string>('Auth config url');
 
@@ -46,5 +47,15 @@ export class SecurityService {
     }
     this.token = 'testowy token';
     return this.token;
+  }
+
+  chechTokenIsValid(token: string): Observable<boolean> {
+    let tokenIsValid$: Observable<boolean>;
+    if (token) {
+      tokenIsValid$ = of(false);
+    } else {
+      tokenIsValid$ = of(true);
+    }
+    return tokenIsValid$;
   }
 }

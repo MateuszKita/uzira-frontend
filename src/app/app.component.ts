@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
+import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +9,24 @@ import { SecurityService } from './security/security.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public token: string;
+  public tokenIsValid = false;
+  private token: string;
 
-  constructor(private readonly securityService: SecurityService) {}
+  constructor(
+    private readonly securityService: SecurityService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.token = this.securityService.getToken();
-    console.log(this.token);
+    this.securityService
+      .chechTokenIsValid(this.token)
+      .pipe(take(1))
+      .subscribe(isValid => {
+        this.tokenIsValid = isValid;
+        if (!this.tokenIsValid) {
+          this.router.navigate(['login']);
+        }
+      });
   }
 }
