@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { InjectionToken, Injectable, Inject } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 export const AUTH_CONFIG_URL = new InjectionToken<string>('Auth config url');
 
@@ -45,16 +45,16 @@ export class SecurityService {
     if (!this.token) {
       this.authorize();
     }
-    this.token = 'testowy token';
+    this.token = 'token';
     return this.token;
   }
 
   chechTokenIsValid(token: string): Observable<boolean> {
     let tokenIsValid$: Observable<boolean>;
-    if (token) {
-      tokenIsValid$ = of(false);
-    } else {
+    if (JSON.parse(sessionStorage.getItem('token')) === token) {
       tokenIsValid$ = of(true);
+    } else {
+      tokenIsValid$ = of(false);
     }
     return tokenIsValid$;
   }

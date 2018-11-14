@@ -16,6 +16,7 @@ export class LoginComponent {
 
   login(): void {
     if (this.username === 'admin' && this.password === 'admin') {
+      sessionStorage.setItem('token', JSON.stringify('token'));
       this.router.navigate(['backlog']);
     } else {
       alert('Invalid credentials');

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
 import { take } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +19,19 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.securityService.getToken();
-    this.securityService
-      .chechTokenIsValid(this.token)
-      .pipe(take(1))
-      .subscribe(isValid => {
-        this.tokenIsValid = isValid;
-        if (!this.tokenIsValid) {
-          this.router.navigate(['login']);
-        }
-      });
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.securityService
+          .chechTokenIsValid(this.token)
+          .pipe(take(1))
+          .subscribe(isValid => {
+            console.log(isValid);
+            this.tokenIsValid = isValid;
+            if (!this.tokenIsValid) {
+              this.router.navigate(['login']);
+            }
+          });
+      }
+    });
   }
 }
