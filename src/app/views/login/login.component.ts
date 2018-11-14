@@ -7,12 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  private username: string;
-  private password: string;
+  public username: string;
+  public password: string;
+  public title = 'UZira';
+  public imagePath = '../assets/uzira-logo.png';
 
   constructor(private router: Router) {}
 
   login(): void {
+    console.log('login: ', this.username);
+    console.log('password: ', this.password);
+
     if (this.username === 'admin' && this.password === 'admin') {
       this.router.navigate(['backlog']);
     } else {

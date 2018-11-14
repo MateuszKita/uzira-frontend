@@ -9,7 +9,8 @@ import {
   MatListModule,
   MatCardModule,
   MatFormFieldModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatInputModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,13 +46,14 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
     BacklogModule,
     SprintModule,
     SecurityModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    MatProgressSpinnerModule
   ],
   providers: [
     {
