@@ -15,9 +15,6 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   login(): void {
-    console.log('login: ', this.username);
-    console.log('password: ', this.password);
-
     if (this.username === 'admin' && this.password === 'admin') {
       this.router.navigate(['backlog']);
     } else {
