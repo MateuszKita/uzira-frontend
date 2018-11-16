@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
         })
       )
       .subscribe(isValid => {
-        console.log('isValid', isValid);
         this.tokenIsValid = isValid;
         if (!this.tokenIsValid) {
           this.router.navigate(['login']);
