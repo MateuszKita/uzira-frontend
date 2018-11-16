@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
     this.checkTokenValidityOnNavigate();
   }
 
-  // TO DO: remove nested subscription
   private checkTokenValidityOnNavigate(): void {
     this.token = this.securityService.getToken();
     this.router.events
