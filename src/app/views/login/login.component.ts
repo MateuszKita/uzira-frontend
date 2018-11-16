@@ -19,6 +19,7 @@ export class LoginComponent {
       sessionStorage.setItem('token', JSON.stringify('token'));
       this.router.navigate(['backlog']);
     } else {
+      sessionStorage.setItem('token', JSON.stringify(''));
       alert('Invalid credentials');
     }
   }
