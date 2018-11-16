@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
-import { take } from 'rxjs/operators';
+import { take, switchMap, filter } from 'rxjs/operators';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 const LOGIN_URL = '/login';
@@ -12,7 +12,7 @@ const LOGIN_URL = '/login';
 })
 export class AppComponent implements OnInit {
   public tokenIsValid = false;
-  public showMenu: boolean;
+  public showMenu = true;
   private token: string;
 
   constructor(
@@ -28,20 +28,21 @@ export class AppComponent implements OnInit {
   // TO DO: remove nested subscription
   private checkTokenValidityOnNavigate(): void {
     this.token = this.securityService.getToken();
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.changeShowMenuValue(event.url);
-        this.securityService
-          .chechTokenIsValid(this.token)
-          .pipe(take(1))
-          .subscribe(isValid => {
-            this.tokenIsValid = isValid;
-            if (!this.tokenIsValid) {
-              this.router.navigate(['login']);
-            }
-          });
-      }
-    });
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        switchMap((event: NavigationEnd) => {
+          this.changeShowMenuValue(event.url);
+          return this.securityService.chechTokenIsValid(this.token);
+        })
+      )
+      .subscribe(isValid => {
+        console.log('isValid', isValid);
+        this.tokenIsValid = isValid;
+        if (!this.tokenIsValid) {
+          this.router.navigate(['login']);
+        }
+      });
   }
 
   private changeShowMenuValue(route: string): void {
