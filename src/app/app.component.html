@@ -1,4 +1,4 @@
-<ng-container *ngIf="!tokenIsValid; else tokenCorrect">
+<ng-container *ngIf="!tokenIsValid || !showMenu; else tokenCorrect">
   <router-outlet></router-outlet>
 </ng-container>
 
