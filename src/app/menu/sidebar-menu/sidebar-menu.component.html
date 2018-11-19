@@ -1,17 +1,16 @@
 <mat-drawer-container class="container"
-  [hasBackdrop]="false">
-
+                      [hasBackdrop]="false">
   <mat-drawer #drawer
-    class="sidebar-menu"
-    mode="side"
-    opened="true">
+              class="sidebar-menu"
+              mode="side"
+              opened="true">
     <mat-nav-list>
       <mat-list-item routerLinkActive='active'
-        *ngFor='let item of navList'
-        class="nav-item">
+                     *ngFor='let item of navList'
+                     class="nav-item">
         <mat-icon>{{item.iconName}}</mat-icon>
         <a class="nav-link"
-          [routerLink]='item.path'>{{item.label}}
+           [routerLink]='item.path'>{{item.label}}
         </a>
       </mat-list-item>
     </mat-nav-list>
@@ -19,8 +18,8 @@
 
   <mat-drawer-content>
     <button class="menu-button"
-      mat-raised-button
-      (click)="drawer.toggle()">
+            mat-raised-button
+            (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <ng-content></ng-content>
