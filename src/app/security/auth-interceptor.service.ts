@@ -28,7 +28,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     return next.handle(authRequest).pipe(
       catchError((error, caught) => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
-          this.securityService.authorize();
+          // this.securityService.authorize();
         }
         return empty(); // Observable without events
         // return throwError(new Error(error.error.error.message));

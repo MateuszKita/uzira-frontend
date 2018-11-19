@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
         filter(event => event instanceof NavigationEnd),
         switchMap((event: NavigationEnd) => {
           this.changeShowMenuValue(event.url);
-          return this.securityService.chechTokenIsValid(this.token);
+          return this.securityService.checkTokenIsValid(this.token);
         })
       )
       .subscribe(isValid => {
