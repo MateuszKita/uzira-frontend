@@ -9,16 +9,14 @@ import {
 import { Observable, empty } from 'rxjs';
 import { SecurityService } from './security.service';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { UNAUTHORIZED } from 'http-status-codes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private securityService: SecurityService) {}
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.securityService.getToken();
     const authRequest = req.clone({
       setHeaders: {
@@ -27,7 +25,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     });
     return next.handle(authRequest).pipe(
       catchError((error, caught) => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
+        if (error instanceof HttpErrorResponse && error.status === UNAUTHORIZED) {
           // this.securityService.authorize();
         }
         return empty(); // Observable without events
