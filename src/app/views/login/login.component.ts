@@ -1,12 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  constructor() {}
+export class LoginComponent {
+  public username: string;
+  public password: string;
+  public title = 'UZira';
+  public imagePath = '../assets/uzira-logo.png';
 
-  ngOnInit() {}
+  constructor(private router: Router) {}
+
+  login(): void {
+    if (this.username === 'admin' && this.password === 'admin') {
+      sessionStorage.setItem('token', JSON.stringify('token'));
+      this.router.navigate(['backlog']);
+    } else {
+      sessionStorage.setItem('token', JSON.stringify(''));
+      alert('Invalid credentials');
+    }
+  }
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
+import { switchMap, filter } from 'rxjs/operators';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+
+const LOGIN_URL = '/login';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +11,39 @@ import { SecurityService } from './security/security.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public token: string;
+  public tokenIsValid = false;
+  public menuIsVisible = true;
+  private token: string;
 
-  constructor(private readonly securityService: SecurityService) {}
+  constructor(
+    private readonly securityService: SecurityService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.checkTokenValidityOnNavigate();
+  }
+
+  private checkTokenValidityOnNavigate(): void {
     this.token = this.securityService.getToken();
-    console.log(this.token);
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        switchMap((event: NavigationEnd) => {
+          this.changeMenuIsVisibleValue(event.url);
+          return this.securityService.checkTokenIsValid(this.token);
+        })
+      )
+      .subscribe(isValid => {
+        this.tokenIsValid = isValid;
+        if (!this.tokenIsValid) {
+          this.router.navigate(['login']);
+        }
+      });
+  }
+
+  private changeMenuIsVisibleValue(route: string): void {
+    this.menuIsVisible = route !== LOGIN_URL;
   }
 }
