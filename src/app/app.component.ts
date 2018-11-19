@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
-import { take, switchMap, filter } from 'rxjs/operators';
+import { switchMap, filter } from 'rxjs/operators';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 const LOGIN_URL = '/login';
@@ -12,7 +12,7 @@ const LOGIN_URL = '/login';
 })
 export class AppComponent implements OnInit {
   public tokenIsValid = false;
-  public showMenu = true;
+  public menuIsVisible = true;
   private token: string;
 
   constructor(
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       .pipe(
         filter(event => event instanceof NavigationEnd),
         switchMap((event: NavigationEnd) => {
-          this.changeShowMenuValue(event.url);
+          this.changeMenuIsVisibleValue(event.url);
           return this.securityService.checkTokenIsValid(this.token);
         })
       )
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  private changeShowMenuValue(route: string): void {
-    this.showMenu = route !== LOGIN_URL;
+  private changeMenuIsVisibleValue(route: string): void {
+    this.menuIsVisible = route !== LOGIN_URL;
   }
 }
