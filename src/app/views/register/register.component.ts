@@ -11,6 +11,7 @@ export class RegisterComponent implements OnInit {
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
   public registerFormGroup: FormGroup;
+  public registerButtonDisabled: boolean;
 
   constructor(
     private readonly router: Router,
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerFormGroup = this.createFormGroup();
+    this.disableButtonIfFormInvalid();
   }
 
   cancel(): void {
@@ -35,6 +37,20 @@ export class RegisterComponent implements OnInit {
       password: '',
       firstName: '',
       lastName: ''
+    });
+  }
+
+  private disableButtonIfFormInvalid(): void {
+    this.registerFormGroup.statusChanges.subscribe((status: string) => {
+      switch (status) {
+        case 'VALID':
+          this.registerButtonDisabled = false;
+          break;
+        case 'INVALID':
+          this.registerButtonDisabled = true;
+          break;
+        default:
+      }
     });
   }
 }

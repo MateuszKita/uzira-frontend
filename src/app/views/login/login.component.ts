@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
   public loginFormGroup: FormGroup;
+  public loginButtonDisabled: boolean;
 
   constructor(
     private readonly router: Router,
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormGroup = this.createFormGroup();
+    this.disableButtonIfFormInvalid();
   }
 
   login(): void {
@@ -31,8 +33,22 @@ export class LoginComponent implements OnInit {
 
   createFormGroup(): FormGroup {
     return this.fb.group({
-      username: '',
+      email: '',
       password: ''
+    });
+  }
+
+  private disableButtonIfFormInvalid(): void {
+    this.loginFormGroup.statusChanges.subscribe((status: string) => {
+      switch (status) {
+        case 'VALID':
+          this.loginButtonDisabled = false;
+          break;
+        case 'INVALID':
+          this.loginButtonDisabled = true;
+          break;
+        default:
+      }
     });
   }
 }

@@ -14,9 +14,10 @@
             class="login-form">
         <mat-form-field class="login-input">
           <input matInput
-                 formControlName="username"
-                 placeholder="Username"
-                 name="username"
+                 formControlName="email"
+                 placeholder="E-mail Address"
+                 name="email"
+                 email
                  required />
         </mat-form-field>
         <mat-form-field class="login-input">
@@ -36,7 +37,8 @@
                 color="secondary">Register</button>
         <button mat-raised-button
                 (click)="login()"
-                color="primary">Login</button>
+                color="primary"
+                [disabled]="loginButtonDisabled">Login</button>
       </div>
     </mat-card-actions>
   </mat-card>

@@ -15,9 +15,9 @@
         <mat-form-field class="login-input">
           <input matInput
                  formControlName="email"
-                 placeholder="Email Address"
+                 placeholder="E-mail Address"
                  name="email"
-                 type="email"
+                 email
                  required />
         </mat-form-field>
         <mat-form-field class="login-input">
@@ -51,7 +51,8 @@
                 color="secondary">Cancel</button>
         <button mat-raised-button
                 (click)="register()"
-                color="primary">Register</button>
+                color="primary"
+                [disabled]="registerButtonDisabled">Register</button>
       </div>
     </mat-card-actions>
   </mat-card>
