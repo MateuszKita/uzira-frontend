@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { SecurityService } from '../../security/security.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly securityService: SecurityService
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +27,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.loginFormGroup.value);
+    this.securityService.login(this.loginFormGroup.value).subscribe(
+      (token: string) => {
+        this.securityService.setToken(token);
+        this.router.navigate(['backlog']);
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
   register(): void {

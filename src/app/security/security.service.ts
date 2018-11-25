@@ -16,11 +16,21 @@ export class SecurityService {
     return this.token;
   }
 
-  login(body: UserLoginData): Observable<any> {
-    return this.http.post<any>('localhost:8000/login/', body);
+  setToken(token: string): void {
+    sessionStorage.setItem('token', token);
+  }
+
+  login(body: UserLoginData): Observable<string> {
+    return this.http.post<any>('http://localhost:8000/login/', body);
   }
 
   register(body: UserRegisterData): Observable<any> {
-    return this.http.post<any>('localhost:8000/user/', body);
+    const registerData: any = {
+      email: body.email,
+      password: body.password,
+      first_name: body.firstName,
+      last_name: body.lastName
+    };
+    return this.http.post<any>('http://localhost:8000/user/', registerData);
   }
 }

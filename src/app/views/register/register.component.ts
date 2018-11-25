@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SecurityService } from '../../security/security.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +17,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly securityService: SecurityService
   ) {}
 
   ngOnInit() {
@@ -28,7 +31,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    console.log(this.registerFormGroup.value, this.registerFormGroup.valid);
+    this.securityService.register(this.registerFormGroup.value).subscribe(
+      () => {
+        this.router.navigate(['/login']);
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
   createFormGroup(): FormGroup {
