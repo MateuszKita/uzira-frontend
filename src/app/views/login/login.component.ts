@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     console.log(this.loginFormGroup.value);
+  }
+
+  register(): void {
+    this.router.navigate(['/register']);
   }
 
   createFormGroup(): FormGroup {

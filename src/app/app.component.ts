@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
-import { switchMap, filter } from 'rxjs/operators';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import {
+  Router,
+  NavigationEnd,
+  ActivatedRoute,
+  RouterEvent
+} from '@angular/router';
 
 const LOGIN_URL = '/login';
 
@@ -28,18 +33,9 @@ export class AppComponent implements OnInit {
   private checkTokenValidityOnNavigate(): void {
     this.token = this.securityService.getToken();
     this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        switchMap((event: NavigationEnd) => {
-          this.changeMenuIsVisibleValue(event.url);
-          return this.securityService.checkTokenIsValid(this.token);
-        })
-      )
-      .subscribe(isValid => {
-        this.tokenIsValid = isValid;
-        if (!this.tokenIsValid) {
-          this.router.navigate(['login']);
-        }
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: RouterEvent) => {
+        this.changeMenuIsVisibleValue(event.url);
       });
   }
 
