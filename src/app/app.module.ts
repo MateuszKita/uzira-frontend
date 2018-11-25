@@ -25,7 +25,7 @@ import { SecurityModule } from './security/security.module';
 import { HELLO_WORLD_URL } from './shared/hello-world.service';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,6 +54,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

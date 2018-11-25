@@ -1,26 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  public username: string;
-  public password: string;
+export class LoginComponent implements OnInit {
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
+  public loginFormGroup: FormGroup;
 
-  constructor(private router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.loginFormGroup = this.createFormGroup();
+  }
 
   login(): void {
-    if (this.username === 'admin' && this.password === 'admin') {
-      sessionStorage.setItem('token', JSON.stringify('token'));
-      this.router.navigate(['backlog']);
-    } else {
-      sessionStorage.setItem('token', JSON.stringify(''));
-      alert('Invalid credentials');
-    }
+    console.log(this.loginFormGroup.value);
+  }
+
+  createFormGroup(): FormGroup {
+    return this.fb.group({
+      username: '',
+      password: ''
+    });
   }
 }
