@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { UserLoginData, UserRegisterData } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class SecurityService {
     return this.token;
   }
 
-  login(): Observable<any> {
-    return this.http.get<any>('localhost:8000/login');
+  login(body: UserLoginData): Observable<any> {
+    return this.http.post<any>('localhost:8000/login/', body);
+  }
+
+  register(body: UserRegisterData): Observable<any> {
+    return this.http.post<any>('localhost:8000/user/', body);
   }
 }
