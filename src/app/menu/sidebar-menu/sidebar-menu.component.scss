@@ -1,5 +1,5 @@
 .container {
-  width: 100%;
+  max-width: 200px;
   height: calc(100% - 64px);
 
   .sidebar-menu {
@@ -20,6 +20,7 @@
 
       &.active {
         background: rgb(206, 206, 206);
+
         .nav-link {
           font-weight: 500;
         }
@@ -29,7 +30,7 @@
         position: absolute;
         margin-left: -16px;
         padding-left: 60px;
-        min-width: 200px;
+        max-width: 160px;
         color: black;
         text-decoration: none;
         line-height: 80px;
