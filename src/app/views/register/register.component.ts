@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    console.log(this.registerFormGroup.value);
+    console.log(this.registerFormGroup.value, this.registerFormGroup.valid);
   }
 
   createFormGroup(): FormGroup {
