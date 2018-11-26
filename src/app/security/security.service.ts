@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { UserLoginData, UserRegisterData } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +12,25 @@ export class SecurityService {
   constructor(private readonly http: HttpClient) {}
 
   getToken(): string {
-    this.token = JSON.parse(sessionStorage.getItem('token'));
-
-    this.token = 'token';
+    this.token = JSON.parse(sessionStorage.getItem('token')).token;
     return this.token;
   }
 
-  checkTokenIsValid(token: string): Observable<boolean> {
-    let tokenIsValid$: Observable<boolean>;
-    if (JSON.parse(sessionStorage.getItem('token')) === token) {
-      tokenIsValid$ = of(true);
-    } else {
-      tokenIsValid$ = of(false);
-    }
-    return tokenIsValid$;
+  setToken(token: string): void {
+    sessionStorage.setItem('token', JSON.stringify(token));
   }
 
-  login(): Observable<any> {
-    return this.http.get<any>('localhost:8000/login');
+  login(body: UserLoginData): Observable<string> {
+    return this.http.post<any>('http://localhost:8000/user/login/', body);
+  }
+
+  register(body: UserRegisterData): Observable<any> {
+    const registerData: any = {
+      email: body.email,
+      password: body.password,
+      first_name: body.firstName,
+      last_name: body.lastName
+    };
+    return this.http.post<any>('http://localhost:8000/user/', registerData);
   }
 }

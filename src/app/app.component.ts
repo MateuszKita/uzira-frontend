@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
-import { switchMap, filter } from 'rxjs/operators';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 
 const LOGIN_URL = '/login';
+const REGISTER_URL = '/register';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +12,11 @@ const LOGIN_URL = '/login';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public tokenIsValid = false;
   public menuIsVisible = true;
-  private token: string;
 
   constructor(
     private readonly securityService: SecurityService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -26,24 +24,21 @@ export class AppComponent implements OnInit {
   }
 
   private checkTokenValidityOnNavigate(): void {
-    this.token = this.securityService.getToken();
     this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        switchMap((event: NavigationEnd) => {
-          this.changeMenuIsVisibleValue(event.url);
-          return this.securityService.checkTokenIsValid(this.token);
-        })
-      )
-      .subscribe(isValid => {
-        this.tokenIsValid = isValid;
-        if (!this.tokenIsValid) {
-          this.router.navigate(['login']);
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: RouterEvent) => {
+        if (
+          !this.securityService.getToken() &&
+          event.url !== LOGIN_URL &&
+          event.url !== REGISTER_URL
+        ) {
+          this.router.navigate(['/login']);
         }
+        this.changeMenuIsVisibleValue(event.url);
       });
   }
 
   private changeMenuIsVisibleValue(route: string): void {
-    this.menuIsVisible = route !== LOGIN_URL;
+    this.menuIsVisible = !(route === LOGIN_URL || route === REGISTER_URL);
   }
 }

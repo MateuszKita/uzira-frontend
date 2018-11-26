@@ -6,11 +6,11 @@
           <img class="logo"
                [src]="imagePath" />
           <span class="main-title"> {{ title }}
-            Login </span>
+            Register </span>
         </span></mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="loginFormGroup"
+      <form [formGroup]="registerFormGroup"
             class="login-form">
         <mat-form-field class="login-input">
           <input matInput
@@ -28,17 +28,31 @@
                  name="password"
                  required />
         </mat-form-field>
+        <mat-form-field class="login-input">
+          <input matInput
+                 formControlName="firstName"
+                 placeholder="First Name"
+                 name="firstName"
+                 required />
+        </mat-form-field>
+        <mat-form-field class="login-input">
+          <input matInput
+                 formControlName="lastName"
+                 placeholder="Last Name"
+                 name="lastName"
+                 required />
+        </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions class="form-actions">
       <div class="actions-container">
         <button mat-raised-button
-                (click)="register()"
-                color="secondary">Register</button>
+                (click)="cancel()"
+                color="secondary">Cancel</button>
         <button mat-raised-button
-                (click)="login()"
+                (click)="register()"
                 color="primary"
-                [disabled]="loginButtonDisabled">Login</button>
+                [disabled]="registerButtonDisabled">Register</button>
       </div>
     </mat-card-actions>
   </mat-card>

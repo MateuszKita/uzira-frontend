@@ -15,7 +15,7 @@ export class HelloWorldService {
     private readonly http: HttpClient
   ) {}
 
-  getHelloWorld(): Observable<any> {
-    return this.http.get<any>(this.api_url);
+  getHelloWorld(): Observable<{ message: string }> {
+    return this.http.get<any>('http://localhost:8000/helloworld/');
   }
 }
