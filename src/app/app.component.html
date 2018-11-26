@@ -1,5 +1,11 @@
-<h1>
-  Welcome to {{ title }}!
-</h1>
+<ng-container *ngIf="!menuIsVisible; else showMenu">
+  <router-outlet></router-outlet>
+</ng-container>
 
-<router-outlet></router-outlet>
+<ng-template #showMenu>
+  <app-topbar-menu></app-topbar-menu>
+
+  <app-sidebar-menu>
+    <router-outlet></router-outlet>
+  </app-sidebar-menu>
+</ng-template>
