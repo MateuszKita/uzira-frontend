@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../shared/user.service';
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-sprint',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sprint.component.scss']
 })
 export class SprintComponent implements OnInit {
-  constructor() {}
+  public users$: Observable<any>;
 
-  ngOnInit() {}
+  constructor(private readonly userService: UserService) {}
+
+  ngOnInit(): void {
+    this.users$ = this.userService.getUsers();
+  }
 }

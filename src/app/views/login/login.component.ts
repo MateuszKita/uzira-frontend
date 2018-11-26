@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['backlog']);
       },
       (err: HttpErrorResponse) => {
-        console.log(err);
+        console.error(err);
       }
     );
   }

@@ -25,11 +25,11 @@ export class AuthInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.securityService.getToken();
-    let headers: any = {};
-    if (req.method !== 'POST' && req.url.includes('/user/')) {
-      headers = {
-        Authorization: 'Bearer ' + this.securityService.getToken()
-      };
+    let headers: any = {
+      Authorization: 'Bearer ' + this.securityService.getToken()
+    };
+    if (req.method === 'POST' && req.url.includes('/user/')) {
+      headers = {};
     }
     const authRequest = req.clone({
       setHeaders: headers

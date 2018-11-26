@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserLoginData, UserRegisterData } from '../models/user.model';
 
@@ -12,7 +12,7 @@ export class SecurityService {
   constructor(private readonly http: HttpClient) {}
 
   getToken(): string {
-    this.token = JSON.parse(sessionStorage.getItem('token'));
+    this.token = JSON.parse(sessionStorage.getItem('token')).token;
     return this.token;
   }
 

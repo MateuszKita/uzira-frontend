@@ -27,7 +27,11 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: RouterEvent) => {
-        if (!this.securityService.getToken()) {
+        if (
+          !this.securityService.getToken() &&
+          event.url !== LOGIN_URL &&
+          event.url !== REGISTER_URL
+        ) {
           this.router.navigate(['/login']);
         }
         this.changeMenuIsVisibleValue(event.url);

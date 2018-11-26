@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HelloWorldService } from '../../shared/hello-world.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-backlog',
