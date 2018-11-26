@@ -41,7 +41,6 @@ export class AuthInterceptorService implements HttpInterceptor {
           error.status === UNAUTHORIZED
         ) {
           this.router.navigate(['login']);
-          // this.securityService.authorize();
         }
         return empty(); // Observable without events
         // return throwError(new Error(error.error.error.message));

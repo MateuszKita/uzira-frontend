@@ -6,7 +6,6 @@ import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 const LOGIN_URL = '/login';
 const REGISTER_URL = '/register';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,6 +27,9 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: RouterEvent) => {
+        if (!this.securityService.getToken()) {
+          this.router.navigate(['/login']);
+        }
         this.changeMenuIsVisibleValue(event.url);
       });
   }

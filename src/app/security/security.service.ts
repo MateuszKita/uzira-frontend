@@ -17,7 +17,7 @@ export class SecurityService {
   }
 
   setToken(token: string): void {
-    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('token', JSON.stringify(token));
   }
 
   login(body: UserLoginData): Observable<string> {
