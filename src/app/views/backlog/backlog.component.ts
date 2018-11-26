@@ -9,14 +9,14 @@ import { Subject } from 'rxjs';
   styleUrls: ['./backlog.component.scss']
 })
 export class BacklogComponent implements OnInit {
-  public helloWorldMessage: Subject<string> = new Subject();
+  public helloWorldMessage: string;
 
   constructor(private readonly helloWorldService: HelloWorldService) {}
 
   ngOnInit(): void {
     this.helloWorldService.getHelloWorld().subscribe(
       (res: { message: string }) => {
-        this.helloWorldMessage.next(res.message);
+        this.helloWorldMessage = res.message;
       },
       (err: HttpErrorResponse) => {
         console.error(err);
