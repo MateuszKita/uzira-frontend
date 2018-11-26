@@ -4,6 +4,8 @@ import { filter } from 'rxjs/operators';
 import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 
 const LOGIN_URL = '/login';
+const REGISTER_URL = '/register';
+
 
 @Component({
   selector: 'app-root',
@@ -31,6 +33,6 @@ export class AppComponent implements OnInit {
   }
 
   private changeMenuIsVisibleValue(route: string): void {
-    this.menuIsVisible = route !== LOGIN_URL;
+    this.menuIsVisible = !(route === LOGIN_URL || route === REGISTER_URL);
   }
 }

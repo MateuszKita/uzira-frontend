@@ -21,7 +21,7 @@ export class SecurityService {
   }
 
   login(body: UserLoginData): Observable<string> {
-    return this.http.post<any>('http://localhost:8000/login/', body);
+    return this.http.post<any>('http://localhost:8000/user/login/', body);
   }
 
   register(body: UserRegisterData): Observable<any> {
