@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserLoginData, UserRegisterData } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,18 @@ import { UserLoginData, UserRegisterData } from '../models/user.model';
 export class SecurityService {
   private token: string;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router
+  ) {}
 
   getToken(): string {
-    this.token = JSON.parse(sessionStorage.getItem('token')).token;
+    const tokenObject: any = JSON.parse(sessionStorage.getItem('token'));
+    if (tokenObject) {
+      this.token = tokenObject.token;
+    } else {
+      this.router.navigate(['/login']);
+    }
     return this.token;
   }
 

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
 import { filter } from 'rxjs/operators';
-import { Router, NavigationEnd, RouterEvent } from '@angular/router';
+import {
+  Router,
+  NavigationEnd,
+  RouterEvent,
+  ActivatedRoute
+} from '@angular/router';
 
 const LOGIN_URL = '/login';
 const REGISTER_URL = '/register';
@@ -21,6 +26,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkTokenValidityOnNavigate();
+    this.changeMenuIsVisibleValue(this.router.url);
   }
 
   private checkTokenValidityOnNavigate(): void {
