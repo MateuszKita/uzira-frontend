@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
 import { filter } from 'rxjs/operators';
-import {
-  Router,
-  NavigationEnd,
-  ActivatedRoute,
-  RouterEvent
-} from '@angular/router';
+import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 
 const LOGIN_URL = '/login';
 
@@ -16,14 +11,11 @@ const LOGIN_URL = '/login';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public tokenIsValid = false;
   public menuIsVisible = true;
-  private token: string;
 
   constructor(
     private readonly securityService: SecurityService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +23,6 @@ export class AppComponent implements OnInit {
   }
 
   private checkTokenValidityOnNavigate(): void {
-    this.token = this.securityService.getToken();
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: RouterEvent) => {
