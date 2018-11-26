@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { UserLoginData, UserRegisterData } from '../models/user.model';
 import { Router } from '@angular/router';
 
+const LOGIN_URL = '/login';
+const REGISTER_URL = '/register';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +22,10 @@ export class SecurityService {
     const tokenObject: any = JSON.parse(sessionStorage.getItem('token'));
     if (tokenObject) {
       this.token = tokenObject.token;
-    } else {
+    } else if (
+      this.router.url !== LOGIN_URL &&
+      this.router.url !== REGISTER_URL
+    ) {
       this.router.navigate(['/login']);
     }
     return this.token;
