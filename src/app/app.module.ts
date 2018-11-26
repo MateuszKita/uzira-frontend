@@ -6,7 +6,11 @@ import {
   MatToolbarModule,
   MatSidenavModule,
   MatButtonModule,
-  MatListModule
+  MatListModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatProgressSpinnerModule,
+  MatInputModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,13 +25,16 @@ import { SecurityModule } from './security/security.module';
 import { HELLO_WORLD_URL } from './shared/hello-world.service';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './views/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarMenuComponent,
     TopbarMenuComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +46,17 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatButtonModule,
     MatListModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
     BacklogModule,
     SprintModule,
     SecurityModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

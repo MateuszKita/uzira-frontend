@@ -1,12 +1,7 @@
-import { HttpParams } from '@angular/common/http';
-import { InjectionToken, Injectable, Inject } from '@angular/core';
-
-export const AUTH_CONFIG_URL = new InjectionToken<string>('Auth config url');
-
-interface AuthConfig {
-  auth_url: string;
-  response_type: string;
-}
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { UserLoginData, UserRegisterData } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,37 +9,28 @@ interface AuthConfig {
 export class SecurityService {
   private token: string;
 
-  constructor(@Inject(AUTH_CONFIG_URL) private config: AuthConfig) {}
-
-  authorize(): void {
-    const { auth_url, response_type } = this.config;
-
-    const p = new HttpParams({
-      fromObject: {
-        response_type
-      }
-    });
-
-    const url = `${auth_url}?${p.toString()}`;
-    sessionStorage.removeItem('token');
-    // location.replace(url);
-  }
+  constructor(private readonly http: HttpClient) {}
 
   getToken(): string {
-    this.token = JSON.parse(sessionStorage.getItem('token'));
-
-    if (!this.token && location.hash) {
-      const params = new HttpParams({
-        fromString: location.hash
-      });
-      this.token = params.get('#access_token');
-      sessionStorage.setItem('token', JSON.stringify(this.token));
-    }
-
-    if (!this.token) {
-      this.authorize();
-    }
-    this.token = 'testowy token';
+    this.token = JSON.parse(sessionStorage.getItem('token')).token;
     return this.token;
+  }
+
+  setToken(token: string): void {
+    sessionStorage.setItem('token', JSON.stringify(token));
+  }
+
+  login(body: UserLoginData): Observable<string> {
+    return this.http.post<any>('http://localhost:8000/user/login/', body);
+  }
+
+  register(body: UserRegisterData): Observable<any> {
+    const registerData: any = {
+      email: body.email,
+      password: body.password,
+      first_name: body.firstName,
+      last_name: body.lastName
+    };
+    return this.http.post<any>('http://localhost:8000/user/', registerData);
   }
 }

@@ -1,8 +1,8 @@
-<ng-container *ngIf="!token; else tokenCorrect">
-
+<ng-container *ngIf="!menuIsVisible; else showMenu">
+  <router-outlet></router-outlet>
 </ng-container>
 
-<ng-template #tokenCorrect>
+<ng-template #showMenu>
   <app-topbar-menu></app-topbar-menu>
 
   <app-sidebar-menu>

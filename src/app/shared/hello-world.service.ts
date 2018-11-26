@@ -11,11 +11,11 @@ export const HELLO_WORLD_URL = new InjectionToken<string>(
 })
 export class HelloWorldService {
   constructor(
-    @Inject(HELLO_WORLD_URL) private api_url: string,
-    private http: HttpClient
+    @Inject(HELLO_WORLD_URL) private readonly api_url: string,
+    private readonly http: HttpClient
   ) {}
 
-  getHelloWorld(): Observable<any> {
-    return this.http.get<any>(this.api_url);
+  getHelloWorld(): Observable<{ message: string }> {
+    return this.http.get<any>('http://localhost:8000/helloworld/');
   }
 }
