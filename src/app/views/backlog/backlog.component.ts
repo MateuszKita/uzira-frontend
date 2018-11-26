@@ -9,6 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BacklogComponent implements OnInit {
   public helloWorldMessage: string;
+  public title1 = 'tytuł 1';
+  public title2 = 'tytuł 2';
 
   constructor(private readonly helloWorldService: HelloWorldService) {}
 
