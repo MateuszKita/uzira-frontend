@@ -5,48 +5,44 @@
         {{expansionPanelTitle}}
       </mat-panel-title>
       <mat-panel-description>
-        This is a summary of the content
+        {{expansionPanelSubtitle}}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <table mat-table
            [dataSource]="dataSource"
-           class="mat-elevation-z8">
+           class="sprint-table">
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell
-            *matHeaderCellDef> No. </th>
-        <td mat-cell
-            *matCellDef="let element">
-          {{element.position}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell
-            *matHeaderCellDef> Name </th>
+            *matHeaderCellDef>Name</th>
         <td mat-cell
             *matCellDef="let element">
-          {{element.name}} </td>
+          {{element.name}}</td>
       </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
+      <ng-container matColumnDef="type">
         <th mat-header-cell
-            *matHeaderCellDef> Weight </th>
+            *matHeaderCellDef>Type</th>
         <td mat-cell
             *matCellDef="let element">
-          {{element.weight}} </td>
+          {{element.type}}</td>
       </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
+      <ng-container matColumnDef="estimation">
         <th mat-header-cell
-            *matHeaderCellDef> Symbol </th>
+            *matHeaderCellDef>Estimation</th>
         <td mat-cell
             *matCellDef="let element">
-          {{element.symbol}} </td>
+          {{element.estimation}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="assigned">
+        <th mat-header-cell
+            *matHeaderCellDef>Assigned</th>
+        <td mat-cell
+            *matCellDef="let element">
+          {{element.assigned}}</td>
       </ng-container>
 
       <tr mat-header-row

@@ -7,7 +7,7 @@ import { SprintTask } from 'src/app/models/sprint.model';
   styleUrls: ['./sprint-expansion-panel.component.scss']
 })
 export class SprintExpansionPanelComponent implements OnInit {
-  @Input() dataSource: SprintTask[];
+  @Input() dataSource: SprintTask[] = [];
   @Input() expansionPanelTitle: string;
   @Input() expansionPanelSubtitle: string;
   public displayedColumns: string[] = [
