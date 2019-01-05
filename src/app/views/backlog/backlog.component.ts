@@ -8,20 +8,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./backlog.component.scss']
 })
 export class BacklogComponent implements OnInit {
-  public helloWorldMessage: string;
   public title1 = 'tytuł 1';
   public title2 = 'tytuł 2';
 
   constructor(private readonly helloWorldService: HelloWorldService) {}
 
-  ngOnInit(): void {
-    this.helloWorldService.getHelloWorld().subscribe(
-      (res: { message: string }) => {
-        this.helloWorldMessage = res.message;
-      },
-      (err: HttpErrorResponse) => {
-        console.error(err);
-      }
-    );
-  }
+  ngOnInit(): void {}
 }
