@@ -14,7 +14,8 @@ import {
   MatDividerModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatSelectModule
 } from '@angular/material';
 import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-expansion-panel.component';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
@@ -35,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatSlideToggleModule,
     MatNativeDateModule,
+    MatSelectModule,
     FormsModule
   ],
   declarations: [

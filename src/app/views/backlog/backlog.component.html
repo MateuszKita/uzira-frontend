@@ -1,5 +1,20 @@
 <div class="backlog-view">
-  <h2>Backlog</h2>
+  <ng-container *ngIf="selectedTeam; else noTeams">
+
+  </ng-container>
+
+  <div class="sprints-header">
+    <h2>Backlog</h2>
+    <div class="select-wrapper">
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedTeam"
+                    (selectionChange)="teamChanged()">
+          <mat-option *ngFor="let team of teams"
+                      [value]="team.id">{{team.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 
   <app-sprint-expansion-panel expansionPanelTitle="Backlog"
                               expansionPanelSubtitle="All tasks in Backlog"></app-sprint-expansion-panel>
@@ -28,6 +43,11 @@
 
   <ng-template #noSprints>
     <h3>Your sprints list is empty</h3>
+  </ng-template>
+
+  <ng-template #noTeams>
+    <h2>There is no teams, create any first,
+      please.</h2>
   </ng-template>
 
 </div>

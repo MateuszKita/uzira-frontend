@@ -8,10 +8,15 @@ import { environment } from '../../../environments/environment';
 })
 export class BacklogService {
   private backlogUrl: string;
+  public teamId: number;
 
   constructor(private readonly http: HttpClient) {
-    const teamId = 2;
-    this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
+    this.backlogUrl = `${environment.apiUrl}team/${this.teamId}/backlog/`;
+  }
+
+  updateTeamId(id: number): void {
+    this.teamId = id;
+    this.backlogUrl = `${environment.apiUrl}team/${id}/backlog/`;
   }
 
   getBacklogAndSprints(): Observable<any> {

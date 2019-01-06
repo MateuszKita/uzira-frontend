@@ -9,10 +9,15 @@ import { SprintGeneral } from 'src/app/models/sprint.model';
 })
 export class SprintService {
   private sprintUrl: string;
+  public teamId: number;
 
   constructor(private readonly http: HttpClient) {
-    const teamId = 2;
-    this.sprintUrl = `${environment.apiUrl}team/${teamId}/sprints/`;
+    this.sprintUrl = `${environment.apiUrl}team/${this.teamId}/sprints/`;
+  }
+
+  updateTeamId(id: number): void {
+    this.teamId = id;
+    this.sprintUrl = `${environment.apiUrl}team/${id}/backlog/`;
   }
 
   addSprint(data: SprintGeneral): Observable<any> {
