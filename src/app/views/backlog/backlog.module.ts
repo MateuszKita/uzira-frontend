@@ -11,10 +11,14 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatDividerModule
+  MatDividerModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-expansion-panel.component';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -27,7 +31,11 @@ import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    FormsModule
   ],
   declarations: [
     BacklogComponent,

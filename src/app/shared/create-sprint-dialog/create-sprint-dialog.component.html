@@ -1,3 +1,32 @@
-<p>
-  create-sprint-dialog works!
-</p>
+<div mat-dialog-content>
+  <p>Enter the new sprint data:</p>
+  <mat-slide-toggle [(ngModel)]="active">Inactive/Active</mat-slide-toggle>
+  <mat-form-field>
+    <input matInput
+           [(ngModel)]="startDateValue"
+           [matDatepicker]="startDate"
+           placeholder="Start Date">
+    <mat-datepicker-toggle matSuffix
+                           [for]="startDate"></mat-datepicker-toggle>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           [(ngModel)]="endDateValue"
+           [matDatepicker]="endDate"
+           placeholder="End Date">
+    <mat-datepicker-toggle matSuffix
+                           [for]="endDate"></mat-datepicker-toggle>
+    <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions
+     class="actions">
+  <button mat-raised-button
+          color="secondary"
+          (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button
+          color="primary"
+          cdkFocusInitial
+          (click)="onCreate()">Create</button>
+</div>

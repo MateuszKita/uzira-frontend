@@ -10,6 +10,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CreateSprintDialogComponent implements OnInit {
   public name: string;
+  public active: boolean;
+  public startDateValue: string;
+  public endDateValue: string;
 
   constructor(
     private readonly sprintService: SprintService,
@@ -23,15 +26,25 @@ export class CreateSprintDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // onCreate(): void {
-  //   this.sprintService.postNewTeam(this.name).subscribe(
-  //     () => {
-  //       this.dialogRef.close();
-  //     },
-  //     (err: HttpErrorResponse) => {
-  //       this.dialogRef.close();
-  //       console.error(err);
-  //     }
-  //   );
+  // {
+  //   "active": true,
+  //   "start_date": "2018-12-30",
+  //   "end_date": "2019-01-05"
   // }
+
+  onCreate(): void {
+    console.log(this.active);
+    console.log(this.startDateValue);
+    console.log(this.endDateValue);
+
+    //   this.sprintService.postNewTeam(this.name).subscribe(
+    //     () => {
+    //       this.dialogRef.close();
+    //     },
+    //     (err: HttpErrorResponse) => {
+    //       this.dialogRef.close();
+    //       console.error(err);
+    //     }
+    //   );
+  }
 }
