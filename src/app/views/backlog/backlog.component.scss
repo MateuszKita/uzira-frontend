@@ -1,6 +1,10 @@
 .backlog-view {
   padding: 0 15px;
 
+  .divider {
+    margin-top: 15px;
+  }
+
   .sprints-header {
     display: flex;
     justify-content: space-between;

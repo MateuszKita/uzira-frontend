@@ -7,9 +7,14 @@ import {
   MatExpansionModule,
   MatTableModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDividerModule
 } from '@angular/material';
 import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-expansion-panel.component';
+import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 
 @NgModule({
   imports: [
@@ -18,8 +23,17 @@ import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-e
     MatExpansionModule,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule
   ],
-  declarations: [BacklogComponent, SprintExpansionPanelComponent]
+  declarations: [
+    BacklogComponent,
+    SprintExpansionPanelComponent,
+    CreateSprintDialogComponent
+  ],
+  entryComponents: [CreateSprintDialogComponent]
 })
 export class BacklogModule {}

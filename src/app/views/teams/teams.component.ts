@@ -25,7 +25,7 @@ export class TeamsComponent implements OnInit {
   openCreateTeamDialog(): void {
     const dialogRef = this.dialog.open(CreateTeamDialogComponent, {
       width: '250px',
-      data: { name: 'hello' }
+      data: { name: 'add-team' }
     });
 
     dialogRef.afterClosed().subscribe(result => {

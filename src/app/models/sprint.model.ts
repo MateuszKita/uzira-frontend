@@ -5,6 +5,12 @@ export interface SprintTask {
   assigned: string;
 }
 
+export interface SprintGeneral {
+  active: boolean;
+  start_date: string;
+  end_date: string;
+}
+
 export enum TaskType {
   STORY = 'story',
   TASK = 'task',
