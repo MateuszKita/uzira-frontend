@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { BacklogRoutingModule } from './backlog-routing.module';
 import { BacklogComponent } from './backlog.component';
-import { MatExpansionModule, MatTableModule } from '@angular/material';
+import {
+  MatExpansionModule,
+  MatTableModule,
+  MatIconModule,
+  MatButtonModule
+} from '@angular/material';
 import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-expansion-panel.component';
 
 @NgModule({
@@ -11,7 +16,9 @@ import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-e
     CommonModule,
     BacklogRoutingModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule
   ],
   declarations: [BacklogComponent, SprintExpansionPanelComponent]
 })

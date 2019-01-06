@@ -1,6 +1,19 @@
 .expansion-panel-wrapper {
   padding: 2px 0;
 
+  .panel-title,
+  .panel-subtitle {
+    margin: auto 0;
+  }
+
+  .panel-add-task {
+    margin: 0 15px;
+
+    .mat-button-riple {
+      width: 40px;
+    }
+  }
+
   .sprint-table {
     width: 100%;
   }
