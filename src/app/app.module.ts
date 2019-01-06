@@ -22,10 +22,10 @@ import { BacklogModule } from './views/backlog/backlog.module';
 import { SprintModule } from './views/sprint/sprint.module';
 import { LoginComponent } from './views/login/login.component';
 import { SecurityModule } from './security/security.module';
-import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './views/register/register.component';
+import { TeamsModule } from './views/teams/teams.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import { RegisterComponent } from './views/register/register.component';
     MatInputModule,
     BacklogModule,
     SprintModule,
+    TeamsModule,
     SecurityModule,
     HttpClientModule,
     FormsModule,
