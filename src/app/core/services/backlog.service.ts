@@ -11,7 +11,7 @@ export class BacklogService {
 
   constructor(private readonly http: HttpClient) {
     const teamId = 1;
-    this.backlogUrl = `${environment.apiUrl}${teamId}/backlog/`;
+    this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
   }
 
   getBacklogAndSprints(): Observable<any> {

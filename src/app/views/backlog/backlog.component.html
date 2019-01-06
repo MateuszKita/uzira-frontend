@@ -4,8 +4,27 @@
   <app-sprint-expansion-panel expansionPanelTitle="Backlog"
                               expansionPanelSubtitle="All tasks in Backlog"></app-sprint-expansion-panel>
 
-  <h2>Sprints list</h2>
+  <div class="sprints-header">
+    <h2>Sprints list</h2>
+    <div class="button-wrapper">
+      <button mat-raised-button
+              color="secondary"
+              class="add-sprint"
+              (click)="addSprint()">
+        Add Sprint</button>
+    </div>
+  </div>
 
-  <app-sprint-expansion-panel expansionPanelTitle="Sprint 1"
-                              expansionPanelSubtitle="All tasks in Sprint 1"></app-sprint-expansion-panel>
+  <ng-container *ngIf="sprints.length; else noSprints">
+    <ng-container *ngFor="let sprint of sprints">
+      <app-sprint-expansion-panel
+                                  expansionPanelTitle="Sprint 1"
+                                  expansionPanelSubtitle="All tasks in Sprint 1"></app-sprint-expansion-panel>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #noSprints>
+    <h3>Your sprints list is empty</h3>
+  </ng-template>
+
 </div>

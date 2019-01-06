@@ -1,3 +1,18 @@
 .backlog-view {
   padding: 0 15px;
+
+  .sprints-header {
+    display: flex;
+    justify-content: space-between;
+
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .add-sprint {
+        height: 40px;
+      }
+    }
+  }
 }
