@@ -9,6 +9,8 @@ export interface SprintGeneral {
   active: boolean;
   start_date: string;
   end_date: string;
+  id?: number;
+  tasks?: SprintTask[];
 }
 
 export enum TaskType {

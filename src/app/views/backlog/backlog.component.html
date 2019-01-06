@@ -34,8 +34,9 @@
     <ng-container *ngIf="sprints.length; else noSprints">
       <ng-container *ngFor="let sprint of sprints">
         <app-sprint-expansion-panel
-                                    expansionPanelTitle="Sprint 1"
-                                    expansionPanelSubtitle="All tasks in Sprint 1"></app-sprint-expansion-panel>
+                                    expansionPanelTitle="Sprint {{sprint.id}}"
+                                    expansionPanelSubtitle="All tasks in Sprint {{sprint.id}}
+                                    [{{sprint.active ? 'Active' : 'Inactive'}}]"></app-sprint-expansion-panel>
       </ng-container>
     </ng-container>
 

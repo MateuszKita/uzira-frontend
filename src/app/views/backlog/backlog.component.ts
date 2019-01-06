@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BacklogService } from '../../core/services/backlog.service';
-import { SprintTask } from 'src/app/models/sprint.model';
+import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
 import { SprintService } from 'src/app/core/services/sprint.service';
 import { MatDialog } from '@angular/material';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
@@ -15,7 +15,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class BacklogComponent implements OnInit {
   public tasks: SprintTask[] = [];
-  public sprints: string[] = [];
+  public sprints: SprintGeneral[] = [];
   public selectedTeam: number;
   public teams: Team[] = [];
   public dataLoaded = false;
