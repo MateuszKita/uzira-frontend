@@ -5,7 +5,8 @@
       <div class="select-wrapper">
         <mat-form-field>
           <mat-select [(ngModel)]="selectedTeam"
-                      (selectionChange)="teamChanged()">
+                      (selectionChange)="teamChanged()"
+                      placeholder="Team">
             <mat-option *ngFor="let team of teams"
                         [value]="team.id">{{team.name}}</mat-option>
           </mat-select>
