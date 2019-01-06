@@ -1,0 +1,17 @@
+<div mat-dialog-content>
+  <p>Enter the new team name:</p>
+  <mat-form-field>
+    <input matInput
+           [(ngModel)]="name"
+           placeholder="Name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions
+     class="actions">
+  <button mat-raised-button
+          color="secondary"
+          (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button
+          color="primary"
+          cdkFocusInitial>Apply</button>
+</div>
