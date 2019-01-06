@@ -1,52 +1,53 @@
 <div class="backlog-view">
-  <ng-container *ngIf="selectedTeam; else noTeams">
-
-  </ng-container>
-
-  <div class="sprints-header">
-    <h2>Backlog</h2>
-    <div class="select-wrapper">
-      <mat-form-field>
-        <mat-select [(ngModel)]="selectedTeam"
-                    (selectionChange)="teamChanged()">
-          <mat-option *ngFor="let team of teams"
-                      [value]="team.id">{{team.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <ng-container *ngIf="teams.length; else noTeams">
+    <div class="sprints-header">
+      <h2>Backlog</h2>
+      <div class="select-wrapper">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedTeam"
+                      (selectionChange)="teamChanged()">
+            <mat-option *ngFor="let team of teams"
+                        [value]="team.id">{{team.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
-  </div>
 
-  <app-sprint-expansion-panel expansionPanelTitle="Backlog"
-                              expansionPanelSubtitle="All tasks in Backlog"></app-sprint-expansion-panel>
+    <app-sprint-expansion-panel
+                                expansionPanelTitle="Backlog"
+                                expansionPanelSubtitle="All tasks in Backlog"></app-sprint-expansion-panel>
 
-  <mat-divider class="divider"></mat-divider>
+    <mat-divider class="divider"></mat-divider>
 
-  <div class="sprints-header">
-    <h2>Sprints list</h2>
-    <div class="button-wrapper">
-      <button mat-raised-button
-              color="secondary"
-              class="add-sprint"
-              (click)="addSprint()">
-        Add Sprint
-      </button>
+    <div class="sprints-header">
+      <h2>Sprints list</h2>
+      <div class="button-wrapper">
+        <button mat-raised-button
+                color="secondary"
+                class="add-sprint"
+                (click)="addSprint()">
+          Add Sprint
+        </button>
+      </div>
     </div>
-  </div>
 
-  <ng-container *ngIf="sprints.length; else noSprints">
-    <ng-container *ngFor="let sprint of sprints">
-      <app-sprint-expansion-panel
-                                  expansionPanelTitle="Sprint 1"
-                                  expansionPanelSubtitle="All tasks in Sprint 1"></app-sprint-expansion-panel>
+    <ng-container *ngIf="sprints.length; else noSprints">
+      <ng-container *ngFor="let sprint of sprints">
+        <app-sprint-expansion-panel
+                                    expansionPanelTitle="Sprint 1"
+                                    expansionPanelSubtitle="All tasks in Sprint 1"></app-sprint-expansion-panel>
+      </ng-container>
     </ng-container>
+
+    <ng-template #noSprints>
+      <h3>Your sprints list is empty</h3>
+    </ng-template>
   </ng-container>
 
-  <ng-template #noSprints>
-    <h3>Your sprints list is empty</h3>
-  </ng-template>
 
   <ng-template #noTeams>
-    <h2>There is no teams, create any first,
+    <h2 *ngIf="dataLoaded">There is no teams,
+      create any first,
       please.</h2>
   </ng-template>
 

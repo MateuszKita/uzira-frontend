@@ -17,7 +17,8 @@ export class BacklogComponent implements OnInit {
   public tasks: SprintTask[] = [];
   public sprints: string[] = [];
   public selectedTeam: number;
-  public teams: Team[];
+  public teams: Team[] = [];
+  public dataLoaded = false;
 
   constructor(
     private readonly backlogService: BacklogService,
@@ -39,6 +40,7 @@ export class BacklogComponent implements OnInit {
   private processBacklogData = data => {
     this.tasks = data.tasks;
     this.sprints = data.list;
+    this.dataLoaded = true;
   };
 
   addSprint(): void {
@@ -69,6 +71,7 @@ export class BacklogComponent implements OnInit {
   }
 
   teamChanged(): void {
+    this.dataLoaded = false;
     this.backlogService.updateTeamId(this.selectedTeam);
     this.sprintService.updateTeamId(this.selectedTeam);
     this.getBacklogData();
