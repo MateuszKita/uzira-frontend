@@ -11,7 +11,7 @@ export class SprintService {
   private sprintUrl: string;
 
   constructor(private readonly http: HttpClient) {
-    const teamId = 1;
+    const teamId = 2;
     this.sprintUrl = `${environment.apiUrl}team/${teamId}/sprints/`;
   }
 

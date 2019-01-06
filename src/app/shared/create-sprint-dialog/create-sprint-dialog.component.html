@@ -5,19 +5,23 @@
     <input matInput
            [(ngModel)]="startDateValue"
            [matDatepicker]="startDate"
-           placeholder="Start Date">
+           placeholder="Start Date"
+           disabled>
     <mat-datepicker-toggle matSuffix
                            [for]="startDate"></mat-datepicker-toggle>
-    <mat-datepicker #startDate></mat-datepicker>
+    <mat-datepicker #startDate
+                    disabled="false"></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
     <input matInput
            [(ngModel)]="endDateValue"
            [matDatepicker]="endDate"
-           placeholder="End Date">
+           placeholder="End Date"
+           disabled>
     <mat-datepicker-toggle matSuffix
                            [for]="endDate"></mat-datepicker-toggle>
-    <mat-datepicker #endDate></mat-datepicker>
+    <mat-datepicker #endDate
+                    disabled="false"></mat-datepicker>
   </mat-form-field>
 </div>
 <div mat-dialog-actions
@@ -28,5 +32,6 @@
   <button mat-raised-button
           color="primary"
           cdkFocusInitial
-          (click)="onCreate()">Create</button>
+          (click)="onCreate()"
+          [disabled]="!(startDateValue && endDateValue)">Create</button>
 </div>

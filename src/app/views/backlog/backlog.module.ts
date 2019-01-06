@@ -33,8 +33,8 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatDividerModule,
     MatDatepickerModule,
-    MatNativeDateModule,
     MatSlideToggleModule,
+    MatNativeDateModule,
     FormsModule
   ],
   declarations: [

@@ -28,24 +28,17 @@ export class BacklogComponent implements OnInit {
     this.backlogService.getBacklogAndSprints().subscribe(data => {
       this.tasks = data.tasks;
       this.sprints = data.list;
-      console.log(data);
     });
   }
 
   addSprint(): void {
-    console.log('add sprint');
-    // {
-    //   "active": true,
-    //   "start_date": "2018-12-30",
-    //   "end_date": "2019-01-05"
-    // }
     const dialogRef = this.dialog.open(CreateSprintDialogComponent, {
       width: '250px',
       data: { name: 'add-team' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // this.getTeams();
+      this.getBacklogData();
     });
   }
 }

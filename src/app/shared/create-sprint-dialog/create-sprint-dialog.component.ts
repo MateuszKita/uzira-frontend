@@ -2,6 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { SprintService } from 'src/app/core/services/sprint.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
+import * as moment from 'moment';
+
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 @Component({
   selector: 'app-create-sprint-dialog',
@@ -26,25 +29,21 @@ export class CreateSprintDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // {
-  //   "active": true,
-  //   "start_date": "2018-12-30",
-  //   "end_date": "2019-01-05"
-  // }
-
   onCreate(): void {
-    console.log(this.active);
-    console.log(this.startDateValue);
-    console.log(this.endDateValue);
-
-    //   this.sprintService.postNewTeam(this.name).subscribe(
-    //     () => {
-    //       this.dialogRef.close();
-    //     },
-    //     (err: HttpErrorResponse) => {
-    //       this.dialogRef.close();
-    //       console.error(err);
-    //     }
-    //   );
+    this.sprintService
+      .addSprint({
+        active: this.active ? this.active : false,
+        start_date: moment(this.startDateValue).format(DATE_FORMAT),
+        end_date: moment(this.endDateValue).format(DATE_FORMAT)
+      })
+      .subscribe(
+        () => {
+          this.dialogRef.close();
+        },
+        (err: HttpErrorResponse) => {
+          this.dialogRef.close();
+          console.error(err);
+        }
+      );
   }
 }

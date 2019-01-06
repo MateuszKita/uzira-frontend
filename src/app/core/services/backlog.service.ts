@@ -10,7 +10,7 @@ export class BacklogService {
   private backlogUrl: string;
 
   constructor(private readonly http: HttpClient) {
-    const teamId = 1;
+    const teamId = 2;
     this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
   }
 
