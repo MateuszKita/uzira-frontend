@@ -17,7 +17,7 @@ export class SprintService {
 
   updateTeamId(id: number): void {
     this.teamId = id;
-    this.sprintUrl = `${environment.apiUrl}team/${id}/backlog/`;
+    this.sprintUrl = `${environment.apiUrl}team/${id}/sprints/`;
   }
 
   addSprint(data: SprintGeneral): Observable<any> {
