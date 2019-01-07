@@ -7,6 +7,7 @@ import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog
 import { TeamsService } from '../../core/services/teams.service';
 import { Team } from 'src/app/models/teams.model';
 import { switchMap } from 'rxjs/operators';
+import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 
 @Component({
   selector: 'app-backlog',
@@ -75,5 +76,16 @@ export class BacklogComponent implements OnInit {
     this.backlogService.updateTeamId(this.selectedTeam);
     this.sprintService.updateTeamId(this.selectedTeam);
     this.getBacklogData();
+  }
+
+  taskAddition(id: number) {
+    const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
+      width: '350px',
+      data: { name: 'add-task', id, sprints: this.sprints }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.getBacklogData();
+    });
   }
 }

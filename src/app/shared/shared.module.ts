@@ -11,9 +11,11 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatSelectModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { CreateTaskDialogComponent } from './create-task-dialog/create-task-dialog.component';
 
 @NgModule({
   imports: [
@@ -28,8 +30,9 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSlideToggleModule,
+    MatSelectModule,
     FormsModule
   ],
-  declarations: [CreateSprintDialogComponent]
+  declarations: [CreateSprintDialogComponent, CreateTaskDialogComponent]
 })
 export class SharedModule {}

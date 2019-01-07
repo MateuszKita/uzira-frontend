@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+  <p>Enter the new task data:</p>
+  <mat-form-field>
+    <input matInput
+           [(ngModel)]="name"
+           placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [(ngModel)]="type"
+                placeholder="Type">
+      <mat-option *ngFor="let type of types"
+                  [value]="type">{{type}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [(ngModel)]="estimation"
+                placeholder="Estimation">
+      <mat-option *ngFor="let est of estimates"
+                  [value]="est">{{est}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- <mat-form-field>
+    <input matInput
+           [(ngModel)]="assigned"
+           placeholder="Assgined">
+  </mat-form-field> -->
+  <mat-form-field>
+    <mat-select [(ngModel)]="sprint"
+                placeholder="Sprint"
+                [disabled]="data.id">
+      <mat-option *ngFor="let spr of data.sprints"
+                  [value]="spr.id || spr.id == 0">Sprint
+        {{spr.id}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           [(ngModel)]="description"
+           placeholder="Description">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions
+     class="actions">
+  <button mat-raised-button
+          color="secondary"
+          (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button
+          color="primary"
+          cdkFocusInitial
+          (click)="onCreate()">Create</button>
+</div>

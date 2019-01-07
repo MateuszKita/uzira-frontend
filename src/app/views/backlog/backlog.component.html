@@ -16,7 +16,9 @@
 
     <app-sprint-expansion-panel
                                 expansionPanelTitle="Backlog"
-                                expansionPanelSubtitle="All tasks in Backlog"></app-sprint-expansion-panel>
+                                expansionPanelSubtitle="All tasks in Backlog"
+                                (taskAddition)="taskAddition($event)"
+                                sprintId="0"></app-sprint-expansion-panel>
 
     <mat-divider class="divider"></mat-divider>
 
@@ -37,7 +39,9 @@
         <app-sprint-expansion-panel
                                     expansionPanelTitle="Sprint {{sprint.id}}"
                                     expansionPanelSubtitle="All tasks in Sprint {{sprint.id}}
-                                    [{{sprint.active ? 'Active' : 'Inactive'}}]"></app-sprint-expansion-panel>
+                                    [{{sprint.active ? 'Active' : 'Inactive'}}]"
+                                    sprintId="{{sprint.id}}"
+                                    (taskAddition)="taskAddition($event)"></app-sprint-expansion-panel>
       </ng-container>
     </ng-container>
 

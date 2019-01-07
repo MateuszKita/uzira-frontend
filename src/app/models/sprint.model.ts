@@ -1,8 +1,11 @@
 export interface SprintTask {
   name: string;
   type: TaskType;
-  estimation: number;
-  assigned: string;
+  estimation?: number;
+  // parent?: string;
+  assigned?: string;
+  sprint?: number;
+  description?: string;
 }
 
 export interface SprintGeneral {
@@ -16,6 +19,5 @@ export interface SprintGeneral {
 export enum TaskType {
   STORY = 'story',
   TASK = 'task',
-  SUBTASK = 'subtask',
   DEFECT = 'defect'
 }

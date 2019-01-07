@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SprintTask } from 'src/app/models/sprint.model';
 
 @Component({
@@ -10,6 +10,9 @@ export class SprintExpansionPanelComponent implements OnInit {
   @Input() dataSource: SprintTask[] = [];
   @Input() expansionPanelTitle: string;
   @Input() expansionPanelSubtitle: string;
+  @Input() sprintId: number;
+  @Output() taskAddition = new EventEmitter<number>();
+
   public displayedColumns: string[] = [
     'name',
     'type',
@@ -20,4 +23,8 @@ export class SprintExpansionPanelComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  addTask(): void {
+    this.taskAddition.emit(this.sprintId);
+  }
 }

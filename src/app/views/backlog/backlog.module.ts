@@ -20,6 +20,7 @@ import {
 import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-expansion-panel.component';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 
 @NgModule({
   imports: [
@@ -42,8 +43,9 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     BacklogComponent,
     SprintExpansionPanelComponent,
-    CreateSprintDialogComponent
+    CreateSprintDialogComponent,
+    CreateTaskDialogComponent
   ],
-  entryComponents: [CreateSprintDialogComponent]
+  entryComponents: [CreateSprintDialogComponent, CreateTaskDialogComponent]
 })
 export class BacklogModule {}
