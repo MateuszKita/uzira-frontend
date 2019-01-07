@@ -18,5 +18,19 @@
 
   .teams-table {
     width: 100%;
+
+    .id {
+      width: 15%;
+    }
+
+    .name {
+      width: 75%;
+
+    }
+
+    .action {
+      width: 10%;
+
+    }
   }
 }
