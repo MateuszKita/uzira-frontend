@@ -16,5 +16,23 @@
 
   .sprint-table {
     width: 100%;
+
+    .name {
+      width: 30%;
+    }
+
+    .type {
+      width: 30%;
+    }
+
+    .estimation {
+      width: 10%;
+
+    }
+
+    .assigned {
+      width: 30%;
+
+    }
   }
 }

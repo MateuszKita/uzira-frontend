@@ -20,33 +20,41 @@
 
       <ng-container matColumnDef="name">
         <th mat-header-cell
-            *matHeaderCellDef>Name</th>
+            *matHeaderCellDef
+            class="name">Name</th>
         <td mat-cell
-            *matCellDef="let element">
+            *matCellDef="let element"
+            class="name">
           {{element.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="type">
         <th mat-header-cell
-            *matHeaderCellDef>Type</th>
+            *matHeaderCellDef
+            class="type">Type</th>
         <td mat-cell
-            *matCellDef="let element">
+            *matCellDef="let element"
+            class="type">
           {{element.type}}</td>
       </ng-container>
 
       <ng-container matColumnDef="estimation">
         <th mat-header-cell
-            *matHeaderCellDef>Estimation</th>
+            *matHeaderCellDef
+            class="estimation">Estimation</th>
         <td mat-cell
-            *matCellDef="let element">
+            *matCellDef="let element"
+            class="estimation">
           {{element.estimation}}</td>
       </ng-container>
 
       <ng-container matColumnDef="assigned">
         <th mat-header-cell
-            *matHeaderCellDef>Assigned</th>
+            *matHeaderCellDef
+            class="assigned">Assigned</th>
         <td mat-cell
-            *matCellDef="let element">
+            *matCellDef="let element"
+            class="assigned">
           {{element.assigned}}</td>
       </ng-container>
 
