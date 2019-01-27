@@ -31,7 +31,7 @@ export class SprintComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(sprints => {
         this.sprints = sprints;
-        this.selectedSprintId = sprints[sprints.length - 1];
+        this.selectedSprintId = sprints[sprints.length - 1].id;
         this.sprintChanged();
       });
   }

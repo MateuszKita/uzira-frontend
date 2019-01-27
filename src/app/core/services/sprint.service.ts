@@ -25,7 +25,7 @@ export class SprintService {
     return this.http.post(this.sprintUrl, data);
   }
 
-  getSprints(): Observable<any> {
-    return this.http.get(this.sprintUrl);
+  getSprints(): Observable<SprintGeneral[]> {
+    return this.http.get<SprintGeneral[]>(this.sprintUrl);
   }
 }
