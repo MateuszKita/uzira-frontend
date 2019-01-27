@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { SprintGeneral } from 'src/app/models/sprint.model';
 import { TeamsService } from './teams.service';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

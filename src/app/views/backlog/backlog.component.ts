@@ -4,7 +4,7 @@ import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
 import { MatDialog } from '@angular/material';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { TeamsService } from '../../core/services/teams.service';
-import { switchMap, takeUntil, filter } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { Subject } from 'rxjs';
 
@@ -49,7 +49,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
     this.teamsService.selectedTeam$
       .pipe(
         takeUntil(this.onDestroy$),
-        filter(teamId => teamId > 0),
         switchMap(teamId => {
           this.selectedTeamId = teamId;
           this.teamChanged();

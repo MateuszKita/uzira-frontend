@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { SprintTask } from 'src/app/models/sprint.model';
 import { TeamsService } from './teams.service';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,10 @@ export class BacklogService {
     private readonly http: HttpClient,
     private readonly teamsService: TeamsService
   ) {
-    this.teamsService.selectedTeam$.subscribe(teamId => {
-      this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
-    });
+    this.teamsService.selectedTeam$
+      .subscribe(teamId => {
+        this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
+      });
   }
 
   getBacklogAndSprints(): Observable<any> {

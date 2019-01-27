@@ -11,11 +11,11 @@ import {
   styleUrls: ['./sprint-drag-and-drop.component.scss']
 })
 export class SprintDragAndDropComponent implements OnInit {
-  public open = ['test 1'];
-  public progress = ['test 2'];
-  public review = ['test 3'];
-  public verification = ['test 4'];
-  public done = ['test 5'];
+  public openItems = ['test 1'];
+  public progressItems = ['test 2'];
+  public reviewItems = ['test 3'];
+  public verificationItems = ['test 4'];
+  public doneItems = ['test 5'];
 
   constructor() {}
 
