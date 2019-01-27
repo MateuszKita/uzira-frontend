@@ -24,8 +24,8 @@ export class SidebarMenuComponent implements OnInit {
       iconName: 'view_week'
     },
     {
-      label: 'Team',
-      path: '/team',
+      label: 'Teams',
+      path: '/teams',
       iconName: 'people'
     }
   ];

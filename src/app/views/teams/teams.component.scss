@@ -1,12 +1,7 @@
-.backlog-view {
+.teams-view {
   padding: 0 15px;
 
-  .divider {
-    margin-top: 15px;
-  }
-
-  .sprints-header {
-    padding-top: 10px;
+  .title-header {
     display: flex;
     justify-content: space-between;
 
@@ -15,9 +10,27 @@
       flex-direction: column;
       justify-content: center;
 
-      .add-sprint {
+      .create-team {
         height: 40px;
       }
+    }
+  }
+
+  .teams-table {
+    width: 100%;
+
+    .id {
+      width: 15%;
+    }
+
+    .name {
+      width: 75%;
+
+    }
+
+    .action {
+      width: 10%;
+
     }
   }
 }
