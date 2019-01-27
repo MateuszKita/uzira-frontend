@@ -39,10 +39,10 @@ export class BacklogComponent implements OnInit {
   }
 
   private processBacklogData = data => {
-    this.tasks = data.tasks;
+    this.tasks = data.backlog.tasks;
     this.sprints = data.list;
     this.dataLoaded = true;
-  };
+  }
 
   addSprint(): void {
     const dialogRef = this.dialog.open(CreateSprintDialogComponent, {
@@ -85,7 +85,7 @@ export class BacklogComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // this.getBacklogData();
+      this.getBacklogData();
     });
   }
 }
