@@ -90,7 +90,9 @@ export class BacklogComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy$)
     )
     .subscribe(result => {
-      this.getBacklogData();
+      if (result) {
+        this.getBacklogData();
+      }
     });
   }
 
