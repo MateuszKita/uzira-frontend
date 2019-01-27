@@ -22,6 +22,10 @@ export class SprintService {
   }
 
   addSprint(data: SprintGeneral): Observable<any> {
-    return this.http.post<any>(this.sprintUrl, data);
+    return this.http.post(this.sprintUrl, data);
+  }
+
+  getSprints(): Observable<any> {
+    return this.http.get(this.sprintUrl);
   }
 }

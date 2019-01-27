@@ -1,3 +1,18 @@
 <div class="sprint-view">
-  <h2>Active Sprint View</h2>
+  <div class="view-header">
+    <h2>Active Sprint View</h2>
+
+    <div class="select-team-wrapper">
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedSprintId"
+                    (selectionChange)="sprintChanged()"
+                    [placeholder]="sprints?.length ? 'Sprint' : 'No sprints for team'"
+                    [disabled]="!sprints?.length">
+          <mat-option *ngFor="let sprint of sprints"
+                      [value]="sprint.id">Sprint
+            {{sprint.id}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 </div>

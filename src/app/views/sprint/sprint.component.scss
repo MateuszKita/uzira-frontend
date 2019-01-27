@@ -1,3 +1,9 @@
 .sprint-view {
   padding: 0 15px;
+
+  .view-header {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
 }
