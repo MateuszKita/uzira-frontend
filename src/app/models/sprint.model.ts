@@ -26,6 +26,6 @@ export enum TaskStatus {
   OPEN = 'open',
   IN_PROGRESS = 'progress',
   IN_REVIEW = 'review',
-  VERIFICATION = 'verification',
+  IN_VERIFICATION = 'verification',
   READY = 'ready'
 }
