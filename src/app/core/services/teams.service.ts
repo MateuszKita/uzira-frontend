@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Team } from 'src/app/models/teams.model';
@@ -9,7 +9,7 @@ import { Team } from 'src/app/models/teams.model';
 })
 export class TeamsService {
   private teamsUrl: string;
-  public selectedTeam$: Subject<number> = new Subject();
+  public selectedTeam$: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(private readonly http: HttpClient) {
     this.teamsUrl = `${environment.apiUrl}team/`;

@@ -32,7 +32,7 @@ export class CreateTaskDialogComponent implements OnInit {
   }
 
   onCancelClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onCreate(): void {
@@ -46,10 +46,10 @@ export class CreateTaskDialogComponent implements OnInit {
       })
       .subscribe(
         () => {
-          this.dialogRef.close();
+          this.dialogRef.close(true);
         },
         (err: HttpErrorResponse) => {
-          this.dialogRef.close();
+          this.dialogRef.close(false);
           console.error(err);
         }
       );

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { SprintService } from 'src/app/core/services/sprint.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,7 +11,7 @@ const DATE_FORMAT = 'YYYY-MM-DD';
   templateUrl: './create-sprint-dialog.component.html',
   styleUrls: ['./create-sprint-dialog.component.scss']
 })
-export class CreateSprintDialogComponent implements OnInit {
+export class CreateSprintDialogComponent {
   public name: string;
   public active: boolean;
   public startDateValue: string;
@@ -23,10 +23,8 @@ export class CreateSprintDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit() {}
-
   onCancelClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onCreate(): void {
@@ -38,10 +36,10 @@ export class CreateSprintDialogComponent implements OnInit {
       })
       .subscribe(
         () => {
-          this.dialogRef.close();
+          this.dialogRef.close(true);
         },
         (err: HttpErrorResponse) => {
-          this.dialogRef.close();
+          this.dialogRef.close(false);
           console.error(err);
         }
       );
