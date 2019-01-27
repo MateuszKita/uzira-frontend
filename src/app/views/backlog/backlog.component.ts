@@ -5,7 +5,6 @@ import { SprintService } from 'src/app/core/services/sprint.service';
 import { MatDialog } from '@angular/material';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { TeamsService } from '../../core/services/teams.service';
-import { Team } from 'src/app/models/teams.model';
 import { switchMap } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 
@@ -15,10 +14,9 @@ import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/cre
   styleUrls: ['./backlog.component.scss']
 })
 export class BacklogComponent implements OnInit {
+  public selectedTeam: number;
   public tasks: SprintTask[] = [];
   public sprints: SprintGeneral[] = [];
-  public selectedTeam: number;
-  public teams: Team[] = [];
   public dataLoaded = false;
 
   constructor(
@@ -29,7 +27,7 @@ export class BacklogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getTeamsAndTasks();
+    this.getTaskForSelectedTeam();
   }
 
   private getBacklogData(): void {
@@ -55,15 +53,12 @@ export class BacklogComponent implements OnInit {
     });
   }
 
-  getTeamsAndTasks(): void {
+  getTaskForSelectedTeam(): void {
     this.teamsService
-      .getTeams()
+      .selectedTeam$
       .pipe(
-        switchMap(teams => {
-          this.teams = teams;
-          if (teams.length) {
-            this.selectedTeam = teams[0].id;
-          }
+        switchMap(teamId => {
+          this.selectedTeam = teamId;
           this.teamChanged();
           return this.backlogService.getBacklogAndSprints();
         })

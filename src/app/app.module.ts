@@ -10,7 +10,8 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatProgressSpinnerModule,
-  MatInputModule
+  MatInputModule,
+  MatSelectModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -49,6 +50,7 @@ import { TeamsModule } from './views/teams/teams.module';
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
+    MatSelectModule,
     BacklogModule,
     SprintModule,
     TeamsModule,

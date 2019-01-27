@@ -1,17 +1,7 @@
 <div class="backlog-view">
-  <ng-container *ngIf="teams.length; else noTeams">
+  <ng-container *ngIf="selectedTeam; else noTeams">
     <div class="sprints-header">
       <h2>Backlog</h2>
-      <div class="select-wrapper">
-        <mat-form-field>
-          <mat-select [(ngModel)]="selectedTeam"
-                      (selectionChange)="teamChanged()"
-                      placeholder="Team">
-            <mat-option *ngFor="let team of teams"
-                        [value]="team.id">{{team.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
     </div>
 
     <app-sprint-expansion-panel

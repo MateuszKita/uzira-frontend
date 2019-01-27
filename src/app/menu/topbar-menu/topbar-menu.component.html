@@ -1,11 +1,21 @@
 <mat-toolbar class="top-bar-menu">
   <span class="nav-bar-item image-title-container">
     <img class="logo"
-      [src]="imagePath">
+         [src]="imagePath">
     <span class="main-title">
       {{ title }}
     </span>
   </span>
+  <div class="select-team-wrapper">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedTeam"
+                  (selectionChange)="teamChanged()"
+                  placeholder="Team">
+        <mat-option *ngFor="let team of teams"
+                    [value]="team.id">{{team.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <span class="nav-bar-item">
     <span>
       <mat-icon class="user-image">mood</mat-icon>
