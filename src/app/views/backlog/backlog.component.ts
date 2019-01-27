@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BacklogService } from '../../core/services/backlog.service';
 import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
-import { SprintService } from 'src/app/core/services/sprint.service';
 import { MatDialog } from '@angular/material';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { TeamsService } from '../../core/services/teams.service';
@@ -23,7 +22,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly backlogService: BacklogService,
-    private readonly sprintService: SprintService,
     private readonly teamsService: TeamsService,
     public readonly dialog: MatDialog
   ) {}

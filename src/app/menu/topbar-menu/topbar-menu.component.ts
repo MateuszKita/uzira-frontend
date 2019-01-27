@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
-import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Team } from 'src/app/models/teams.model';
 import { TeamsService } from 'src/app/core/services/teams.service';
