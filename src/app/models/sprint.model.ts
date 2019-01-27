@@ -21,3 +21,11 @@ export enum TaskType {
   TASK = 'task',
   DEFECT = 'defect'
 }
+
+export enum TaskStatus {
+  OPEN = 'open',
+  IN_PROGRESS = 'progress',
+  IN_REVIEW = 'review',
+  VERIFICATION = 'verification',
+  READY = 'ready'
+}
