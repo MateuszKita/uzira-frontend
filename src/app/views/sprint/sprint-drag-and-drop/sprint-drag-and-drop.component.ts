@@ -11,8 +11,11 @@ import {
   styleUrls: ['./sprint-drag-and-drop.component.scss']
 })
 export class SprintDragAndDropComponent implements OnInit {
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+  public open = ['test 1'];
+  public progress = ['test 2'];
+  public review = ['test 3'];
+  public verification = ['test 4'];
+  public done = ['test 5'];
 
   constructor() {}
 

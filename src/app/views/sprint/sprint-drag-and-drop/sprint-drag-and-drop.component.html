@@ -1,30 +1,28 @@
 <div class="containers">
   <div class="example-container">
     <h2>Open</h2>
-
     <div cdkDropList
-         #todoList="cdkDropList"
-         [cdkDropListData]="todo"
-         [cdkDropListConnectedTo]="[doneList]"
+         #openList="cdkDropList"
+         [cdkDropListData]="open"
+         [cdkDropListConnectedTo]="[progressList]"
          class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
-           *ngFor="let item of todo"
+           *ngFor="let item of open"
            cdkDrag>{{item}}</div>
     </div>
   </div>
 
   <div class="example-container">
     <h2>In Progress</h2>
-
     <div cdkDropList
-         #doneList="cdkDropList"
-         [cdkDropListData]="done"
-         [cdkDropListConnectedTo]="[todoList]"
+         #progressList="cdkDropList"
+         [cdkDropListData]="progress"
+         [cdkDropListConnectedTo]="[openList, reviewList]"
          class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
-           *ngFor="let item of done"
+           *ngFor="let item of progress"
            cdkDrag>{{item}}</div>
     </div>
   </div>
@@ -33,13 +31,13 @@
     <h2>In Review</h2>
 
     <div cdkDropList
-         #doneList="cdkDropList"
-         [cdkDropListData]="done"
-         [cdkDropListConnectedTo]="[todoList]"
+         #reviewList="cdkDropList"
+         [cdkDropListData]="review"
+         [cdkDropListConnectedTo]="[progressList, verificationList]"
          class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
-           *ngFor="let item of done"
+           *ngFor="let item of review"
            cdkDrag>{{item}}</div>
     </div>
   </div>
@@ -48,13 +46,13 @@
     <h2>In Verification</h2>
 
     <div cdkDropList
-         #doneList="cdkDropList"
-         [cdkDropListData]="done"
-         [cdkDropListConnectedTo]="[todoList]"
+         #verificationList="cdkDropList"
+         [cdkDropListData]="verification"
+         [cdkDropListConnectedTo]="[progressList, doneList]"
          class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
-           *ngFor="let item of done"
+           *ngFor="let item of verification"
            cdkDrag>{{item}}</div>
     </div>
   </div>
@@ -65,7 +63,7 @@
     <div cdkDropList
          #doneList="cdkDropList"
          [cdkDropListData]="done"
-         [cdkDropListConnectedTo]="[todoList]"
+         [cdkDropListConnectedTo]="[]"
          class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
