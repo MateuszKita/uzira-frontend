@@ -9,7 +9,12 @@
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
            *ngFor="let item of openItems"
-           cdkDrag>{{item}}</div>
+           cdkDrag>
+        <div>
+          <h4>{{item.name}}</h4>
+          <p>{{item.type}}</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -23,7 +28,12 @@
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
            *ngFor="let item of progressItems"
-           cdkDrag>{{item}}</div>
+           cdkDrag>
+        <div>
+          <h4>{{item.name}}</h4>
+          <p>{{item.type}}</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -37,7 +47,12 @@
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
            *ngFor="let item of reviewItems"
-           cdkDrag>{{item}}</div>
+           cdkDrag>
+        <div>
+          <h4>{{item.name}}</h4>
+          <p>{{item.type}}</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -46,26 +61,36 @@
     <div cdkDropList
          #verificationList="cdkDropList"
          [cdkDropListData]="verificationItems"
-         [cdkDropListConnectedTo]="[progressList, doneList]"
+         [cdkDropListConnectedTo]="[progressList, readyList]"
          class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
            *ngFor="let item of verificationItems"
-           cdkDrag>{{item}}</div>
+           cdkDrag>
+        <div>
+          <h4>{{item.name}}</h4>
+          <p>{{item.type}}</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="example-container">
-    <h3>Done</h3>
+    <h3>Ready</h3>
     <div cdkDropList
-         #doneList="cdkDropList"
-         [cdkDropListData]="doneItems"
+         #readyList="cdkDropList"
+         [cdkDropListData]="readyItems"
          [cdkDropListConnectedTo]="[]"
          class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div class="example-box"
-           *ngFor="let item of doneItems"
-           cdkDrag>{{item}}</div>
+           *ngFor="let item of readyItems"
+           cdkDrag>
+        <div>
+          <h4>{{item.name}}</h4>
+          <p>{{item.type}}</p>
+        </div>
+      </div>
     </div>
   </div>
 

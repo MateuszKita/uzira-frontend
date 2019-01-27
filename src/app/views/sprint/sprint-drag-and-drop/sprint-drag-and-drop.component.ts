@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
+import { SprintTask, TaskStatus } from 'src/app/models/sprint.model';
 
 @Component({
   selector: 'app-sprint-drag-and-drop',
@@ -11,15 +12,43 @@ import {
   styleUrls: ['./sprint-drag-and-drop.component.scss']
 })
 export class SprintDragAndDropComponent implements OnInit {
-  public openItems = ['test 1'];
-  public progressItems = ['test 2'];
-  public reviewItems = ['test 3'];
-  public verificationItems = ['test 4'];
-  public doneItems = ['test 5'];
+  @Input() tasks: SprintTask[];
+  public openItems: SprintTask[] = [];
+  public progressItems: SprintTask[] = [];
+  public reviewItems: SprintTask[] = [];
+  public verificationItems: SprintTask[] = [];
+  public readyItems: SprintTask[] = [];
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    console.log(this.tasks);
+    this.segregateTasks();
+  }
+
+  private segregateTasks(): void {
+    this.tasks.forEach(task => {
+      switch (task.status) {
+        case TaskStatus.OPEN:
+          this.openItems.push(task);
+          break;
+        case TaskStatus.IN_PROGRESS:
+          this.progressItems.push(task);
+          break;
+        case TaskStatus.IN_REVIEW:
+          this.reviewItems.push(task);
+          break;
+        case TaskStatus.IN_VERIFICATION:
+          this.verificationItems.push(task);
+          break;
+        case TaskStatus.READY:
+          this.readyItems.push(task);
+          break;
+        default:
+          this.openItems.push(task);
+      }
+    });
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

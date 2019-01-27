@@ -1,6 +1,7 @@
 export interface SprintTask {
   name: string;
   type: TaskType;
+  status: TaskStatus;
   estimation?: number;
   // parent?: string;
   assigned?: string;
