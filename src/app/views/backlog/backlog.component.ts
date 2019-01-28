@@ -33,9 +33,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
   private getBacklogData(): void {
     this.backlogService
       .getBacklogAndSprints()
-      .pipe(
-        takeUntil(this.onDestroy$)
-      )
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe(this.processBacklogData);
   }
 
@@ -43,7 +41,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
     this.tasks = data.backlog.tasks;
     this.sprints = data.list;
     this.dataLoaded = true;
-  }
+  };
 
   private getTaskForSelectedTeam(): void {
     this.teamsService.selectedTeam$
@@ -82,15 +80,14 @@ export class BacklogComponent implements OnInit, OnDestroy {
       data: { name: 'add-task', id, sprints: this.sprints }
     });
 
-    dialogRef.afterClosed()
-    .pipe(
-      takeUntil(this.onDestroy$)
-    )
-    .subscribe(result => {
-      if (result) {
-        this.getBacklogData();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(result => {
+        if (result) {
+          this.getBacklogData();
+        }
+      });
   }
 
   ngOnDestroy(): void {

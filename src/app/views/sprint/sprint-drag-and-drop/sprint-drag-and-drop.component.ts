@@ -5,6 +5,7 @@ import {
   transferArrayItem
 } from '@angular/cdk/drag-drop';
 import { SprintTask, TaskStatus } from 'src/app/models/sprint.model';
+import { TaskService } from 'src/app/core/services/task.service';
 
 @Component({
   selector: 'app-sprint-drag-and-drop',
@@ -18,11 +19,11 @@ export class SprintDragAndDropComponent implements OnInit {
   public reviewItems: SprintTask[] = [];
   public verificationItems: SprintTask[] = [];
   public readyItems: SprintTask[] = [];
+  public taskStatus: typeof TaskStatus = TaskStatus;
 
-  constructor() {}
+  constructor(private readonly taskService: TaskService) {}
 
   ngOnInit(): void {
-    console.log(this.tasks);
     this.segregateTasks();
   }
 
@@ -45,12 +46,16 @@ export class SprintDragAndDropComponent implements OnInit {
           this.readyItems.push(task);
           break;
         default:
-          this.openItems.push(task);
       }
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  private updateTask(data: SprintTask, status: TaskStatus) {
+    data.status = status;
+    this.taskService.updateTask(data).subscribe();
+  }
+
+  drop(event: CdkDragDrop<SprintTask[]>, taskStatus: TaskStatus) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -58,6 +63,7 @@ export class SprintDragAndDropComponent implements OnInit {
         event.currentIndex
       );
     } else {
+      this.updateTask(event.previousContainer.data[event.previousIndex], taskStatus);
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

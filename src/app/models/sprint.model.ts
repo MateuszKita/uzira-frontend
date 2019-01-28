@@ -7,12 +7,15 @@ export interface SprintTask {
   assigned?: string;
   sprint?: number;
   description?: string;
+  subtasks?: SprintTask[];
+  id?: number;
 }
 
 export interface SprintGeneral {
   active: boolean;
   start_date: string;
   end_date: string;
+  inner_id?: number;
   id?: number;
   tasks?: SprintTask[];
 }

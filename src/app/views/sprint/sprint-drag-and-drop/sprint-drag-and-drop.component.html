@@ -6,13 +6,14 @@
          [cdkDropListData]="openItems"
          [cdkDropListConnectedTo]="[progressList]"
          class="example-list"
-         (cdkDropListDropped)="drop($event)">
+         (cdkDropListDropped)="drop($event, taskStatus.OPEN)">
       <div class="example-box"
            *ngFor="let item of openItems"
            cdkDrag>
         <div>
           <h4>{{item.name}}</h4>
           <p>{{item.type}}</p>
+          <p>estimation: {{item.estimation}}</p>
         </div>
       </div>
     </div>
@@ -25,13 +26,14 @@
          [cdkDropListData]="progressItems"
          [cdkDropListConnectedTo]="[openList, reviewList]"
          class="example-list"
-         (cdkDropListDropped)="drop($event)">
+         (cdkDropListDropped)="drop($event, taskStatus.IN_PROGRESS)">
       <div class="example-box"
            *ngFor="let item of progressItems"
            cdkDrag>
         <div>
           <h4>{{item.name}}</h4>
           <p>{{item.type}}</p>
+          <p>estimation: {{item.estimation}}</p>
         </div>
       </div>
     </div>
@@ -44,13 +46,14 @@
          [cdkDropListData]="reviewItems"
          [cdkDropListConnectedTo]="[progressList, verificationList]"
          class="example-list"
-         (cdkDropListDropped)="drop($event)">
+         (cdkDropListDropped)="drop($event, taskStatus.IN_REVIEW)">
       <div class="example-box"
            *ngFor="let item of reviewItems"
            cdkDrag>
         <div>
           <h4>{{item.name}}</h4>
           <p>{{item.type}}</p>
+          <p>estimation: {{item.estimation}}</p>
         </div>
       </div>
     </div>
@@ -63,13 +66,14 @@
          [cdkDropListData]="verificationItems"
          [cdkDropListConnectedTo]="[progressList, readyList]"
          class="example-list"
-         (cdkDropListDropped)="drop($event)">
+         (cdkDropListDropped)="drop($event, taskStatus.IN_VERIFICATION)">
       <div class="example-box"
            *ngFor="let item of verificationItems"
            cdkDrag>
         <div>
           <h4>{{item.name}}</h4>
           <p>{{item.type}}</p>
+          <p>estimation: {{item.estimation}}</p>
         </div>
       </div>
     </div>
@@ -82,13 +86,14 @@
          [cdkDropListData]="readyItems"
          [cdkDropListConnectedTo]="[]"
          class="example-list"
-         (cdkDropListDropped)="drop($event)">
+         (cdkDropListDropped)="drop($event, taskStatus.READY)">
       <div class="example-box"
            *ngFor="let item of readyItems"
            cdkDrag>
         <div>
           <h4>{{item.name}}</h4>
-          <p>{{item.type}}</p>
+          <p>Type: {{item.type}}</p>
+          <p>Estimation: {{item.estimation}}</p>
         </div>
       </div>
     </div>

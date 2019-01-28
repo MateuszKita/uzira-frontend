@@ -28,8 +28,8 @@
     <ng-container *ngIf="sprints.length; else noSprints">
       <ng-container *ngFor="let sprint of sprints; index as i">
         <app-sprint-expansion-panel
-                                    expansionPanelTitle="Sprint {{sprint.id}}"
-                                    expansionPanelSubtitle="All tasks in Sprint {{sprint.id}}
+                                    expansionPanelTitle="Sprint {{sprint.inner_id}}"
+                                    expansionPanelSubtitle="All tasks in Sprint {{sprint.inner_id}}
                                     [{{sprint.active ? 'Active' : 'Inactive'}}]"
                                     [dataSource]="sprints[i].tasks.length ? sprints[i].tasks : []"
                                     sprintId="{{sprint.id}}"

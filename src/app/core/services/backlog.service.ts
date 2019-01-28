@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { SprintTask } from 'src/app/models/sprint.model';
 import { TeamsService } from './teams.service';
-import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +27,9 @@ export class BacklogService {
 
   addTask(data: SprintTask): Observable<any> {
     return this.http.post<any>(this.backlogUrl, data);
+  }
+
+  updateTask(data: SprintTask): Observable<any> {
+    return this.http.put<any>(this.backlogUrl, data);
   }
 }
