@@ -5,11 +5,11 @@ import { Team } from 'src/app/models/teams.model';
 import { TeamsService } from 'src/app/core/services/teams.service';
 
 @Component({
-  selector: 'app-topbar-menu',
-  templateUrl: './topbar-menu.component.html',
-  styleUrls: ['./topbar-menu.component.scss']
+  selector: 'app-top-bar-menu',
+  templateUrl: './top-bar-menu.component.html',
+  styleUrls: ['./top-bar-menu.component.scss']
 })
-export class TopbarMenuComponent implements OnInit {
+export class TopBarMenuComponent implements OnInit {
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
   public teams: Team[] = [];
@@ -21,7 +21,8 @@ export class TopbarMenuComponent implements OnInit {
   constructor(
     private readonly userService: UserService,
     private readonly teamsService: TeamsService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.userService.getUsers().subscribe(

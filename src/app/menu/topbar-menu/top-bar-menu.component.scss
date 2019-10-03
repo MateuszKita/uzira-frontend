@@ -1,10 +1,10 @@
-.top-bar-menu {
+.top-bar {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   padding: 0;
 
-  .nav-bar-item {
+  .top-bar__user {
     padding: 0 15px;
     height: 50px;
     max-height: 50px;
@@ -12,12 +12,12 @@
     flex-direction: row;
     justify-content: center;
 
-    .user-image {
+    .top-bar__user-image {
       width: 50px;
       font-size: 50px;
     }
 
-    .user-name {
+    .top-bar__user-name {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -25,22 +25,22 @@
     }
   }
 
-  .select-team-wrapper {
+  .top-bar__select-team__container {
     font-size: 15px;
     padding: 15px 20% 0 140px;
   }
 
-  .image-title-container {
+  .top-bar__app-logo-and-title__container {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: space-between;
 
-    .logo {
+    .top-bar__logo {
       width: 50px;
-      height: 50px;
-      ;
+      height: 50px;;
     }
 
-    .main-title {
+    .top-bar__app-title {
       font-weight: 900;
       font-size: 110%;
       display: flex;

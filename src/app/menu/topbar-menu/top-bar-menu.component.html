@@ -1,12 +1,12 @@
-<mat-toolbar class="top-bar-menu">
-  <span class="nav-bar-item image-title-container">
-    <img class="logo"
+<mat-toolbar class="top-bar">
+  <div class="top-bar__app-logo-and-title__container">
+    <img class="top-bar__logo"
          [src]="imagePath">
-    <span class="main-title">
-      {{ title }}
+    <span class="top-bar__app-title">
+      {{title}}
     </span>
-  </span>
-  <div class="select-team-wrapper">
+  </div>
+  <div class="top-bar__select-team__container">
     <mat-form-field>
       <mat-select [(ngModel)]="selectedTeam"
                   (selectionChange)="teamChanged()"
@@ -16,12 +16,12 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <span class="nav-bar-item">
+  <div class="top-bar__user">
     <span>
-      <mat-icon class="user-image">mood</mat-icon>
+      <mat-icon class="top-bar__user-image">mood</mat-icon>
     </span>
-    <span class="user-name">
+    <span class="top-bar__user-name">
       {{firstName}} {{lastName}}
     </span>
-  </span>
+  </div>
 </mat-toolbar>

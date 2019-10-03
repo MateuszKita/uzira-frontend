@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarMenuComponent } from './menu/sidebar-menu/sidebar-menu.component';
-import { TopbarMenuComponent } from './menu/topbar-menu/topbar-menu.component';
+import { TopBarMenuComponent } from './menu/topbar-menu/top-bar-menu.component';
 import { BacklogModule } from './views/backlog/backlog.module';
 import { SprintModule } from './views/sprint/sprint.module';
 import { LoginComponent } from './views/login/login.component';
@@ -30,7 +30,7 @@ import { TeamsModule } from './views/teams/teams.module';
   declarations: [
     AppComponent,
     SidebarMenuComponent,
-    TopbarMenuComponent,
+    TopBarMenuComponent,
     LoginComponent,
     RegisterComponent
   ],
