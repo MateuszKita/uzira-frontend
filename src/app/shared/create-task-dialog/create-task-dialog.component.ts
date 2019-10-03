@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskType, TaskStatus } from 'src/app/models/sprint.model';
 import { BacklogService } from 'src/app/core/services/backlog.service';
 import { HttpErrorResponse } from '@angular/common/http';

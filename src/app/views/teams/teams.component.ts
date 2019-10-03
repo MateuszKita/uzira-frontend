@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from 'src/app/models/teams.model';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CreateTeamDialogComponent } from './create-team-dialog/create-team-dialog.component';
 import { TeamsService } from 'src/app/core/services/teams.service';
 import { HttpErrorResponse } from '@angular/common/http';

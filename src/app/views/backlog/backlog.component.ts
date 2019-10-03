@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BacklogService } from '../../core/services/backlog.service';
-import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
-import { MatDialog } from '@angular/material';
-import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
-import { TeamsService } from '../../core/services/teams.service';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
-import { Subject } from 'rxjs';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {BacklogService} from '../../core/services/backlog.service';
+import {SprintTask, SprintGeneral} from 'src/app/models/sprint.model';
+import {MatDialog} from '@angular/material/dialog';
+import {CreateSprintDialogComponent} from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
+import {TeamsService} from '../../core/services/teams.service';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {CreateTaskDialogComponent} from 'src/app/shared/create-task-dialog/create-task-dialog.component';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-backlog',
@@ -23,7 +23,8 @@ export class BacklogComponent implements OnInit, OnDestroy {
     private readonly backlogService: BacklogService,
     private readonly teamsService: TeamsService,
     public readonly dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getTaskForSelectedTeam();
@@ -36,7 +37,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
       .subscribe(this.processBacklogData);
   }
 
-  private processBacklogData = data => {
+  private processBacklogData(data) {
     this.tasks = data.backlog.tasks;
     this.sprints = data.list;
   }
@@ -44,20 +45,20 @@ export class BacklogComponent implements OnInit, OnDestroy {
   private getTaskForSelectedTeam(): void {
     this.teamsService.selectedTeam$
       .pipe(
-        takeUntil(this.onDestroy$),
         switchMap(teamId => {
           this.selectedTeamId = teamId;
           this.teamChanged();
           return this.backlogService.getBacklogAndSprints();
-        })
+        }),
+        takeUntil(this.onDestroy$)
       )
-      .subscribe(this.processBacklogData);
+      .subscribe(this.processBacklogData.bind(this));
   }
 
   addSprint(): void {
     const dialogRef = this.dialog.open(CreateSprintDialogComponent, {
       width: '250px',
-      data: { name: 'add-team' }
+      data: {name: 'add-team'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -74,7 +75,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
   taskAddition(id: number) {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
       width: '350px',
-      data: { name: 'add-task', id, sprints: this.sprints }
+      data: {name: 'add-task', id, sprints: this.sprints}
     });
 
     dialogRef
