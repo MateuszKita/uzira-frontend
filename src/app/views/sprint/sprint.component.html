@@ -15,4 +15,7 @@
       </mat-form-field>
     </div>
   </div>
+
+  <app-sprint-drag-and-drop *ngIf="currentSprint"
+                            [tasks]="currentSprint.tasks"></app-sprint-drag-and-drop>
 </div>

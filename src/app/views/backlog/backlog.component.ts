@@ -4,7 +4,7 @@ import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
 import { MatDialog } from '@angular/material';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { TeamsService } from '../../core/services/teams.service';
-import { switchMap, takeUntil, filter } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { Subject } from 'rxjs';
 
@@ -18,7 +18,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
   public selectedTeamId: number;
   public tasks: SprintTask[] = [];
   public sprints: SprintGeneral[] = [];
-  public dataLoaded = false;
 
   constructor(
     private readonly backlogService: BacklogService,
@@ -33,23 +32,19 @@ export class BacklogComponent implements OnInit, OnDestroy {
   private getBacklogData(): void {
     this.backlogService
       .getBacklogAndSprints()
-      .pipe(
-        takeUntil(this.onDestroy$)
-      )
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe(this.processBacklogData);
   }
 
   private processBacklogData = data => {
     this.tasks = data.backlog.tasks;
     this.sprints = data.list;
-    this.dataLoaded = true;
   }
 
   private getTaskForSelectedTeam(): void {
     this.teamsService.selectedTeam$
       .pipe(
         takeUntil(this.onDestroy$),
-        filter(teamId => teamId > 0),
         switchMap(teamId => {
           this.selectedTeamId = teamId;
           this.teamChanged();
@@ -73,7 +68,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   teamChanged(): void {
-    this.dataLoaded = false;
     this.getBacklogData();
   }
 
@@ -83,15 +77,14 @@ export class BacklogComponent implements OnInit, OnDestroy {
       data: { name: 'add-task', id, sprints: this.sprints }
     });
 
-    dialogRef.afterClosed()
-    .pipe(
-      takeUntil(this.onDestroy$)
-    )
-    .subscribe(result => {
-      if (result) {
-        this.getBacklogData();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(result => {
+        if (result) {
+          this.getBacklogData();
+        }
+      });
   }
 
   ngOnDestroy(): void {

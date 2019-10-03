@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { TaskType } from 'src/app/models/sprint.model';
+import { TaskType, TaskStatus } from 'src/app/models/sprint.model';
 import { BacklogService } from 'src/app/core/services/backlog.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -42,7 +42,8 @@ export class CreateTaskDialogComponent implements OnInit {
         type: this.type,
         estimation: this.estimation,
         sprint: this.sprint > 0 ? this.sprint : undefined,
-        description: this.description
+        description: this.description,
+        status: TaskStatus.OPEN
       })
       .subscribe(
         () => {

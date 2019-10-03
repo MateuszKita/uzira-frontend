@@ -15,9 +15,10 @@ export class BacklogService {
     private readonly http: HttpClient,
     private readonly teamsService: TeamsService
   ) {
-    this.teamsService.selectedTeam$.subscribe(teamId => {
-      this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
-    });
+    this.teamsService.selectedTeam$
+      .subscribe(teamId => {
+        this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
+      });
   }
 
   getBacklogAndSprints(): Observable<any> {
@@ -26,5 +27,9 @@ export class BacklogService {
 
   addTask(data: SprintTask): Observable<any> {
     return this.http.post<any>(this.backlogUrl, data);
+  }
+
+  updateTask(data: SprintTask): Observable<any> {
+    return this.http.put<any>(this.backlogUrl, data);
   }
 }
