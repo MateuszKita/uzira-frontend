@@ -1,12 +1,12 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {BacklogService} from '../../core/services/backlog.service';
-import {SprintTask, SprintGeneral} from 'src/app/models/sprint.model';
-import {MatDialog} from '@angular/material/dialog';
-import {CreateSprintDialogComponent} from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
-import {TeamsService} from '../../core/services/teams.service';
-import {switchMap, takeUntil} from 'rxjs/operators';
-import {CreateTaskDialogComponent} from 'src/app/shared/create-task-dialog/create-task-dialog.component';
-import {Subject} from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BacklogService } from '../../core/services/backlog.service';
+import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
+import { TeamsService } from '../../core/services/teams.service';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-backlog',

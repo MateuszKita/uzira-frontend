@@ -19,7 +19,7 @@ import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-e
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
-import {SharedModule} from '../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
