@@ -3,6 +3,8 @@ import { UserService } from '../../shared/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Team } from 'src/app/models/teams.model';
 import { TeamsService } from 'src/app/core/services/teams.service';
+import { Router } from '@angular/router';
+import { SecurityService } from '../../security/security.service';
 
 @Component({
   selector: 'app-top-bar-menu',
@@ -20,7 +22,9 @@ export class TopBarMenuComponent implements OnInit {
 
   constructor(
     private readonly userService: UserService,
-    private readonly teamsService: TeamsService
+    private readonly teamsService: TeamsService,
+    private readonly securityService: SecurityService,
+    private readonly router: Router
   ) {
   }
 
@@ -49,5 +53,10 @@ export class TopBarMenuComponent implements OnInit {
 
   teamChanged(): void {
     this.teamsService.selectedTeam$.next(this.selectedTeam);
+  }
+
+  logout(): void {
+    this.securityService.removeToken();
+    this.router.navigate(['login']);
   }
 }
