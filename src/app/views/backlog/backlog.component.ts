@@ -18,7 +18,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
   public selectedTeamId: number;
   public tasks: SprintTask[] = [];
   public sprints: SprintGeneral[] = [];
-  public dataLoaded = false;
 
   constructor(
     private readonly backlogService: BacklogService,
@@ -40,8 +39,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
   private processBacklogData = data => {
     this.tasks = data.backlog.tasks;
     this.sprints = data.list;
-    this.dataLoaded = true;
-  };
+  }
 
   private getTaskForSelectedTeam(): void {
     this.teamsService.selectedTeam$
@@ -70,7 +68,6 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   teamChanged(): void {
-    this.dataLoaded = false;
     this.getBacklogData();
   }
 

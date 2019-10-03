@@ -26,8 +26,8 @@ export class TopbarMenuComponent implements OnInit {
   ngOnInit() {
     this.userService.getUsers().subscribe(
       (res: { first_name: string; last_name: string }) => {
-        this.firstName = res[1].first_name;
-        this.lastName = res[1].last_name;
+        this.firstName = res[0].first_name;
+        this.lastName = res[0].last_name;
       },
       (err: HttpErrorResponse) => {
         console.error(err);

@@ -1,5 +1,5 @@
 <div class="backlog-view">
-  <ng-container *ngIf="selectedTeamId > 0; else noTeams">
+  <ng-container *ngIf="selectedTeamId; else noTeams">
     <div class="sprints-header">
       <h2>Backlog</h2>
     </div>
@@ -44,9 +44,10 @@
 
 
   <ng-template #noTeams>
-    <h2 *ngIf="dataLoaded">There is no teams,
-      create any first,
-      please.</h2>
+    <h2>
+      There is no teams, create any first,
+      please.
+    </h2>
   </ng-template>
 
 </div>

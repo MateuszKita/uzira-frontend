@@ -25,7 +25,8 @@ export class CreateTeamDialogComponent implements OnInit {
 
   onCreate(): void {
     this.teamsService.postNewTeam(this.name).subscribe(
-      () => {
+      res => {
+        this.teamsService.selectedTeam$.next(res.id);
         this.dialogRef.close();
       },
       (err: HttpErrorResponse) => {
