@@ -1,0 +1,36 @@
+.teams-view {
+  padding: 0 15px;
+
+  .title-header {
+    display: flex;
+    justify-content: space-between;
+
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .create-team {
+        height: 40px;
+      }
+    }
+  }
+
+  .teams-table {
+    width: 100%;
+
+    .id {
+      width: 15%;
+    }
+
+    .name {
+      width: 75%;
+
+    }
+
+    .action {
+      width: 10%;
+
+    }
+  }
+}

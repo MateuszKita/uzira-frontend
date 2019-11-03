@@ -1,12 +1,21 @@
-<p>
-  sprint works!
-</p>
+<div class="sprint-view">
+  <div class="view-header">
+    <h2>Active Sprint View</h2>
 
-<ul>
-  <li *ngFor="let user of (users$ | async)">
-    <p>{{user.id}}</p>
-    <p>{{user.email}}</p>
-    <p>{{user.first_name}}</p>
-    <p>{{user.last_name}}</p>
-  </li>
-</ul>
+    <div class="select-team-wrapper">
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedSprintId"
+                    (selectionChange)="sprintChanged()"
+                    [placeholder]="sprints?.length ? 'Sprint' : 'No sprints for team'"
+                    [disabled]="!sprints?.length">
+          <mat-option *ngFor="let sprint of sprints"
+                      [value]="sprint.id">Sprint
+            {{sprint.id}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <app-sprint-drag-and-drop *ngIf="currentSprint"
+                            [tasks]="currentSprint.tasks"></app-sprint-drag-and-drop>
+</div>
