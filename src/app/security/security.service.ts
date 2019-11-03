@@ -44,6 +44,7 @@ export class SecurityService {
 
   login(body: UserLoginData): Observable<string> {
     const apiUrl = this.apiUrl;
+    console.log(apiUrl);
     return this.http.post<any>(`${{apiUrl}}users/login`, body);
   }
 
