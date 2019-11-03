@@ -8,11 +8,18 @@ import { environment } from '../../environments/environment';
 const LOGIN_URL = '/login';
 const REGISTER_URL = '/register';
 
+declare const process: {
+  env: {
+    API_URL: string;
+  }
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class SecurityService {
   private token: string;
+  private apiUrl: string = process.env.API_URL || environment.apiUrl;
 
   constructor(
     private readonly http: HttpClient,
@@ -42,7 +49,7 @@ export class SecurityService {
   }
 
   login(body: UserLoginData): Observable<string> {
-    return this.http.post<any>(`${{process.env.API_URL || environment.apiUrl}}`, body);
+    return this.http.post<any>(this.apiUrl + 'users/login', body);
   }
 
   register(body: UserRegisterData): Observable<any> {
@@ -51,6 +58,6 @@ export class SecurityService {
       password: body.password,
       name: body.firstName,
     };
-    return this.http.post<any>(`${{process.env.API_URL || environment.apiUrl}}users`, registerData);
+    return this.http.post<any>(this.apiUrl + 'users', registerData);
   }
 }
