@@ -1,0 +1,34 @@
+<mat-toolbar class="top-bar">
+
+  <div class="top-bar__app-logo-and-title__container">
+    <img class="top-bar__logo"
+         [src]="imagePath">
+    <span class="top-bar__app-title">
+      {{title}}
+    </span>
+  </div>
+
+  <div class="top-bar__select-team__container">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedTeam"
+                  (selectionChange)="teamChanged()"
+                  placeholder="Team">
+        <mat-option *ngFor="let team of teams"
+                    [value]="team.id">{{team.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="top-bar__user">
+    <mat-icon class="top-bar__user-image">mood</mat-icon>
+    <span class="top-bar__user-name">
+      {{firstName}} {{lastName}}
+    </span>
+    <button class="top-bar__log-out__button"
+            mat-icon-button
+            (click)="logout()">
+      <mat-icon class="top-bar__user-image">power_settings_new</mat-icon>
+    </button>
+  </div>
+
+</mat-toolbar>

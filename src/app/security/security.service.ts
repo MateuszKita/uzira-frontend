@@ -35,6 +35,10 @@ export class SecurityService {
     sessionStorage.setItem('token', JSON.stringify(token));
   }
 
+  removeToken(): void {
+    sessionStorage.removeItem('token');
+  }
+
   login(body: UserLoginData): Observable<string> {
     return this.http.post<any>('http://localhost:8000/user/login/', body);
   }

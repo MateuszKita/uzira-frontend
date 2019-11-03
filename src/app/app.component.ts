@@ -5,7 +5,6 @@ import {
   Router,
   NavigationEnd,
   RouterEvent,
-  ActivatedRoute
 } from '@angular/router';
 
 const LOGIN_URL = '/login';

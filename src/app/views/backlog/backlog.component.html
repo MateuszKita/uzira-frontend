@@ -1,3 +1,53 @@
-<div class="backlog">
-  <h3 class="title">{{helloWorldMessage}}</h3>
+<div class="backlog-view">
+  <ng-container *ngIf="selectedTeamId; else noTeams">
+    <div class="sprints-header">
+      <h2>Backlog</h2>
+    </div>
+
+    <app-sprint-expansion-panel
+                                expansionPanelTitle="Backlog"
+                                expansionPanelSubtitle="All tasks in Backlog"
+                                [dataSource]="tasks?.length ? tasks : []"
+                                (taskAddition)="taskAddition($event)"
+                                sprintId="0"></app-sprint-expansion-panel>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <div class="sprints-header">
+      <h2>Sprints list</h2>
+      <div class="button-wrapper">
+        <button mat-raised-button
+                color="secondary"
+                class="add-sprint"
+                (click)="addSprint()">
+          Add Sprint
+        </button>
+      </div>
+    </div>
+
+    <ng-container *ngIf="sprints.length; else noSprints">
+      <ng-container *ngFor="let sprint of sprints; index as i">
+        <app-sprint-expansion-panel
+                                    expansionPanelTitle="Sprint {{sprint.inner_id}}"
+                                    expansionPanelSubtitle="All tasks in Sprint {{sprint.inner_id}}
+                                    [{{sprint.active ? 'Active' : 'Inactive'}}]"
+                                    [dataSource]="sprints[i].tasks.length ? sprints[i].tasks : []"
+                                    sprintId="{{sprint.id}}"
+                                    (taskAddition)="taskAddition($event)"></app-sprint-expansion-panel>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noSprints>
+      <h3>Your sprints list is empty</h3>
+    </ng-template>
+  </ng-container>
+
+
+  <ng-template #noTeams>
+    <h2>
+      There is no teams, create any first,
+      please.
+    </h2>
+  </ng-template>
+
 </div>

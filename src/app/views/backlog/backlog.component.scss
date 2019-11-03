@@ -1,6 +1,23 @@
-.backlog {
-  padding: 20px;
-  .title {
-    font: 30px black;
+.backlog-view {
+  padding: 0 15px;
+
+  .divider {
+    margin-top: 15px;
+  }
+
+  .sprints-header {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .add-sprint {
+        height: 40px;
+      }
+    }
   }
 }

@@ -4,11 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'test',
-  auth_config: {
-    auth_url: '',
-    response_type: 'token'
-  }
+  apiUrl: 'http://localhost:8000/'
 };
 
 /*

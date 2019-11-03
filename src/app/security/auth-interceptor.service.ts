@@ -6,7 +6,7 @@ import {
   HttpEvent,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, empty } from 'rxjs';
+import { Observable, empty, EMPTY } from 'rxjs';
 import { SecurityService } from './security.service';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { UNAUTHORIZED } from 'http-status-codes';
@@ -30,6 +30,9 @@ export class AuthInterceptorService implements HttpInterceptor {
     };
     if (req.method === 'POST' && req.url.includes('/user/')) {
       headers = {};
+    }
+    if (req.url.includes('/0/')) {
+      return EMPTY;
     }
     const authRequest = req.clone({
       setHeaders: headers
