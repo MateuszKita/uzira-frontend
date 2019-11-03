@@ -1,7 +1,4 @@
 export const environment = {
   production: true,
-  auth_config: {
-    auth_url: '',
-    response_type: 'token',
-  }
+  apiUrl: 'https://uzira-backend-nodejs.herokuapp.com/'
 };
