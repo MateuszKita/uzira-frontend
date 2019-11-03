@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserLoginData, UserRegisterData } from '../models/user.model';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 const LOGIN_URL = '/login';
 const REGISTER_URL = '/register';
@@ -12,11 +13,13 @@ const REGISTER_URL = '/register';
 })
 export class SecurityService {
   private token: string;
+  private apiUrl: string = environment.apiUrl;
 
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router
-  ) {}
+  ) {
+  }
 
   getToken(): string {
     const tokenObject: any = JSON.parse(sessionStorage.getItem('token'));
@@ -40,16 +43,17 @@ export class SecurityService {
   }
 
   login(body: UserLoginData): Observable<string> {
-    return this.http.post<any>('http://localhost:8000/user/login/', body);
+    const apiUrl = this.apiUrl;
+    return this.http.post<any>(`${{apiUrl}}users/login`, body);
   }
 
   register(body: UserRegisterData): Observable<any> {
+    const apiUrl = this.apiUrl;
     const registerData: any = {
       email: body.email,
       password: body.password,
-      first_name: body.firstName,
-      last_name: body.lastName
+      name: body.firstName,
     };
-    return this.http.post<any>('http://localhost:8000/user/', registerData);
+    return this.http.post<any>(`${{apiUrl}}users`, registerData);
   }
 }
