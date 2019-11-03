@@ -45,7 +45,7 @@ export class SecurityService {
   login(body: UserLoginData): Observable<string> {
     const apiUrl = this.apiUrl;
     console.log(apiUrl);
-    return this.http.post<any>(`${{apiUrl}}users/login`, body);
+    return this.http.post<any>(`https://uzira-backend-nodejs.herokuapp.com/users/login`, body);
   }
 
   register(body: UserRegisterData): Observable<any> {
