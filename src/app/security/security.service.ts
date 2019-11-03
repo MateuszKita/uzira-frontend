@@ -13,7 +13,6 @@ const REGISTER_URL = '/register';
 })
 export class SecurityService {
   private token: string;
-  private apiUrl: string = environment.apiUrl;
 
   constructor(
     private readonly http: HttpClient,
@@ -43,18 +42,15 @@ export class SecurityService {
   }
 
   login(body: UserLoginData): Observable<string> {
-    const apiUrl = this.apiUrl;
-    console.log(apiUrl);
-    return this.http.post<any>(`https://uzira-backend-nodejs.herokuapp.com/users/login`, body);
+    return this.http.post<any>(`${{process.env.API_URL || environment.apiUrl}}`, body);
   }
 
   register(body: UserRegisterData): Observable<any> {
-    const apiUrl = this.apiUrl;
     const registerData: any = {
       email: body.email,
       password: body.password,
       name: body.firstName,
     };
-    return this.http.post<any>(`${{apiUrl}}users`, registerData);
+    return this.http.post<any>(`${{process.env.API_URL || environment.apiUrl}}users`, registerData);
   }
 }
