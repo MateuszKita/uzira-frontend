@@ -8,18 +8,12 @@ import { environment } from '../../environments/environment';
 const LOGIN_URL = '/login';
 const REGISTER_URL = '/register';
 
-declare const process: {
-  env: {
-    API_URL: string;
-  }
-};
-
 @Injectable({
   providedIn: 'root'
 })
 export class SecurityService {
   private token: string;
-  private apiUrl: string = process.env.API_URL || environment.apiUrl;
+  private apiUrl: string = environment.apiUrl;
 
   constructor(
     private readonly http: HttpClient,
