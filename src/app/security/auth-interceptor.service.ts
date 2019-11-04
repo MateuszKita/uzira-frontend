@@ -6,7 +6,7 @@ import {
   HttpEvent,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, empty, EMPTY } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { SecurityService } from './security.service';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { UNAUTHORIZED } from 'http-status-codes';
@@ -19,18 +19,18 @@ export class AuthInterceptorService implements HttpInterceptor {
   constructor(
     private readonly securityService: SecurityService,
     private readonly router: Router
-  ) {}
+  ) {
+  }
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.securityService.getToken();
-    let headers: any = {
-      Authorization: 'Bearer ' + this.securityService.getToken()
-    };
-    if (req.method === 'POST' && req.url.includes('/users')) {
-      headers = {};
-    }
+    const headers: any = req.method === 'POST' && req.url.includes('/users')
+      ? {}
+      : {Authorization: 'Bearer ' + this.securityService.getToken()};
+
     if (req.url.includes('/0/')) {
       return EMPTY;
     }
@@ -45,8 +45,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         ) {
           this.router.navigate(['login']);
         }
-        return empty(); // Observable without events
-        // return throwError(new Error(error.error.error.message));
+        return EMPTY; // Observable without events
       })
     );
   }
