@@ -28,7 +28,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     let headers: any = {
       Authorization: 'Bearer ' + this.securityService.getToken()
     };
-    if (req.method === 'POST' && req.url.includes('/user/')) {
+    if (req.method === 'POST' && req.url.includes('/users')) {
       headers = {};
     }
     if (req.url.includes('/0/')) {
