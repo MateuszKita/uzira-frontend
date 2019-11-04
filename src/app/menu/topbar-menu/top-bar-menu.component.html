@@ -8,13 +8,13 @@
     </span>
   </div>
 
-  <div class="top-bar__select-team__container">
+  <div class="top-bar__select-project__container">
     <mat-form-field>
-      <mat-select [(ngModel)]="selectedTeam"
-                  (selectionChange)="teamChanged()"
-                  placeholder="Team">
-        <mat-option *ngFor="let team of teams"
-                    [value]="team.id">{{team.name}}</mat-option>
+      <mat-select [(ngModel)]="selectedProjectId"
+                  (selectionChange)="projectChanged()"
+                  placeholder="Project">
+        <mat-option *ngFor="let project of projects"
+                    [value]="project.id">{{project.name}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

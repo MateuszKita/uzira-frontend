@@ -1,18 +1,18 @@
-<div class="teams-view">
+<div class="projects-view">
   <div class="title-header">
-    <h2>Teams list</h2>
+    <h2>Projects list</h2>
     <div class="button-wrapper">
       <button mat-raised-button
               color="secondary"
-              class="create-team"
-              (click)="openCreateTeamDialog()">
-        Create Team</button>
+              class="create-project"
+              (click)="openCreateProjectDialog()">
+        Create Project</button>
     </div>
   </div>
 
   <table mat-table
          [dataSource]="dataSource"
-         class="teams-table">
+         class="projects-table">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell
@@ -27,7 +27,7 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell
           *matHeaderCellDef
-          class="name">Team Name</th>
+          class="name">Project Name</th>
       <td mat-cell
           *matCellDef="let element"
           class="name">
@@ -41,7 +41,7 @@
       <td mat-cell
           *matCellDef="let element"
           class="action">
-        <button mat-icon-button (click)="deleteTeam(element.id)">
+        <button mat-icon-button (click)="deleteProject(element.id)">
           <mat-icon>
             delete
           </mat-icon>

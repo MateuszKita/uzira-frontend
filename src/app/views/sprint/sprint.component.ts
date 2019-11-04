@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { TeamsService } from 'src/app/core/services/teams.service';
+import { ProjectsService } from 'src/app/core/services/projects.service';
 import { SprintService } from 'src/app/core/services/sprint.service';
 import { SprintGeneral } from 'src/app/models/sprint.model';
 import { takeUntil, switchMap, take, filter } from 'rxjs/operators';
@@ -17,19 +17,20 @@ export class SprintComponent implements OnInit, OnDestroy {
   public sprints: SprintGeneral[];
 
   constructor(
-    private readonly teamsService: TeamsService,
+    private readonly projectsService: ProjectsService,
     private readonly sprintService: SprintService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getSprints();
   }
 
   private getSprints(): void {
-    this.teamsService.selectedTeam$
+    this.projectsService.selectedProjectId$
       .pipe(
         takeUntil(this.onDestroy$),
-        filter(teamId => teamId > 0),
+        filter(id => id > 0),
         switchMap(() => this.sprintService.getSprints().pipe(take(1)))
       )
       .subscribe(sprints => {

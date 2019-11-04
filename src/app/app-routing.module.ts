@@ -4,7 +4,7 @@ import { BacklogComponent } from './views/backlog/backlog.component';
 import { SprintComponent } from './views/sprint/sprint.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { TeamsComponent } from './views/teams/teams.component';
+import { ProjectsComponent } from './views/projects/projects.component';
 
 const routes: Routes = [
   {
@@ -29,8 +29,8 @@ const routes: Routes = [
     component: SprintComponent
   },
   {
-    path: 'teams',
-    component: TeamsComponent
+    path: 'projects',
+    component: ProjectsComponent
   },
   {
     path: '**',

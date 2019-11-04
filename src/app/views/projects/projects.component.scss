@@ -1,4 +1,4 @@
-.teams-view {
+.projects-view {
   padding: 0 15px;
 
   .title-header {
@@ -10,13 +10,13 @@
       flex-direction: column;
       justify-content: center;
 
-      .create-team {
+      .create-project {
         height: 40px;
       }
     }
   }
 
-  .teams-table {
+  .projects-table {
     width: 100%;
 
     .id {

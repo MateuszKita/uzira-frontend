@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TeamsRoutingModule } from './teams-routing.module';
-import { TeamsComponent } from './teams.component';
+import { ProjectsRoutingModule } from './projects-routing.module';
+import { ProjectsComponent } from './projects.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -10,13 +10,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { CreateTeamDialogComponent } from './create-team-dialog/create-team-dialog.component';
+import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    TeamsRoutingModule,
+    ProjectsRoutingModule,
     FormsModule,
     MatExpansionModule,
     MatTableModule,
@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule
   ],
-  declarations: [TeamsComponent, CreateTeamDialogComponent],
-  entryComponents: [CreateTeamDialogComponent]
+  declarations: [ProjectsComponent, CreateProjectDialogComponent],
+  entryComponents: [CreateProjectDialogComponent]
 })
-export class TeamsModule {}
+export class ProjectsModule {}

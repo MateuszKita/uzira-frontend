@@ -2,11 +2,11 @@
   <div class="view-header">
     <h2>Active Sprint View</h2>
 
-    <div class="select-team-wrapper">
+    <div class="select-project-wrapper">
       <mat-form-field>
         <mat-select [(ngModel)]="selectedSprintId"
                     (selectionChange)="sprintChanged()"
-                    [placeholder]="sprints?.length ? 'Sprint' : 'No sprints for team'"
+                    [placeholder]="sprints?.length ? 'Sprint' : 'No sprints for project'"
                     [disabled]="!sprints?.length">
           <mat-option *ngFor="let sprint of sprints"
                       [value]="sprint.id">Sprint

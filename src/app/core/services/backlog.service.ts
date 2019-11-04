@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { SprintTask } from 'src/app/models/sprint.model';
-import { TeamsService } from './teams.service';
+import { ProjectsService } from './projects.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,11 @@ export class BacklogService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly teamsService: TeamsService
+    private readonly projectsService: ProjectsService
   ) {
-    this.teamsService.selectedTeam$
-      .subscribe(teamId => {
-        this.backlogUrl = `${environment.apiUrl}team/${teamId}/backlog/`;
+    this.projectsService.selectedProjectId$
+      .subscribe(id => {
+        this.backlogUrl = `${environment.apiUrl}project/${id}/backlog/`;
       });
   }
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Team } from 'src/app/models/teams.model';
-import { TeamsService } from 'src/app/core/services/teams.service';
+import { Project } from 'src/app/models/projects.model';
+import { ProjectsService } from 'src/app/core/services/projects.service';
 import { Router } from '@angular/router';
 import { SecurityService } from '../../security/security.service';
 
@@ -14,15 +14,15 @@ import { SecurityService } from '../../security/security.service';
 export class TopBarMenuComponent implements OnInit {
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
-  public teams: Team[] = [];
-  public selectedTeam: number;
+  public projects: Project[] = [];
+  public selectedProjectId: number;
 
   public firstName: string;
   public lastName: string;
 
   constructor(
     private readonly userService: UserService,
-    private readonly teamsService: TeamsService,
+    private readonly projectsService: ProjectsService,
     private readonly securityService: SecurityService,
     private readonly router: Router
   ) {
@@ -38,21 +38,21 @@ export class TopBarMenuComponent implements OnInit {
         console.error(err);
       }
     );
-    this.getTeams();
+    this.getProjects();
   }
 
-  getTeams(): void {
-    this.teamsService.getTeams().subscribe(teams => {
-      this.teams = teams;
-      if (teams.length) {
-        this.selectedTeam = teams[0].id;
-        this.teamsService.selectedTeam$.next(this.selectedTeam);
+  getProjects(): void {
+    this.projectsService.getProjects().subscribe(projects => {
+      this.projects = projects;
+      if (projects.length) {
+        this.selectedProjectId = projects[0].id;
+        this.projectsService.selectedProjectId$.next(this.selectedProjectId);
       }
     });
   }
 
-  teamChanged(): void {
-    this.teamsService.selectedTeam$.next(this.selectedTeam);
+  projectChanged(): void {
+    this.projectsService.selectedProjectId$.next(this.selectedProjectId);
   }
 
   logout(): void {

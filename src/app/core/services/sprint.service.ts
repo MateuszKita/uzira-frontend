@@ -3,21 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { SprintGeneral } from 'src/app/models/sprint.model';
-import { TeamsService } from './teams.service';
+import { ProjectsService } from './projects.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SprintService {
   private sprintUrl: string;
-  public teamId: number;
+  public projectId: number;
 
   constructor(
     private readonly http: HttpClient,
-    private readonly teamsService: TeamsService
+    private readonly projectsService: ProjectsService
   ) {
-    this.teamsService.selectedTeam$.subscribe(teamId => {
-      this.sprintUrl = `${environment.apiUrl}team/${teamId}/sprints/`;
+    this.projectsService.selectedProjectId$.subscribe(id => {
+      this.sprintUrl = `${environment.apiUrl}project/${id}/sprints/`;
     });
   }
 

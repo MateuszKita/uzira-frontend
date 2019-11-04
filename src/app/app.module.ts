@@ -24,7 +24,7 @@ import { SecurityModule } from './security/security.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './views/register/register.component';
-import { TeamsModule } from './views/teams/teams.module';
+import { ProjectsModule } from './views/projects/projects.module';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { TeamsModule } from './views/teams/teams.module';
     MatSelectModule,
     BacklogModule,
     SprintModule,
-    TeamsModule,
+    ProjectsModule,
     SecurityModule,
     HttpClientModule,
     FormsModule,
