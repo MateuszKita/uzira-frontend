@@ -19,7 +19,8 @@ export class RegisterComponent implements OnInit {
     private readonly router: Router,
     private readonly fb: FormBuilder,
     private readonly securityService: SecurityService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.registerFormGroup = this.createFormGroup();
@@ -31,22 +32,22 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.securityService.register(this.registerFormGroup.value).subscribe(
-      () => {
-        this.router.navigate(['/login']);
-      },
-      (err: HttpErrorResponse) => {
-        console.error(err);
-      }
-    );
+    this.securityService.register(this.registerFormGroup.value)
+      .subscribe(
+        () => {
+          this.router.navigate(['/login']);
+        },
+        (err: HttpErrorResponse) => {
+          console.error(err);
+        }
+      );
   }
 
   createFormGroup(): FormGroup {
     return this.fb.group({
       email: '',
       password: '',
-      firstName: '',
-      lastName: ''
+      name: ''
     });
   }
 

@@ -50,7 +50,7 @@ export class SecurityService {
     const registerData: any = {
       email: body.email,
       password: body.password,
-      name: body.firstName,
+      name: body.name,
     };
     return this.http.post<any>(this.apiUrl + 'users', registerData);
   }

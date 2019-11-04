@@ -4,7 +4,7 @@
       <mat-card-title>
         <span class="nav-bar-item image-title-container">
           <img class="logo"
-               [src]="imagePath" />
+               [src]="imagePath"/>
           <span class="main-title"> {{ title }}
             Register </span>
         </span></mat-card-title>
@@ -18,7 +18,7 @@
                  placeholder="E-mail Address"
                  name="email"
                  email
-                 required />
+                 required/>
         </mat-form-field>
         <mat-form-field class="login-input">
           <input matInput
@@ -26,21 +26,14 @@
                  placeholder="Password"
                  type="password"
                  name="password"
-                 required />
+                 required/>
         </mat-form-field>
         <mat-form-field class="login-input">
           <input matInput
                  formControlName="firstName"
-                 placeholder="First Name"
-                 name="firstName"
-                 required />
-        </mat-form-field>
-        <mat-form-field class="login-input">
-          <input matInput
-                 formControlName="lastName"
-                 placeholder="Last Name"
-                 name="lastName"
-                 required />
+                 placeholder="User Name"
+                 name="name"
+                 required/>
         </mat-form-field>
       </form>
     </mat-card-content>
@@ -48,11 +41,13 @@
       <div class="actions-container">
         <button mat-raised-button
                 (click)="cancel()"
-                color="secondary">Cancel</button>
+                color="secondary">Cancel
+        </button>
         <button mat-raised-button
                 (click)="register()"
                 color="primary"
-                [disabled]="registerButtonDisabled">Register</button>
+                [disabled]="registerButtonDisabled">Register
+        </button>
       </div>
     </mat-card-actions>
   </mat-card>
