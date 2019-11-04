@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
     private readonly router: Router,
     private readonly fb: FormBuilder,
     private readonly securityService: SecurityService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.loginFormGroup = this.createFormGroup();
@@ -27,15 +28,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.securityService.login(this.loginFormGroup.value).subscribe(
-      (token: string) => {
-        this.securityService.setToken(token);
-        this.router.navigate(['backlog']);
-      },
-      (err: HttpErrorResponse) => {
-        console.error(err);
-      }
-    );
+    this.securityService.login(this.loginFormGroup.value)
+      .subscribe(
+        (userBody: any) => {
+          this.securityService.setToken(userBody.token);
+          this.router.navigate(['backlog']);
+        },
+        (err: HttpErrorResponse) => {
+          console.error(err);
+        }
+      );
   }
 
   register(): void {
@@ -50,16 +52,17 @@ export class LoginComponent implements OnInit {
   }
 
   private disableButtonIfFormInvalid(): void {
-    this.loginFormGroup.statusChanges.subscribe((status: string) => {
-      switch (status) {
-        case 'VALID':
-          this.loginButtonDisabled = false;
-          break;
-        case 'INVALID':
-          this.loginButtonDisabled = true;
-          break;
-        default:
-      }
-    });
+    this.loginFormGroup.statusChanges
+      .subscribe((status: string) => {
+        switch (status) {
+          case 'VALID':
+            this.loginButtonDisabled = false;
+            break;
+          case 'INVALID':
+            this.loginButtonDisabled = true;
+            break;
+          default:
+        }
+      });
   }
 }
