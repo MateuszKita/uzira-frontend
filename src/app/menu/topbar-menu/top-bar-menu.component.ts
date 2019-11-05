@@ -15,7 +15,7 @@ export class TopBarMenuComponent implements OnInit {
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
   public projects: Project[] = [];
-  public selectedProjectId: number;
+  public selectedProjectId: string;
 
   public name: string;
 
@@ -50,8 +50,9 @@ export class TopBarMenuComponent implements OnInit {
     });
   }
 
-  projectChanged(): void {
-    this.projectsService.selectedProjectId$.next(this.selectedProjectId);
+  projectChanged($event): void {
+    console.log($event.value);
+    this.projectsService.selectedProjectId$.next($event.value);
   }
 
   logout(): void {

@@ -11,7 +11,7 @@
   <div class="top-bar__select-project__container">
     <mat-form-field>
       <mat-select [(ngModel)]="selectedProjectId"
-                  (selectionChange)="projectChanged()"
+                  (selectionChange)="projectChanged($event)"
                   placeholder="Project">
         <mat-option *ngFor="let project of projects"
                     [value]="project._id">{{project.name}}</mat-option>

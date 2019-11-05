@@ -30,7 +30,7 @@ export class SprintComponent implements OnInit, OnDestroy {
     this.projectsService.selectedProjectId$
       .pipe(
         takeUntil(this.onDestroy$),
-        filter(id => id > 0),
+        filter(id => id !== '0'),
         switchMap(() => this.sprintService.getSprints().pipe(take(1)))
       )
       .subscribe(sprints => {

@@ -15,7 +15,7 @@ import { forkJoin, Subject } from 'rxjs';
 })
 export class BacklogComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<null> = new Subject();
-  public selectedProjectId: number;
+  public selectedProjectId: string;
   public tasks: SprintTask[] = [];
   public sprints: SprintGeneral[] = [];
 

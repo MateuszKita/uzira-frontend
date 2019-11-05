@@ -9,7 +9,7 @@ import { Project } from 'src/app/models/projects.model';
 })
 export class ProjectsService {
   private readonly projectsUrl: string = `${environment.apiUrl}projects/`;
-  public selectedProjectId$: BehaviorSubject<number> = new BehaviorSubject(0);
+  public selectedProjectId$: BehaviorSubject<string> = new BehaviorSubject('0');
 
   constructor(
     private readonly http: HttpClient
@@ -24,7 +24,7 @@ export class ProjectsService {
     return this.http.post<any>(this.projectsUrl, {name});
   }
 
-  deleteProject(id: number): Observable<any> {
+  deleteProject(id: string): Observable<any> {
     return this.http.delete<any>(`${this.projectsUrl}${id}/`);
   }
 }
