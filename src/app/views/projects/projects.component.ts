@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  public displayedColumns: string[] = ['id', 'name', 'action'];
+  public displayedColumns: string[] = ['no', 'name', 'action'];
   public dataSource: Project[] = [];
 
   constructor(

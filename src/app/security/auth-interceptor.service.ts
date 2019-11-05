@@ -11,6 +11,7 @@ import { SecurityService } from './security.service';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { UNAUTHORIZED } from 'http-status-codes';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.securityService.getToken();
-    const headers: any = req.method === 'POST' && req.url.includes('/users')
+    const headers: any = req.method === 'POST' && req.url.includes(environment.apiUrl + '/users')
       ? {}
       : {Authorization: 'Bearer ' + this.securityService.getToken()};
 

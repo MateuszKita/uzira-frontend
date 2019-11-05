@@ -17,8 +17,7 @@ export class TopBarMenuComponent implements OnInit {
   public projects: Project[] = [];
   public selectedProjectId: number;
 
-  public firstName: string;
-  public lastName: string;
+  public name: string;
 
   constructor(
     private readonly userService: UserService,
@@ -29,15 +28,15 @@ export class TopBarMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(
-      (res: { first_name: string; last_name: string }) => {
-        this.firstName = res[0].first_name;
-        this.lastName = res[0].last_name;
-      },
-      (err: HttpErrorResponse) => {
-        console.error(err);
-      }
-    );
+    this.userService.getMe()
+      .subscribe(
+        (res: any) => {
+          this.name = res.name;
+        },
+        (err: HttpErrorResponse) => {
+          console.error(err);
+        }
+      );
     this.getProjects();
   }
 
@@ -45,7 +44,7 @@ export class TopBarMenuComponent implements OnInit {
     this.projectsService.getProjects().subscribe(projects => {
       this.projects = projects;
       if (projects.length) {
-        this.selectedProjectId = projects[0].id;
+        this.selectedProjectId = projects[0]._id;
         this.projectsService.selectedProjectId$.next(this.selectedProjectId);
       }
     });

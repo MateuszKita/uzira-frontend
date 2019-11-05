@@ -14,7 +14,7 @@
                   (selectionChange)="projectChanged()"
                   placeholder="Project">
         <mat-option *ngFor="let project of projects"
-                    [value]="project.id">{{project.name}}</mat-option>
+                    [value]="project._id">{{project.name}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -22,7 +22,7 @@
   <div class="top-bar__user">
     <mat-icon class="top-bar__user-image">mood</mat-icon>
     <span class="top-bar__user-name">
-      {{firstName}} {{lastName}}
+      {{name}}
     </span>
     <button class="top-bar__log-out__button"
             mat-icon-button

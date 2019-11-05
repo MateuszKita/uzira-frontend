@@ -8,7 +8,7 @@ import { Project } from 'src/app/models/projects.model';
   providedIn: 'root'
 })
 export class ProjectsService {
-  private readonly projectsUrl: string = `${environment.apiUrl}project/`;
+  private readonly projectsUrl: string = `${environment.apiUrl}projects/`;
   public selectedProjectId$: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(

@@ -22,9 +22,9 @@ export class SecurityService {
   }
 
   getToken(): string {
-    const tokenObject: any = JSON.parse(sessionStorage.getItem('token'));
-    if (tokenObject) {
-      this.token = tokenObject.token;
+    const token: any = JSON.parse(sessionStorage.getItem('token'));
+    if (token) {
+      this.token = token;
     } else if (
       this.router.url !== LOGIN_URL &&
       this.router.url !== REGISTER_URL

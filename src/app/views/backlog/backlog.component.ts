@@ -6,7 +6,7 @@ import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog
 import { ProjectsService } from '../../core/services/projects.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-backlog',
@@ -31,15 +31,19 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   private getBacklogData(): void {
-    this.backlogService
-      .getBacklogAndSprints()
-      .pipe(takeUntil(this.onDestroy$))
+    forkJoin([
+      this.backlogService.getBacklog(),
+      this.backlogService.getSprints()
+    ])
+      .pipe(
+        takeUntil(this.onDestroy$)
+      )
       .subscribe(this.processBacklogData);
   }
 
   private processBacklogData(data) {
-    this.tasks = data.backlog.tasks;
-    this.sprints = data.list;
+    this.tasks = data[0].tasks;
+    this.sprints = data[1];
   }
 
   private getTaskForSelectedProject(): void {
@@ -48,7 +52,10 @@ export class BacklogComponent implements OnInit, OnDestroy {
         switchMap(id => {
           this.selectedProjectId = id;
           this.projectChanged();
-          return this.backlogService.getBacklogAndSprints();
+          return forkJoin([
+            this.backlogService.getBacklog(),
+            this.backlogService.getSprints()
+          ]);
         }),
         takeUntil(this.onDestroy$)
       )

@@ -10,6 +10,7 @@ import { ProjectsService } from './projects.service';
 })
 export class BacklogService {
   private backlogUrl: string;
+  private sprintsUrl: string;
 
   constructor(
     private readonly http: HttpClient,
@@ -17,12 +18,17 @@ export class BacklogService {
   ) {
     this.projectsService.selectedProjectId$
       .subscribe(id => {
-        this.backlogUrl = `${environment.apiUrl}project/${id}/backlog/`;
+        this.backlogUrl = `${environment.apiUrl}projects/${id}/backlog`;
+        this.sprintsUrl = `${environment.apiUrl}projects/${id}/sprints`;
       });
   }
 
-  getBacklogAndSprints(): Observable<any> {
+  getBacklog(): Observable<any> {
     return this.http.get<any>(this.backlogUrl);
+  }
+
+  getSprints(): Observable<any> {
+    return this.http.get<any>(this.sprintsUrl);
   }
 
   addTask(data: SprintTask): Observable<any> {

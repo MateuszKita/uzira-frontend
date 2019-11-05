@@ -6,7 +6,8 @@
               color="secondary"
               class="create-project"
               (click)="openCreateProjectDialog()">
-        Create Project</button>
+        Create Project
+      </button>
     </div>
   </div>
 
@@ -14,20 +15,22 @@
          [dataSource]="dataSource"
          class="projects-table">
 
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="no">
       <th mat-header-cell
           *matHeaderCellDef
-          class="id">ID</th>
+          class="id">No.
+      </th>
       <td mat-cell
-          *matCellDef="let element"
+          *matCellDef="let element; let i = index"
           class="id">
-        {{element.id}}</td>
+        {{i + 1}}</td>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <th mat-header-cell
           *matHeaderCellDef
-          class="name">Project Name</th>
+          class="name">Project Name
+      </th>
       <td mat-cell
           *matCellDef="let element"
           class="name">
@@ -45,7 +48,8 @@
           <mat-icon>
             delete
           </mat-icon>
-        </button></td>
+        </button>
+      </td>
     </ng-container>
 
     <tr mat-header-row

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from './security/security.service';
-import { filter } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 import {
   Router,
   NavigationEnd,
@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
   constructor(
     private readonly securityService: SecurityService,
     private readonly router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.checkTokenValidityOnNavigate();
@@ -30,7 +31,9 @@ export class AppComponent implements OnInit {
 
   private checkTokenValidityOnNavigate(): void {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
       .subscribe((event: RouterEvent) => {
         if (
           !this.securityService.getToken() &&
