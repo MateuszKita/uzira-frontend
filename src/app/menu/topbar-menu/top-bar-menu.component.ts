@@ -5,6 +5,8 @@ import { Project } from 'src/app/models/projects.model';
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { Router } from '@angular/router';
 import { SecurityService } from '../../security/security.service';
+import { ToastService } from '../../core/services/toast.service';
+import { ToastType } from '../../models/toast.model';
 
 @Component({
   selector: 'app-top-bar-menu',
@@ -23,7 +25,8 @@ export class TopBarMenuComponent implements OnInit {
     private readonly userService: UserService,
     private readonly projectsService: ProjectsService,
     private readonly securityService: SecurityService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly toastService: ToastService,
   ) {
   }
 
@@ -55,7 +58,12 @@ export class TopBarMenuComponent implements OnInit {
   }
 
   logout(): void {
-    this.securityService.removeToken();
-    this.router.navigate(['login']);
+    this.toastService.openSnackBar('Logging out...', ToastType.INFO);
+    this.securityService.logout()
+      .subscribe(() => {
+        this.toastService.openSnackBar('Successfully logged out!');
+        this.securityService.removeToken();
+        this.router.navigate(['login']);
+      });
   }
 }

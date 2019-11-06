@@ -54,4 +54,8 @@ export class SecurityService {
     };
     return this.http.post<any>(this.apiUrl + 'users', registerData);
   }
+
+  logout(): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'users/logout', null);
+  }
 }
