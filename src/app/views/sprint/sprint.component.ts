@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ProjectsService } from 'src/app/core/services/projects.service';
-import { SprintService } from 'src/app/core/services/sprint.service';
+import { SprintsService } from 'src/app/core/services/sprints.service';
 import { SprintGeneral } from 'src/app/models/sprint.model';
 import { takeUntil, switchMap, take, filter } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export class SprintComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly projectsService: ProjectsService,
-    private readonly sprintService: SprintService
+    private readonly sprintService: SprintsService
   ) {
   }
 

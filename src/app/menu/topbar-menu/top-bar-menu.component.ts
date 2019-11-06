@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../shared/user.service';
+import { UsersService } from '../../shared/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from 'src/app/models/projects.model';
 import { ProjectsService } from 'src/app/core/services/projects.service';
@@ -22,7 +22,7 @@ export class TopBarMenuComponent implements OnInit {
   public name: string;
 
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
     private readonly projectsService: ProjectsService,
     private readonly securityService: SecurityService,
     private readonly router: Router,

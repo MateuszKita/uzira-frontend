@@ -8,16 +8,15 @@ import { ProjectsService } from './projects.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SprintService {
+export class SprintsService {
   private sprintUrl: string;
-  public projectId: number;
 
   constructor(
     private readonly http: HttpClient,
     private readonly projectsService: ProjectsService
   ) {
     this.projectsService.selectedProjectId$.subscribe(id => {
-      this.sprintUrl = `${environment.apiUrl}project/${id}/sprints/`;
+      this.sprintUrl = `${environment.apiUrl}projects/${id}/sprints`;
     });
   }
 

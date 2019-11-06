@@ -7,18 +7,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService {
-  private backlogUrl: string;
-  private taskId: string;
+export class TasksService {
+  private readonly tasksUrl: string = `${environment.apiUrl}tasks`;
 
-  constructor(private readonly http: HttpClient) {
-    this.backlogUrl = `${environment.apiUrl}task/`;
+  constructor(
+    private readonly http: HttpClient
+  ) {
   }
 
   updateTask(data: SprintTask): Observable<any> {
     delete data.description;
     delete data.subtasks;
-
-    return this.http.put<any>(`${this.backlogUrl}${data.id}/`, data);
+    return this.http.put<any>(`${this.tasksUrl}${data.id}/`, data);
   }
 }

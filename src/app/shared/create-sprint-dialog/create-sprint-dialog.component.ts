@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { SprintService } from 'src/app/core/services/sprint.service';
+import { SprintsService } from 'src/app/core/services/sprints.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
@@ -18,7 +18,7 @@ export class CreateSprintDialogComponent {
   public endDateValue: string;
 
   constructor(
-    private readonly sprintService: SprintService,
+    private readonly sprintService: SprintsService,
     public dialogRef: MatDialogRef<CreateSprintDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
