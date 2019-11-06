@@ -46,7 +46,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         ) {
           this.router.navigate(['login']);
         }
-        return EMPTY; // Observable without events
+        throw error;
       })
     );
   }

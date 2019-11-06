@@ -47,7 +47,6 @@ export class RegisterComponent implements OnInit {
           this.toastService.openSnackBar(`Successfully created new user: '${user.name}'`);
           this.router.navigate(['/login']);
         }, (err: HttpErrorResponse) => {
-          console.log(1);
           this.toastService.openSnackBar(err.status === BAD_REQUEST
             ? 'Form is filled incorrectly'
             : 'Could not create new user', ToastType.ERROR);
