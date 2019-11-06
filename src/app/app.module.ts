@@ -25,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './views/register/register.component';
 import { ProjectsModule } from './views/projects/projects.module';
+import { MatProgressBarModule, MatSnackBarModule } from '@angular/material';
+import { ToastComponent } from './shared/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ProjectsModule } from './views/projects/projects.module';
     SidebarMenuComponent,
     TopBarMenuComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -56,8 +59,11 @@ import { ProjectsModule } from './views/projects/projects.module';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

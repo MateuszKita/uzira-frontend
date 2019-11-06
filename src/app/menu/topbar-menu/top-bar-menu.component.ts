@@ -51,7 +51,6 @@ export class TopBarMenuComponent implements OnInit {
   }
 
   projectChanged($event): void {
-    console.log($event.value);
     this.projectsService.selectedProjectId$.next($event.value);
   }
 

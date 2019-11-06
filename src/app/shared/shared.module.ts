@@ -33,4 +33,5 @@ import { CreateTaskDialogComponent } from './create-task-dialog/create-task-dial
   ],
   declarations: [CreateSprintDialogComponent, CreateTaskDialogComponent]
 })
-export class SharedModule {}
+export class SharedModule {
+}

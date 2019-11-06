@@ -4,7 +4,7 @@
       <mat-card-title>
         <span class="nav-bar-item image-title-container">
           <img class="logo"
-               [src]="imagePath" />
+               [src]="imagePath"/>
           <span class="main-title"> {{ title }}
             Login </span>
         </span></mat-card-title>
@@ -18,7 +18,7 @@
                  placeholder="E-mail Address"
                  name="email"
                  email
-                 required />
+                 required/>
         </mat-form-field>
         <mat-form-field class="login-input">
           <input matInput
@@ -26,7 +26,7 @@
                  placeholder="Password"
                  type="password"
                  name="password"
-                 required />
+                 required/>
         </mat-form-field>
       </form>
     </mat-card-content>
@@ -34,12 +34,16 @@
       <div class="actions-container">
         <button mat-raised-button
                 (click)="register()"
-                color="secondary">Register</button>
+                color="secondary">Register
+        </button>
         <button mat-raised-button
                 (click)="login()"
                 color="primary"
-                [disabled]="loginButtonDisabled">Login</button>
+                [disabled]="loginButtonDisabled">Login
+        </button>
       </div>
     </mat-card-actions>
+
+    <mat-progress-bar *ngIf="isLoading" mode="buffer"></mat-progress-bar>
   </mat-card>
 </div>
