@@ -15,7 +15,6 @@ export class CreateTaskDialogComponent implements OnInit {
   public types: TaskType[] = [TaskType.DEFECT, TaskType.STORY, TaskType.TASK];
   public estimation: number;
   public estimates: number[] = [0, 1, 3, 5, 8, 13, 20, 40, 100];
-  // public assigned = ;
   public sprint: number;
   public description = '';
 
@@ -23,7 +22,8 @@ export class CreateTaskDialogComponent implements OnInit {
     private readonly backlogService: BacklogService,
     public dialogRef: MatDialogRef<CreateTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     if (this.data.id) {

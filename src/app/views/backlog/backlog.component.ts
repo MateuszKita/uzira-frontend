@@ -4,7 +4,7 @@ import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { ProjectsService } from '../../core/services/projects.service';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { forkJoin, Subject } from 'rxjs';
 
@@ -30,7 +30,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
     this.getTaskForSelectedProject();
   }
 
-  private getBacklogData(): void {
+  private getBacklogAndSprints(): void {
     forkJoin([
       this.backlogService.getBacklog(),
       this.backlogService.getSprints()
@@ -47,11 +47,11 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   private getTaskForSelectedProject(): void {
+    console.log('getTaskForSelectedProject');
     this.projectsService.selectedProjectId$
       .pipe(
         switchMap(id => {
           this.selectedProjectId = id;
-          this.projectChanged();
           return forkJoin([
             this.backlogService.getBacklog(),
             this.backlogService.getSprints()
@@ -68,15 +68,15 @@ export class BacklogComponent implements OnInit, OnDestroy {
       data: {name: 'add-project'}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.getBacklogData();
-      }
-    });
-  }
-
-  projectChanged(): void {
-    this.getBacklogData();
+    dialogRef.afterClosed()
+      .pipe(
+        filter(Boolean),
+        switchMap(() => this.backlogService.getSprints()),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(sprints => {
+        this.sprints = sprints;
+      });
   }
 
   taskAddition(id: number) {
@@ -85,13 +85,14 @@ export class BacklogComponent implements OnInit, OnDestroy {
       data: {name: 'add-task', id, sprints: this.sprints}
     });
 
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(result => {
-        if (result) {
-          this.getBacklogData();
-        }
+    dialogRef.afterClosed()
+      .pipe(
+        filter(Boolean),
+        switchMap(() => this.backlogService.getBacklog()),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(res => {
+        this.tasks = res.tasks;
       });
   }
 
