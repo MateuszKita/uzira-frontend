@@ -46,7 +46,7 @@
         <button mat-raised-button
                 (click)="register()"
                 color="primary"
-                [disabled]="registerButtonDisabled">Register
+                [disabled]="registerButtonDisabled || isLoading">Register
         </button>
       </div>
     </mat-card-actions>

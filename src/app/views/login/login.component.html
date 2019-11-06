@@ -39,7 +39,7 @@
         <button mat-raised-button
                 (click)="login()"
                 color="primary"
-                [disabled]="loginButtonDisabled">Login
+                [disabled]="loginButtonDisabled || isLoading">Login
         </button>
       </div>
     </mat-card-actions>
