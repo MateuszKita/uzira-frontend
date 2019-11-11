@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { SecurityService } from '../../security/security.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { finalize } from 'rxjs/operators';
+import { finalize, switchMap } from 'rxjs/operators';
 import { ToastService } from '../../core/services/toast.service';
 import { ToastType } from '../../models/toast.model';
-import { BAD_REQUEST } from 'http-status-codes';
+import { BAD_REQUEST, CONFLICT } from 'http-status-codes';
 
 @Component({
   selector: 'app-register',
@@ -46,9 +46,18 @@ export class RegisterComponent implements OnInit {
           this.toastService.openSnackBar(`Successfully created new user: '${res.user.name}'`);
           this.router.navigate(['/login']);
         }, (err: HttpErrorResponse) => {
-          this.toastService.openSnackBar(err.status === BAD_REQUEST
-            ? 'Form is filled incorrectly'
-            : 'Could not create new user', ToastType.ERROR);
+          let errorMessage: string;
+          switch (err.status) {
+            case BAD_REQUEST:
+              errorMessage = 'Form is filled incorrectly!';
+              break;
+            case CONFLICT:
+              errorMessage = 'This e-mail is already taken!';
+              break;
+            default:
+              errorMessage = 'Could not create new user!';
+          }
+          this.toastService.openSnackBar(errorMessage, ToastType.ERROR);
           console.error(err);
         }
       );

@@ -19,14 +19,13 @@
                  name="email"
                  email
                  required/>
-          <mat-error *ngIf="loginFormGroup.controls.email.errors?.email as email">
+          <mat-error *ngIf="loginFormGroup.controls.email.errors?.email">
             E-mail is invalid!
           </mat-error>
           <mat-error *ngIf="loginFormGroup.controls.email.errors?.required">
             E-mail is required!
           </mat-error>
         </mat-form-field>
-        {{loginFormGroup.controls.email.errors?.email | json}}
         <mat-form-field class="login-input">
           <input matInput
                  formControlName="password"

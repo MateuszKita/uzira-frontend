@@ -32,7 +32,7 @@ export class ToastComponent implements OnInit {
 
   private openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 3000,
+      duration: 6000,
       panelClass: `toast-panel-class--${this.toastClass}`
     });
   }

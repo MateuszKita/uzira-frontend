@@ -19,7 +19,7 @@
                  name="email"
                  email
                  required/>
-          <mat-error *ngIf="registerFormGroup.controls.email.errors?.email as email">
+          <mat-error *ngIf="registerFormGroup.controls.email.errors?.email">
             E-mail is invalid!
           </mat-error>
           <mat-error *ngIf="registerFormGroup.controls.email.errors?.required">
