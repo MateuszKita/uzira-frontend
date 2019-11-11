@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { SecurityService } from '../../security/security.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastService } from '../../core/services/toast.service';
@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormGroup = this.createFormGroup();
-    this.disableButtonIfFormInvalid();
   }
 
   login(): void {
@@ -57,23 +56,8 @@ export class LoginComponent implements OnInit {
 
   createFormGroup(): FormGroup {
     return this.fb.group({
-      email: '',
-      password: ''
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(7)])
     });
-  }
-
-  private disableButtonIfFormInvalid(): void {
-    this.loginFormGroup.statusChanges
-      .subscribe((status: string) => {
-        switch (status) {
-          case 'VALID':
-            this.loginButtonDisabled = false;
-            break;
-          case 'INVALID':
-            this.loginButtonDisabled = true;
-            break;
-          default:
-        }
-      });
   }
 }

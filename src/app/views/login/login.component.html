@@ -19,7 +19,14 @@
                  name="email"
                  email
                  required/>
+          <mat-error *ngIf="loginFormGroup.controls.email.errors?.email as email">
+            E-mail is invalid!
+          </mat-error>
+          <mat-error *ngIf="loginFormGroup.controls.email.errors?.required">
+            E-mail is required!
+          </mat-error>
         </mat-form-field>
+        {{loginFormGroup.controls.email.errors?.email | json}}
         <mat-form-field class="login-input">
           <input matInput
                  formControlName="password"
@@ -27,6 +34,12 @@
                  type="password"
                  name="password"
                  required/>
+          <mat-error *ngIf="loginFormGroup.controls.password.errors?.minlength as minLength">
+            {{"Required min length is " + minLength.requiredLength + ", but actually it's " + minLength.actualLength}}
+          </mat-error>
+          <mat-error *ngIf="loginFormGroup.controls.password.errors?.required">
+            Password is required!
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
@@ -39,7 +52,7 @@
         <button mat-raised-button
                 (click)="login()"
                 color="primary"
-                [disabled]="loginButtonDisabled || isLoading">Login
+                [disabled]="loginFormGroup.invalid || isLoading">Login
         </button>
       </div>
     </mat-card-actions>

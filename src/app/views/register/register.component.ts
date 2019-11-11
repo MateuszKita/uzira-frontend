@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SecurityService } from '../../security/security.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerFormGroup = this.createFormGroup();
-    this.disableButtonIfFormInvalid();
   }
 
   cancel(): void {
@@ -57,23 +56,9 @@ export class RegisterComponent implements OnInit {
 
   createFormGroup(): FormGroup {
     return this.fb.group({
-      email: '',
-      password: '',
-      name: ''
-    });
-  }
-
-  private disableButtonIfFormInvalid(): void {
-    this.registerFormGroup.statusChanges.subscribe((status: string) => {
-      switch (status) {
-        case 'VALID':
-          this.registerButtonDisabled = false;
-          break;
-        case 'INVALID':
-          this.registerButtonDisabled = true;
-          break;
-        default:
-      }
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(7)]),
+      name: new FormControl('', [Validators.required]),
     });
   }
 }
