@@ -8,7 +8,7 @@ import { Project } from 'src/app/models/projects.model';
   providedIn: 'root'
 })
 export class ProjectsService {
-  private readonly projectsUrl: string = `${environment.apiUrl}projects`;
+  private readonly projectsUrl: string = `${environment.apiUrl}projects/`;
   public selectedProjectId$: BehaviorSubject<string> = new BehaviorSubject('0');
   public projectAdded$: Subject<void> = new Subject();
 
@@ -26,6 +26,6 @@ export class ProjectsService {
   }
 
   deleteProject(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.projectsUrl}/${id}/`);
+    return this.http.delete<any>(`${this.projectsUrl}${id}`);
   }
 }
