@@ -32,6 +32,7 @@ export class ProjectsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.getProjects();
+      this.projectsService.projectAdded$.next();
     });
   }
 

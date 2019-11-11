@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SecurityService } from '../../security/security.service';
 import { ToastService } from '../../core/services/toast.service';
 import { ToastType } from '../../models/toast.model';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-top-bar-menu',
@@ -17,7 +18,7 @@ export class TopBarMenuComponent implements OnInit {
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
   public projects: Project[] = [];
-  public selectedProjectId: string;
+  public selectedProjectId = '0';
 
   public name: string;
 
@@ -41,6 +42,17 @@ export class TopBarMenuComponent implements OnInit {
         }
       );
     this.getProjects();
+    this.watchProjectAddition();
+  }
+
+  private watchProjectAddition(): void {
+    this.projectsService.projectAdded$
+      .pipe(
+        switchMap(() => this.projectsService.getProjects())
+      )
+      .subscribe(projects => {
+        this.projects = projects;
+      });
   }
 
   getProjects(): void {

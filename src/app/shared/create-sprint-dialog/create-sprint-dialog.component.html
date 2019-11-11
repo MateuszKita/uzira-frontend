@@ -28,10 +28,11 @@
      class="actions">
   <button mat-raised-button
           color="secondary"
-          (click)="onCancelClick()">Cancel</button>
+          (click)="onCancelClick()">Cancel
+  </button>
   <button mat-raised-button
           color="primary"
-          cdkFocusInitial
           (click)="onCreate()"
-          [disabled]="!(startDateValue && endDateValue)">Create</button>
+          [disabled]="!(startDateValue && endDateValue)">Create
+  </button>
 </div>

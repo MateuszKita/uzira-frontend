@@ -30,24 +30,12 @@ export class BacklogComponent implements OnInit, OnDestroy {
     this.getTaskForSelectedProject();
   }
 
-  private getBacklogAndSprints(): void {
-    forkJoin([
-      this.backlogService.getBacklog(),
-      this.backlogService.getSprints()
-    ])
-      .pipe(
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(this.processBacklogData);
-  }
-
   private processBacklogData(data) {
     this.tasks = data[0].tasks;
     this.sprints = data[1];
   }
 
   private getTaskForSelectedProject(): void {
-    console.log('getTaskForSelectedProject');
     this.projectsService.selectedProjectId$
       .pipe(
         switchMap(id => {

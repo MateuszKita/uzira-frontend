@@ -11,10 +11,14 @@
   <div class="top-bar__select-project__container">
     <mat-form-field>
       <mat-select [(ngModel)]="selectedProjectId"
+                  [disabled]="projects?.length === 0"
                   (selectionChange)="projectChanged($event)"
                   placeholder="Project">
         <mat-option *ngFor="let project of projects"
                     [value]="project._id">{{project.name}}</mat-option>
+        <mat-option *ngIf="projects?.length === 0"
+                    value="0">No projects
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
