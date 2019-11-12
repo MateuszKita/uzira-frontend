@@ -29,7 +29,7 @@ import { CreateTaskDialogComponent } from './create-task-dialog/create-task-dial
     MatNativeDateModule,
     MatSlideToggleModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [CreateSprintDialogComponent, CreateTaskDialogComponent]
 })

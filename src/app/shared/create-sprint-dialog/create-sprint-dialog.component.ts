@@ -31,8 +31,8 @@ export class CreateSprintDialogComponent {
     this.sprintService
       .addSprint({
         active: this.active ? this.active : false,
-        start_date: moment(this.startDateValue).format(DATE_FORMAT),
-        end_date: moment(this.endDateValue).format(DATE_FORMAT)
+        startDate: moment(this.startDateValue).format(DATE_FORMAT),
+        endDate: moment(this.endDateValue).format(DATE_FORMAT)
       })
       .subscribe(
         () => {

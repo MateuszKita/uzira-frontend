@@ -4,8 +4,9 @@ import {
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
-import { SprintTask, TaskStatus } from 'src/app/models/sprint.model';
+import { TaskStatus } from 'src/app/models/sprint.model';
 import { TasksService } from 'src/app/core/services/tasks.service';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-sprint-drag-and-drop',
@@ -13,12 +14,14 @@ import { TasksService } from 'src/app/core/services/tasks.service';
   styleUrls: ['./sprint-drag-and-drop.component.scss']
 })
 export class SprintDragAndDropComponent implements OnInit {
-  @Input() tasks: SprintTask[];
-  public openItems: SprintTask[] = [];
-  public progressItems: SprintTask[] = [];
-  public reviewItems: SprintTask[] = [];
-  public verificationItems: SprintTask[] = [];
-  public readyItems: SprintTask[] = [];
+
+  @Input() tasks: Task[];
+
+  public openItems: Task[] = [];
+  public progressItems: Task[] = [];
+  public reviewItems: Task[] = [];
+  public verificationItems: Task[] = [];
+  public readyItems: Task[] = [];
   public taskStatus: typeof TaskStatus = TaskStatus;
 
   constructor(
@@ -53,12 +56,12 @@ export class SprintDragAndDropComponent implements OnInit {
     });
   }
 
-  private updateTask(data: SprintTask, status: TaskStatus) {
+  private updateTask(data: Task, status: TaskStatus) {
     data.status = status;
     this.tasksService.updateTask(data).subscribe();
   }
 
-  drop(event: CdkDragDrop<SprintTask[]>, taskStatus: TaskStatus) {
+  drop(event: CdkDragDrop<Task[]>, taskStatus: TaskStatus) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

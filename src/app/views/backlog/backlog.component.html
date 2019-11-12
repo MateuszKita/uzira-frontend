@@ -9,7 +9,8 @@
       expansionPanelSubtitle="All tasks in Backlog"
       [dataSource]="tasks?.length ? tasks : []"
       (taskAddition)="taskAddition($event)"
-      sprintId="0"></app-sprint-expansion-panel>
+      sprintId="0">
+    </app-sprint-expansion-panel>
 
     <mat-divider class="divider"></mat-divider>
 
@@ -27,12 +28,12 @@
 
     <ng-container *ngIf="sprints.length; else noSprints">
       <ng-container *ngFor="let sprint of sprints; index as i">
-        <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.inner_id}}"
-                                    expansionPanelSubtitle="All tasks in Sprint {{sprint.inner_id}}
+        <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.index}}"
+                                    expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}
                                     [{{sprint.active ? 'Active' : 'Inactive'}}]"
                                     [dataSource]="sprints[i].tasks.length ? sprints[i].tasks : []"
-                                    sprintId="{{sprint.id}}"
-                                    (taskAddition)="taskAddition($event)"></app-sprint-expansion-panel>
+                                    sprintId="{{sprint._id}}"
+                                    (taskAddition)="taskAddition($event, sprint._id)"></app-sprint-expansion-panel>
       </ng-container>
     </ng-container>
 

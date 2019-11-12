@@ -13,7 +13,7 @@ import { takeUntil, switchMap, take, filter } from 'rxjs/operators';
 export class SprintComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<null> = new Subject();
   public currentSprint: SprintGeneral;
-  public selectedSprintId: number;
+  public selectedSprintId: string;
   public sprints: SprintGeneral[];
 
   constructor(
@@ -35,14 +35,14 @@ export class SprintComponent implements OnInit, OnDestroy {
       )
       .subscribe(sprints => {
         this.sprints = sprints;
-        this.selectedSprintId = sprints[sprints.length - 1].id;
+        this.selectedSprintId = sprints[sprints.length - 1]._id;
         this.sprintChanged();
       });
   }
 
   sprintChanged(): void {
     this.currentSprint = this.sprints.find(
-      sprint => sprint.id === this.selectedSprintId
+      sprint => sprint._id === this.selectedSprintId
     );
   }
 

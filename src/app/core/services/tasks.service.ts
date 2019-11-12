@@ -1,23 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { SprintTask } from 'src/app/models/sprint.model';
 import { Observable } from 'rxjs';
+import { ProjectsService } from './projects.service';
+import { Task } from 'src/app/models/task.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-  private readonly tasksUrl: string = `${environment.apiUrl}tasks`;
-
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private readonly projectsService: ProjectsService
   ) {
   }
 
-  updateTask(data: SprintTask): Observable<any> {
-    delete data.description;
-    delete data.subtasks;
-    return this.http.put<any>(`${this.tasksUrl}${data.id}/`, data);
+  private getTasksUrl(taskId: string): string {
+    return `${environment.apiUrl}projects/${this.projectsService.selectedProjectId$.getValue()}/tasks/${taskId}`;
+  }
+
+  updateTask(data: Task): Observable<any> {
+    return this.http.patch<any>(this.getTasksUrl(data._id), data);
+  }
+
+  getTask(data: Task): Observable<any> {
+    return this.http.get<Task>(this.getTasksUrl(data._id));
+  }
+
+  deleteTask(data: Task): Observable<any> {
+    return this.http.delete<any>(this.getTasksUrl(data._id));
   }
 }

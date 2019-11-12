@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BacklogService } from '../../core/services/backlog.service';
-import { SprintTask, SprintGeneral } from 'src/app/models/sprint.model';
+import { SprintGeneral } from 'src/app/models/sprint.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { ProjectsService } from '../../core/services/projects.service';
 import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { forkJoin, Subject } from 'rxjs';
+import { SprintsService } from '../../core/services/sprints.service';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-backlog',
@@ -16,12 +18,13 @@ import { forkJoin, Subject } from 'rxjs';
 export class BacklogComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<null> = new Subject();
   public selectedProjectId: string;
-  public tasks: SprintTask[] = [];
+  public tasks: Task[] = [];
   public sprints: SprintGeneral[] = [];
 
   constructor(
     private readonly backlogService: BacklogService,
     private readonly projectsService: ProjectsService,
+    private readonly sprintsService: SprintsService,
     public readonly dialog: MatDialog
   ) {
   }
@@ -42,7 +45,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
           this.selectedProjectId = id;
           return forkJoin([
             this.backlogService.getBacklog(),
-            this.backlogService.getSprints()
+            this.sprintsService.getSprints()
           ]);
         }),
         takeUntil(this.onDestroy$)
@@ -59,7 +62,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(
         filter(Boolean),
-        switchMap(() => this.backlogService.getSprints()),
+        switchMap(() => this.sprintsService.getSprints()),
         takeUntil(this.onDestroy$)
       )
       .subscribe(sprints => {
@@ -67,20 +70,28 @@ export class BacklogComponent implements OnInit, OnDestroy {
       });
   }
 
-  taskAddition(id: number) {
+  taskAddition(id: number, sprintId?: string) {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
       width: '350px',
-      data: {name: 'add-task', id, sprints: this.sprints}
+      data: {
+        name: 'add-task',
+        id,
+        sprints: this.sprints,
+        sprintId
+      }
     });
 
     dialogRef.afterClosed()
       .pipe(
         filter(Boolean),
-        switchMap(() => this.backlogService.getBacklog()),
+        switchMap(() => (sprintId ? this.sprintsService.getSprints() : this.backlogService.getBacklog())),
         takeUntil(this.onDestroy$)
       )
       .subscribe(res => {
-        this.tasks = res.tasks;
+        console.log(111111111, res);
+        sprintId
+          ? this.tasks = res.tasks
+          : this.sprints = res;
       });
   }
 

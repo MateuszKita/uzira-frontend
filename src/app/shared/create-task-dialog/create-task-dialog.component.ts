@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskType, TaskStatus } from 'src/app/models/sprint.model';
 import { BacklogService } from 'src/app/core/services/backlog.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SprintsService } from '../../core/services/sprints.service';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -19,8 +21,9 @@ export class CreateTaskDialogComponent implements OnInit {
   public description = '';
 
   constructor(
-    private readonly backlogService: BacklogService,
     public dialogRef: MatDialogRef<CreateTaskDialogComponent>,
+    private readonly sprintsService: SprintsService,
+    private readonly backlogService: BacklogService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
@@ -36,15 +39,17 @@ export class CreateTaskDialogComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.backlogService
-      .addTask({
-        name: this.name,
-        type: this.type,
-        estimation: this.estimation,
-        sprint: this.sprint > 0 ? this.sprint : undefined,
-        description: this.description,
-        status: TaskStatus.OPEN
-      })
+    const taskData: Task = {
+      name: this.name,
+      type: this.type,
+      estimation: this.estimation,
+      sprint: this.sprint > 0 ? this.sprint : undefined,
+      description: this.description,
+      status: TaskStatus.OPEN
+    };
+    (this.data.sprintId
+      ? this.sprintsService.addTaskToSprint(this.data.sprintId, taskData)
+      : this.backlogService.addTaskToBacklog(taskData))
       .subscribe(
         () => {
           this.dialogRef.close(true);

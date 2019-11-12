@@ -1,23 +1,12 @@
-export interface SprintTask {
-  name: string;
-  type: TaskType;
-  status: TaskStatus;
-  estimation?: number;
-  // parent?: string;
-  assigned?: string;
-  sprint?: number;
-  description?: string;
-  subtasks?: SprintTask[];
-  id?: number;
-}
+import { Task } from './task.model';
 
 export interface SprintGeneral {
   active: boolean;
-  start_date: string;
-  end_date: string;
-  inner_id?: number;
-  id?: number;
-  tasks?: SprintTask[];
+  startDate: string;
+  endDate: string;
+  _id?: string;
+  tasks?: Task[];
+  index?: number;
 }
 
 export enum TaskType {
