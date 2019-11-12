@@ -90,8 +90,8 @@ export class BacklogComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         console.log(111111111, res);
         sprintId
-          ? this.tasks = res.tasks
-          : this.sprints = res;
+          ? this.tasks = {...res.tasks}
+          : this.sprints = {...res};
       });
   }
 
