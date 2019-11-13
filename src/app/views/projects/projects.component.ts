@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-projects',
@@ -16,6 +17,7 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private readonly projectsService: ProjectsService,
+    private readonly toastService: ToastService,
     public readonly dialog: MatDialog
   ) {
   }
@@ -39,11 +41,12 @@ export class ProjectsComponent implements OnInit {
   deleteProject(id: string) {
     this.projectsService.deleteProject(id).subscribe(
       () => {
+        this.toastService.openSnackBar(`Successfully deleted Project`);
         this.getProjects();
       },
       (err: HttpErrorResponse) => {
+        this.toastService.openSnackBar(`Could not delete project`);
         console.error(err);
-        this.getProjects();
       }
     );
   }
