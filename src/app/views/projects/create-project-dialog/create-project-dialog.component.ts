@@ -29,7 +29,6 @@ export class CreateProjectDialogComponent {
     this.projectsService.addNewProject(this.name).subscribe(
       res => {
         this.toastService.openSnackBar(`Successfully added new Project - '${res.name}'`);
-        this.projectsService.selectedProjectId$.next(res.id);
         this.dialogRef.close();
       },
       (err: HttpErrorResponse) => {
