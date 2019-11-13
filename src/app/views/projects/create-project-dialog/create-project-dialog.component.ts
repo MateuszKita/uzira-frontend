@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProjectsService } from '../../../core/services/projects.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastService } from '../../../core/services/toast.service';
+import { ToastType } from '../../../models/toast.model';
 
 @Component({
   selector: 'app-create-project-dialog',
@@ -13,6 +15,7 @@ export class CreateProjectDialogComponent {
 
   constructor(
     private readonly projectsService: ProjectsService,
+    private readonly toastService: ToastService,
     public dialogRef: MatDialogRef<CreateProjectDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -25,10 +28,12 @@ export class CreateProjectDialogComponent {
   onCreate(): void {
     this.projectsService.addNewProject(this.name).subscribe(
       res => {
+        this.toastService.openSnackBar(res.message);
         this.projectsService.selectedProjectId$.next(res.id);
         this.dialogRef.close();
       },
       (err: HttpErrorResponse) => {
+        this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
         this.dialogRef.close();
         console.error(err);
       }

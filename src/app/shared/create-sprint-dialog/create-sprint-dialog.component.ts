@@ -1,8 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { SprintsService } from 'src/app/core/services/sprints.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
+import { ToastService } from '../../core/services/toast.service';
+import { ToastType } from '../../models/toast.model';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -19,9 +21,11 @@ export class CreateSprintDialogComponent {
 
   constructor(
     private readonly sprintService: SprintsService,
+    private readonly toastService: ToastService,
     public dialogRef: MatDialogRef<CreateSprintDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+  }
 
   onCancelClick(): void {
     this.dialogRef.close(false);
@@ -35,10 +39,12 @@ export class CreateSprintDialogComponent {
         endDate: moment(this.endDateValue).format(DATE_FORMAT)
       })
       .subscribe(
-        () => {
+        (res) => {
+          this.toastService.openSnackBar(res.message);
           this.dialogRef.close(true);
         },
         (err: HttpErrorResponse) => {
+          this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
           this.dialogRef.close(false);
           console.error(err);
         }

@@ -1,10 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TaskType, TaskStatus } from 'src/app/models/sprint.model';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TaskStatus, TaskType } from 'src/app/models/sprint.model';
 import { BacklogService } from 'src/app/core/services/backlog.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SprintsService } from '../../core/services/sprints.service';
 import { Task } from 'src/app/models/task.model';
+import { ToastService } from '../../core/services/toast.service';
+import { ToastType } from '../../models/toast.model';
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -24,6 +26,7 @@ export class CreateTaskDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateTaskDialogComponent>,
     private readonly sprintsService: SprintsService,
     private readonly backlogService: BacklogService,
+    private readonly toastService: ToastService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
@@ -51,10 +54,12 @@ export class CreateTaskDialogComponent implements OnInit {
       ? this.sprintsService.addTaskToSprint(this.data.sprintId, taskData)
       : this.backlogService.addTaskToBacklog(taskData))
       .subscribe(
-        () => {
+        (res) => {
+          this.toastService.openSnackBar(res.message);
           this.dialogRef.close(true);
         },
         (err: HttpErrorResponse) => {
+          this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
           this.dialogRef.close(false);
           console.error(err);
         }
