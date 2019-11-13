@@ -30,15 +30,15 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getTaskForSelectedProject();
+    this.getSelectedProjectTasks();
   }
 
-  private processBacklogData(data) {
+  private processTasksData(data) {
     this.tasks = data[0].tasks;
     this.sprints = data[1];
   }
 
-  private getTaskForSelectedProject(): void {
+  private getSelectedProjectTasks(): void {
     this.projectsService.selectedProjectId$
       .pipe(
         switchMap(id => {
@@ -50,7 +50,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.onDestroy$)
       )
-      .subscribe(this.processBacklogData.bind(this));
+      .subscribe(this.processTasksData.bind(this));
   }
 
   addSprint(): void {
@@ -88,10 +88,9 @@ export class BacklogComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe(res => {
-        console.log(111111111, res);
         sprintId
-          ? this.tasks = {...res.tasks}
-          : this.sprints = {...res};
+          ? this.sprints = res
+          : this.tasks = res.tasks;
       });
   }
 

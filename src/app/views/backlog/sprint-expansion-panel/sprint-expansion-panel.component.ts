@@ -7,7 +7,17 @@ import { Task } from 'src/app/models/task.model';
   styleUrls: ['./sprint-expansion-panel.component.scss']
 })
 export class SprintExpansionPanelComponent {
-  @Input() dataSource: Task[] = [];
+  private _dataSource: Task[] = [];
+
+  @Input()
+  set dataSource(tasks: Task[]) {
+    this._dataSource = tasks;
+  }
+
+  get dataSource(): Task[] {
+    return this._dataSource;
+  }
+
   @Input() expansionPanelTitle: string;
   @Input() expansionPanelSubtitle: string;
   @Input() sprintId: number;

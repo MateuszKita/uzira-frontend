@@ -7,7 +7,7 @@
     <app-sprint-expansion-panel
       expansionPanelTitle="Backlog"
       expansionPanelSubtitle="All tasks in Backlog"
-      [dataSource]="tasks?.length ? tasks : []"
+      [dataSource]="tasks"
       (taskAddition)="taskAddition($event)"
       sprintId="0">
     </app-sprint-expansion-panel>
@@ -31,7 +31,7 @@
         <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.index}}"
                                     expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}
                                     [{{sprint.active ? 'Active' : 'Inactive'}}]"
-                                    [dataSource]="sprints[i].tasks.length ? sprints[i].tasks : []"
+                                    [dataSource]="sprints[i] ? sprints[i].tasks : []"
                                     sprintId="{{sprint._id}}"
                                     (taskAddition)="taskAddition($event, sprint._id)"></app-sprint-expansion-panel>
       </ng-container>
