@@ -21,6 +21,7 @@ export class CreateTaskDialogComponent implements OnInit {
   public estimates: number[] = [0, 1, 3, 5, 8, 13, 20, 40, 100];
   public sprint: number;
   public description = '';
+  public isLoading = false;
 
   constructor(
     public dialogRef: MatDialogRef<CreateTaskDialogComponent>,

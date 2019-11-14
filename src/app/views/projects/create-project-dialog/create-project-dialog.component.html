@@ -14,7 +14,8 @@
   </button>
   <button mat-raised-button
           color="primary"
-          (click)="onCreate()"
-          [disabled]="!name?.length">Apply
+          (click)="onCreate(); isLoading = true"
+          [disabled]="!name?.length || isLoading">
+    Apply
   </button>
 </div>

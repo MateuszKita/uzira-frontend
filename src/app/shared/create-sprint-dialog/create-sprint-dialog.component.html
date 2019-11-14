@@ -32,7 +32,7 @@
   </button>
   <button mat-raised-button
           color="primary"
-          (click)="onCreate()"
-          [disabled]="!(startDateValue && endDateValue)">Create
+          (click)="onCreate(); isLoading = true"
+          [disabled]="!(startDateValue && endDateValue) || isLoading">Create
   </button>
 </div>

@@ -18,6 +18,7 @@ export class CreateSprintDialogComponent {
   public active: boolean;
   public startDateValue: string;
   public endDateValue: string;
+  public isLoading = false;
 
   constructor(
     private readonly sprintService: SprintsService,

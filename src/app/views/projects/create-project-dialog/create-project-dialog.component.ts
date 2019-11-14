@@ -12,6 +12,7 @@ import { ToastType } from '../../../models/toast.model';
 })
 export class CreateProjectDialogComponent {
   public name: string;
+  public isLoading = false;
 
   constructor(
     private readonly projectsService: ProjectsService,
