@@ -1,12 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem
-} from '@angular/cdk/drag-drop';
+import { Component, Input, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskStatus } from 'src/app/models/sprint.model';
 import { TasksService } from 'src/app/core/services/tasks.service';
 import { Task } from 'src/app/models/task.model';
+import { take } from 'rxjs/operators';
+import { ToastService } from '../../../core/services/toast.service';
+import { ToastType } from '../../../models/toast.model';
 
 @Component({
   selector: 'app-sprint-drag-and-drop',
@@ -25,7 +24,8 @@ export class SprintDragAndDropComponent implements OnInit {
   public taskStatus: typeof TaskStatus = TaskStatus;
 
   constructor(
-    private readonly tasksService: TasksService
+    private readonly tasksService: TasksService,
+    private readonly toastService: ToastService
   ) {
   }
 
@@ -57,8 +57,13 @@ export class SprintDragAndDropComponent implements OnInit {
   }
 
   private updateTask(data: Task, status: TaskStatus) {
-    data.status = status;
-    this.tasksService.updateTask(data).subscribe();
+    this.tasksService.updateTask({status, _id: data._id} as Task)
+      .pipe(
+        take(1)
+      )
+      .subscribe(() => {
+        this.toastService.openSnackBar(`Moved '${data.name}' from '${data.status}' to '${status}'`, ToastType.INFO);
+      });
   }
 
   drop(event: CdkDragDrop<Task[]>, taskStatus: TaskStatus) {

@@ -34,21 +34,26 @@ export class ProjectsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.getProjects();
-      this.projectsService.projectAdded$.next();
+      this.projectsService.projectsChanged$.next();
     });
   }
 
   deleteProject(id: string) {
-    this.projectsService.deleteProject(id).subscribe(
-      () => {
-        this.toastService.openSnackBar(`Successfully deleted Project`);
-        this.getProjects();
-      },
-      (err: HttpErrorResponse) => {
-        this.toastService.openSnackBar(`Could not delete project`);
-        console.error(err);
-      }
-    );
+    this.projectsService.deleteProject(id)
+      .subscribe(
+        () => {
+          this.toastService.openSnackBar(`Successfully deleted Project`);
+          if (id === this.projectsService.selectedProjectId$.getValue()) {
+            this.projectsService.selectedProjectId$.next('0');
+          }
+          this.getProjects();
+          this.projectsService.projectsChanged$.next();
+        },
+        (err: HttpErrorResponse) => {
+          this.toastService.openSnackBar(`Could not delete project`);
+          console.error(err);
+        }
+      );
   }
 
   private getProjects(): void {

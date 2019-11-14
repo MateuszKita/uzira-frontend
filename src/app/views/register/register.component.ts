@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
           let errorMessage: string;
           switch (err.status) {
             case BAD_REQUEST:
-              errorMessage = 'Form is filled incorrectly!';
+              errorMessage = err.error.message || 'Form is filled incorrectly!';
               break;
             case CONFLICT:
               errorMessage = 'This e-mail is already taken!';

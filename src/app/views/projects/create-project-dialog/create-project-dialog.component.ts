@@ -29,6 +29,9 @@ export class CreateProjectDialogComponent {
   onCreate(): void {
     this.projectsService.addNewProject(this.name).subscribe(
       res => {
+        if (this.projectsService.selectedProjectId$.getValue() === '0') {
+          this.projectsService.selectedProjectId$.next(res._id);
+        }
         this.toastService.openSnackBar(`Successfully added new Project - '${res.name}'`);
         this.dialogRef.close();
       },

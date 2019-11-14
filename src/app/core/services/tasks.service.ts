@@ -20,7 +20,9 @@ export class TasksService {
   }
 
   updateTask(data: Task): Observable<any> {
-    return this.http.patch<any>(this.getTasksUrl(data._id), data);
+    const taskId = data._id;
+    delete data._id;
+    return this.http.patch<any>(this.getTasksUrl(taskId), data);
   }
 
   getTask(data: Task): Observable<any> {

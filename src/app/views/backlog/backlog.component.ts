@@ -18,7 +18,7 @@ import { Task } from 'src/app/models/task.model';
 export class BacklogComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<null> = new Subject();
   public selectedProjectId: string;
-  public tasks: Task[] = [];
+  public tasks: Task[];
   public sprints: SprintGeneral[] = [];
 
   constructor(

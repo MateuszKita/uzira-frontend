@@ -10,7 +10,7 @@ import { Project } from 'src/app/models/projects.model';
 export class ProjectsService {
   private readonly projectsUrl: string = `${environment.apiUrl}projects/`;
   public selectedProjectId$: BehaviorSubject<string> = new BehaviorSubject('0');
-  public projectAdded$: Subject<void> = new Subject();
+  public projectsChanged$: Subject<void> = new Subject();
 
   constructor(
     private readonly http: HttpClient

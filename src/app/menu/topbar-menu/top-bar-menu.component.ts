@@ -42,16 +42,20 @@ export class TopBarMenuComponent implements OnInit {
         }
       );
     this.getProjects();
-    this.watchProjectAddition();
+    this.watchProjectsChange();
   }
 
-  private watchProjectAddition(): void {
-    this.projectsService.projectAdded$
+  private watchProjectsChange(): void {
+    this.projectsService.projectsChanged$
       .pipe(
         switchMap(() => this.projectsService.getProjects())
       )
       .subscribe(projects => {
         this.projects = projects;
+        if (this.selectedProjectId === '0') {
+          this.selectedProjectId = projects[0]._id;
+          this.projectsService.selectedProjectId$.next(this.selectedProjectId);
+        }
       });
   }
 

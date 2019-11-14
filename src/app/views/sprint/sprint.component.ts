@@ -11,7 +11,9 @@ import { takeUntil, switchMap, take, filter } from 'rxjs/operators';
   styleUrls: ['./sprint.component.scss']
 })
 export class SprintComponent implements OnInit, OnDestroy {
+
   private onDestroy$: Subject<null> = new Subject();
+
   public currentSprint: SprintGeneral;
   public selectedSprintId: string;
   public sprints: SprintGeneral[];
@@ -29,9 +31,9 @@ export class SprintComponent implements OnInit, OnDestroy {
   private getSprints(): void {
     this.projectsService.selectedProjectId$
       .pipe(
-        takeUntil(this.onDestroy$),
         filter(id => id !== '0'),
-        switchMap(() => this.sprintService.getSprints().pipe(take(1)))
+        switchMap(() => this.sprintService.getSprints()),
+        takeUntil(this.onDestroy$),
       )
       .subscribe(sprints => {
         this.sprints = sprints;
