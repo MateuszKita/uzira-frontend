@@ -5,6 +5,7 @@ import { CreateProjectDialogComponent } from './create-project-dialog/create-pro
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastService } from '../../core/services/toast.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-projects',
@@ -14,6 +15,7 @@ import { ToastService } from '../../core/services/toast.service';
 export class ProjectsComponent implements OnInit {
   public displayedColumns: string[] = ['no', 'name', 'action'];
   public dataSource: Project[] = [];
+  public disabledDeleteIndexes: boolean[] = [];
 
   constructor(
     private readonly projectsService: ProjectsService,
@@ -40,6 +42,9 @@ export class ProjectsComponent implements OnInit {
 
   deleteProject(id: string) {
     this.projectsService.deleteProject(id)
+      .pipe(
+        finalize(() => this.disabledDeleteIndexes = [])
+      )
       .subscribe(
         () => {
           this.toastService.openSnackBar(`Successfully deleted Project`);

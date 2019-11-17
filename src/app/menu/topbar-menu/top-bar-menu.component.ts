@@ -52,7 +52,7 @@ export class TopBarMenuComponent implements OnInit {
       )
       .subscribe(projects => {
         this.projects = projects;
-        if (this.selectedProjectId === '0') {
+        if (this.selectedProjectId === '0' || projects.length === 1) {
           this.selectedProjectId = projects[0]._id;
           this.projectsService.selectedProjectId$.next(this.selectedProjectId);
         }
