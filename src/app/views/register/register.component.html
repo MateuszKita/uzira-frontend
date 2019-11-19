@@ -14,6 +14,16 @@
             class="login-form">
         <mat-form-field class="login-input">
           <input matInput
+                 formControlName="name"
+                 placeholder="User Name"
+                 name="name"
+                 required/>
+          <mat-error *ngIf="registerFormGroup.controls.name.errors?.required">
+            User Name is required!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="login-input">
+          <input matInput
                  formControlName="email"
                  placeholder="E-mail Address"
                  name="email"
@@ -38,16 +48,6 @@
           </mat-error>
           <mat-error *ngIf="registerFormGroup.controls.password.errors?.required">
             Password is required!
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="login-input">
-          <input matInput
-                 formControlName="name"
-                 placeholder="User Name"
-                 name="name"
-                 required/>
-          <mat-error *ngIf="registerFormGroup.controls.name.errors?.required">
-            User Name is required!
           </mat-error>
         </mat-form-field>
       </form>
