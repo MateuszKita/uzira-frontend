@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { SprintsService } from 'src/app/core/services/sprints.service';
 import { SprintGeneral } from 'src/app/models/sprint.model';
-import { takeUntil, switchMap, take, filter } from 'rxjs/operators';
+import { takeUntil, switchMap, filter, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sprint',
@@ -17,6 +17,7 @@ export class SprintComponent implements OnInit, OnDestroy {
   public currentSprint: SprintGeneral;
   public selectedSprintId: string;
   public sprints: SprintGeneral[];
+  public isLoading = true;
 
   constructor(
     private readonly projectsService: ProjectsService,
@@ -29,6 +30,7 @@ export class SprintComponent implements OnInit, OnDestroy {
   }
 
   private getSprints(): void {
+    this.isLoading = true;
     this.projectsService.selectedProjectId$
       .pipe(
         filter(id => id !== '0'),
@@ -46,6 +48,7 @@ export class SprintComponent implements OnInit, OnDestroy {
     this.currentSprint = this.sprints.find(
       sprint => sprint._id === this.selectedSprintId
     );
+    this.isLoading = false;
   }
 
   ngOnDestroy(): void {

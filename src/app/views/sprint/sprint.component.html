@@ -1,6 +1,9 @@
-<div class="sprint-view">
+<div class="sprint-view" *ngIf="!isLoading; else loading">
   <div class="view-header">
-    <h2>Active Sprint View</h2>
+    <div class="view-header__title">
+      <h2>Maintain Sprint Tasks</h2>
+      <h3 *ngIf="!selectedSprintId">Create Sprint in Backlog tab to maintain tasks</h3>
+    </div>
 
     <div class="select-project-wrapper">
       <mat-form-field>
@@ -19,3 +22,10 @@
   <app-sprint-drag-and-drop *ngIf="currentSprint"
                             [tasks]="currentSprint.tasks"></app-sprint-drag-and-drop>
 </div>
+
+<ng-template #loading>
+  <div class="loader">
+    <mat-spinner [diameter]="25"></mat-spinner>
+    <h3>Loading sprints...</h3>
+  </div>
+</ng-template>

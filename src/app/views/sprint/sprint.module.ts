@@ -7,7 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { SprintDragAndDropComponent } from './sprint-drag-and-drop/sprint-drag-and-drop.component';
-import { CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -15,10 +16,11 @@ import { CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
     SprintRoutingModule,
     MatSelectModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     FormsModule,
-    // CdkDropList,
-    DragDropModule
+    DragDropModule,
   ],
   declarations: [SprintComponent, SprintDragAndDropComponent]
 })
-export class SprintModule {}
+export class SprintModule {
+}

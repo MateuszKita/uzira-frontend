@@ -5,5 +5,28 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+
+    .view-header__title {
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        color: dimgray;
+      }
+    }
+  }
+}
+
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    padding-left: 10px;
   }
 }
