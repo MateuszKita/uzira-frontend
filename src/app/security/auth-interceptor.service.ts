@@ -23,10 +23,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   ) {
   }
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.securityService.getToken();
     const headers: any = req.method === 'POST' && req.url.includes(environment.apiUrl + '/users')
       ? {}
@@ -39,11 +36,8 @@ export class AuthInterceptorService implements HttpInterceptor {
       setHeaders: headers
     });
     return next.handle(authRequest).pipe(
-      catchError((error, caught) => {
-        if (
-          error instanceof HttpErrorResponse &&
-          error.status === UNAUTHORIZED
-        ) {
+      catchError(error => {
+        if (error instanceof HttpErrorResponse && error.status === UNAUTHORIZED) {
           this.router.navigate(['login']);
         }
         throw error;
