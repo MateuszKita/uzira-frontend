@@ -55,9 +55,15 @@
     </ng-container>
 
     <tr mat-header-row
-        *matHeaderRowDef=" displayedColumns
-        "></tr>
+        *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
         *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <div *ngIf="isLoading"
+       class="loader">
+    <mat-spinner [diameter]="25"></mat-spinner>
+    <h3>Loading sprints...</h3>
+  </div>
+
 </div>

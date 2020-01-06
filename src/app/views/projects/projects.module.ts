@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -24,9 +25,11 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   declarations: [ProjectsComponent, CreateProjectDialogComponent],
   entryComponents: [CreateProjectDialogComponent]
 })
-export class ProjectsModule {}
+export class ProjectsModule {
+}

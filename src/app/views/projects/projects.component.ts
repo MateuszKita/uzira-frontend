@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/projects.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastService } from '../../core/services/toast.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnDestroy {
+
+  private onDestroy$: Subject<null> = new Subject();
+
   public displayedColumns: string[] = ['no', 'name', 'action'];
   public dataSource: Project[] = [];
   public disabledDeleteIndexes: boolean[] = [];
+  public isLoading = true;
 
   constructor(
     private readonly projectsService: ProjectsService,
@@ -62,8 +67,18 @@ export class ProjectsComponent implements OnInit {
   }
 
   private getProjects(): void {
-    this.projectsService.getProjects().subscribe(projects => {
-      this.dataSource = projects;
-    });
+    this.isLoading = true;
+    this.projectsService.getProjects()
+      .pipe(
+        finalize(() => this.isLoading = false),
+        takeUntil(this.onDestroy$),
+      )
+      .subscribe(projects => {
+        this.dataSource = projects;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
   }
 }

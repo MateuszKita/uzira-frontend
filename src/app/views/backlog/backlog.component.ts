@@ -4,7 +4,7 @@ import { SprintGeneral } from 'src/app/models/sprint.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { ProjectsService } from '../../core/services/projects.service';
-import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
+import { filter, finalize, switchMap, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { forkJoin, Subject } from 'rxjs';
 import { SprintsService } from '../../core/services/sprints.service';
@@ -20,6 +20,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
   public selectedProjectId: string;
   public tasks: Task[];
   public sprints: SprintGeneral[] = [];
+  public isLoading = true;
 
   constructor(
     private readonly backlogService: BacklogService,
@@ -39,6 +40,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   private getSelectedProjectTasks(): void {
+    this.isLoading = true;
     this.projectsService.selectedProjectId$
       .pipe(
         switchMap(id => {
@@ -48,6 +50,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
             this.sprintsService.getSprints()
           ]);
         }),
+        finalize(() => this.isLoading = false),
         takeUntil(this.onDestroy$)
       )
       .subscribe(this.processTasksData.bind(this));

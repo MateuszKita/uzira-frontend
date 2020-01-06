@@ -54,3 +54,17 @@ body {
     background: #0099CC;
   }
 }
+
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    padding-left: 10px;
+  }
+}

@@ -20,26 +20,28 @@ import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog
 import { FormsModule } from '@angular/forms';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { SharedModule } from '../../shared/shared.module';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    BacklogRoutingModule,
-    MatExpansionModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDividerModule,
-    MatDatepickerModule,
-    MatSlideToggleModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        BacklogRoutingModule,
+        MatExpansionModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDividerModule,
+        MatDatepickerModule,
+        MatSlideToggleModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        FormsModule,
+        MatProgressSpinnerModule
+    ],
   declarations: [
     BacklogComponent,
     SprintExpansionPanelComponent,

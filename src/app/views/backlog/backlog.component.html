@@ -43,9 +43,16 @@
   </ng-container>
 
   <ng-template #noProjects>
-    <h2>
-      There are no projects yet, please create a project in the 'Projects' tab.
-    </h2>
+    <div class="loader" *ngIf="isLoading; else notLoading">
+      <mat-spinner [diameter]="25"></mat-spinner>
+      <h3>Loading sprints...</h3>
+    </div>
+    <ng-template #notLoading>
+      <h2>
+        There are no projects yet, please create a project in the 'Projects' tab.
+      </h2>
+    </ng-template>
+
   </ng-template>
 
 </div>
