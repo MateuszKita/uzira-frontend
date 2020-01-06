@@ -8,11 +8,11 @@ import { NavListItem } from './sidebar-menu.model';
 })
 export class SidebarMenuComponent implements OnInit {
   public navList: NavListItem[] = [
-    {
-      label: 'Add task',
-      path: '/add-task',
-      iconName: 'add_circle'
-    },
+    // {
+    //   label: 'Add task',
+    //   path: '/add-task',
+    //   iconName: 'add_circle'
+    // },
     {
       label: 'Backlog',
       path: '/backlog',
