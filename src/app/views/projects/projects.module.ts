@@ -11,14 +11,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
-import { FormsModule } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule, MatProgressSpinnerModule, MatSelectModule } from '@angular/material';
+import { EditProjectUsersComponent } from './edit-project-users/edit-project-users.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   imports: [
     CommonModule,
     ProjectsRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    NgxMatSelectSearchModule,
     MatExpansionModule,
     MatTableModule,
     MatIconModule,
@@ -26,10 +33,11 @@ import { MatProgressSpinnerModule } from '@angular/material';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
-  declarations: [ProjectsComponent, CreateProjectDialogComponent],
-  entryComponents: [CreateProjectDialogComponent]
+  declarations: [ProjectsComponent, CreateProjectDialogComponent, EditProjectUsersComponent],
+  entryComponents: [CreateProjectDialogComponent, EditProjectUsersComponent]
 })
 export class ProjectsModule {
 }

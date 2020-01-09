@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { UserLoginData, UserRegisterData } from '../models/user.model';
+import { UserLoginData, User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
@@ -46,7 +46,7 @@ export class SecurityService {
     return this.http.post<any>(this.apiUrl + 'users/login', body);
   }
 
-  register(body: UserRegisterData): Observable<any> {
+  register(body: User): Observable<any> {
     const registerData: any = {
       email: body.email,
       password: body.password,

@@ -37,6 +37,25 @@
         {{element.name}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="users">
+      <th mat-header-cell
+          *matHeaderCellDef
+          class="users">Assigned users
+      </th>
+      <td mat-cell
+          *matCellDef="let element; let i = index"
+          class="users">
+        <ng-container *ngIf="projectsUsersNames">
+          {{projectsUsersNames[i]}}
+          <button mat-icon-button
+                  class="panel-add-task"
+                  (click)="editProjectUsers(element._id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </ng-container>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="action">
       <th mat-header-cell
           *matHeaderCellDef

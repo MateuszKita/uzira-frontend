@@ -5,8 +5,9 @@ import { CreateProjectDialogComponent } from './create-project-dialog/create-pro
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastService } from '../../core/services/toast.service';
-import { finalize, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { finalize, switchMap, takeUntil } from 'rxjs/operators';
+import { forkJoin, Subject } from 'rxjs';
+import { EditProjectUsersComponent } from './edit-project-users/edit-project-users.component';
 
 @Component({
   selector: 'app-projects',
@@ -17,15 +18,16 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   private onDestroy$: Subject<null> = new Subject();
 
-  public displayedColumns: string[] = ['no', 'name', 'action'];
+  public displayedColumns: string[] = ['no', 'name', 'users', 'action'];
   public dataSource: Project[] = [];
   public disabledDeleteIndexes: boolean[] = [];
   public isLoading = true;
+  public projectsUsersNames: string[];
 
   constructor(
     private readonly projectsService: ProjectsService,
     private readonly toastService: ToastService,
-    public readonly dialog: MatDialog
+    private readonly dialog: MatDialog
   ) {
   }
 
@@ -66,15 +68,26 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       );
   }
 
+  editProjectUsers(projectId: string): void {
+    this.dialog.open(EditProjectUsersComponent, {
+      width: '400px',
+      data: {projectId}
+    });
+  }
+
   private getProjects(): void {
     this.isLoading = true;
     this.projectsService.getProjects()
       .pipe(
         finalize(() => this.isLoading = false),
+        switchMap(projects => {
+          this.dataSource = projects;
+          return forkJoin(projects.map(project => project._id).map(id => this.projectsService.getProjectUsers(id)));
+        }),
         takeUntil(this.onDestroy$),
       )
-      .subscribe(projects => {
-        this.dataSource = projects;
+      .subscribe(projectsUsers => {
+        this.projectsUsersNames = projectsUsers.map(users => users.map(user => user.name).join(', '));
       });
   }
 

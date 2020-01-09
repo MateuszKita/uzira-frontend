@@ -1,7 +1,8 @@
-export interface UserRegisterData {
+export interface User {
   email: string;
   password: string;
   name: string;
+  _id?: string;
 }
 
 export interface UserLoginData {

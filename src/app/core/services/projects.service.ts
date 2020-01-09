@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Project } from 'src/app/models/projects.model';
+import { User } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,17 @@ export class ProjectsService {
 
   deleteProject(id: string): Observable<any> {
     return this.http.delete<any>(`${this.projectsUrl}${id}`);
+  }
+
+  getProjectUsers(projectId: string): Observable<User[]> {
+    return this.http.get<any>(`${this.projectsUrl}${projectId}/users/`);
+  }
+
+  addUserToProject(projectId: string, userId: string): Observable<any> {
+    return this.http.post(`${this.projectsUrl}${projectId}/users/${userId}`, {});
+  }
+
+  removeUserFromProject(projectId: string, userId: string): Observable<any> {
+    return this.http.delete(`${this.projectsUrl}${projectId}/users/${userId}`, {});
   }
 }
