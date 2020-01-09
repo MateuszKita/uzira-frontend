@@ -68,7 +68,7 @@
           *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <ng-container *ngIf="!dataSource.length">
+    <ng-container *ngIf="!dataSource?.length">
       <h3>List of tasks is empty</h3>
     </ng-container>
 

@@ -15,11 +15,11 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./top-bar-menu.component.scss']
 })
 export class TopBarMenuComponent implements OnInit {
+
   public title = 'UZira';
   public imagePath = '../assets/uzira-logo.png';
   public projects: Project[] = [];
   public selectedProjectId = '0';
-
   public name: string;
 
   constructor(
@@ -57,13 +57,14 @@ export class TopBarMenuComponent implements OnInit {
   }
 
   getProjects(): void {
-    this.projectsService.getProjects().subscribe(projects => {
-      this.projects = projects;
-      if (projects.length > 0) {
-        this.selectedProjectId = projects[0]._id;
-        this.projectsService.selectedProjectId$.next(this.selectedProjectId);
-      }
-    });
+    this.projectsService.getProjects()
+      .subscribe(projects => {
+        this.projects = projects;
+        if (projects.length > 0) {
+          this.selectedProjectId = projects[0]._id;
+          this.projectsService.selectedProjectId$.next(this.selectedProjectId);
+        }
+      });
   }
 
   projectChanged($event): void {

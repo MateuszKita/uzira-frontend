@@ -4,9 +4,9 @@ import { SprintGeneral } from 'src/app/models/sprint.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
 import { ProjectsService } from '../../core/services/projects.service';
-import { filter, finalize, switchMap, takeUntil } from 'rxjs/operators';
+import { catchError, filter, finalize, switchMap, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
-import { forkJoin, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, of, Subject } from 'rxjs';
 import { SprintsService } from '../../core/services/sprints.service';
 import { Task } from 'src/app/models/task.model';
 
@@ -17,7 +17,7 @@ import { Task } from 'src/app/models/task.model';
 })
 export class BacklogComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<null> = new Subject();
-  public selectedProjectId: string;
+  public selectedProjectId$: BehaviorSubject<string> = this.projectsService.selectedProjectId$;
   public tasks: Task[];
   public sprints: SprintGeneral[] = [];
   public isLoading = true;
@@ -41,15 +41,13 @@ export class BacklogComponent implements OnInit, OnDestroy {
 
   private getSelectedProjectTasks(): void {
     this.isLoading = true;
-    this.projectsService.selectedProjectId$
+    this.selectedProjectId$
       .pipe(
-        switchMap(id => {
-          this.selectedProjectId = id;
-          return forkJoin([
-            this.backlogService.getBacklog(),
-            this.sprintsService.getSprints()
-          ]);
-        }),
+        switchMap(() => forkJoin([
+            this.backlogService.getBacklog().pipe(catchError(() => of({tasks: []}))),
+            this.sprintsService.getSprints().pipe(catchError(() => of([])))
+          ])
+        ),
         finalize(() => this.isLoading = false),
         takeUntil(this.onDestroy$)
       )
