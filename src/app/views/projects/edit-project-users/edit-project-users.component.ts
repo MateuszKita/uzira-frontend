@@ -37,6 +37,16 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
     this.getProjectUsers();
   }
 
+  private getProjectUsers(): void {
+    this.projectsService.getProjectUsers(this.data.projectId)
+      .pipe(
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(users => {
+        this.users = users;
+      });
+  }
+
   onCancelClick(): void {
     this.dialogRef.close();
   }
@@ -52,17 +62,9 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
       }, err => {
         if (err.error.message) {
           this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
+        } else {
+          this.toastService.openSnackBar('Could not remove user from project.', ToastType.ERROR);
         }
-      });
-  }
-
-  private getProjectUsers(): void {
-    this.projectsService.getProjectUsers(this.data.projectId)
-      .pipe(
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(users => {
-        this.users = users;
       });
   }
 
@@ -76,6 +78,8 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
       }, err => {
         if (err.status === CONFLICT && err.error && err.error.message) {
           this.toastService.openSnackBar(err.error.message, ToastType.INFO);
+        } else {
+          this.toastService.openSnackBar('Could not add user to project.', ToastType.ERROR);
         }
       });
   }
