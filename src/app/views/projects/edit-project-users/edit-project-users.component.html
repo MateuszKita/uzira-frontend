@@ -1,0 +1,33 @@
+<div mat-dialog-content>
+  <form *ngIf="users"
+        [formGroup]="form">
+    <mat-form-field>
+      <mat-select formControlName="users"
+                  placeholder="User to add">
+        <mat-option>
+          <ngx-mat-select-search formControlName="search"
+                                 placeholderLabel="Search for user..."></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let user of users"
+                    (click)="addUser(user)">
+          {{user.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip *ngFor="let user of users"
+                [removable]="true"
+                (removed)="removeUser(user._id)">{{user.name}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </form>
+</div>
+<div mat-dialog-actions
+     class="actions">
+  <button mat-raised-button
+          color="primary"
+          (click)="onCancelClick()">
+    Close
+  </button>
+</div>
