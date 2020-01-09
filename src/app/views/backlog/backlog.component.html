@@ -27,14 +27,16 @@
     </div>
 
     <ng-container *ngIf="sprints.length; else noSprints">
-      <ng-container *ngFor="let sprint of sprints; index as i">
-        <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.index}}"
-                                    expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}
+      <mat-accordion>
+        <ng-container *ngFor="let sprint of sprints; index as i">
+          <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.index}}"
+                                      expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}
                                     [{{sprint.active ? 'Active' : 'Inactive'}}]"
-                                    [dataSource]="sprints[i] ? sprints[i].tasks : []"
-                                    sprintId="{{sprint._id}}"
-                                    (taskAddition)="taskAddition($event, sprint._id)"></app-sprint-expansion-panel>
-      </ng-container>
+                                      [dataSource]="sprints[i] ? sprints[i].tasks : []"
+                                      sprintId="{{sprint._id}}"
+                                      (taskAddition)="taskAddition($event, sprint._id)"></app-sprint-expansion-panel>
+        </ng-container>
+      </mat-accordion>
     </ng-container>
 
     <ng-template #noSprints>
