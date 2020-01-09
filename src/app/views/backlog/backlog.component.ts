@@ -16,11 +16,15 @@ import { Task } from 'src/app/models/task.model';
   styleUrls: ['./backlog.component.scss']
 })
 export class BacklogComponent implements OnInit, OnDestroy {
+
   private onDestroy$: Subject<null> = new Subject();
+
   public selectedProjectId$: BehaviorSubject<string> = this.projectsService.selectedProjectId$;
   public tasks: Task[];
   public sprints: SprintGeneral[] = [];
   public isLoading = true;
+  public isSprintExpanded: boolean[];
+  public isBacklogExpanded = true;
 
   constructor(
     private readonly backlogService: BacklogService,
@@ -37,6 +41,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
   private processTasksData(data) {
     this.tasks = data[0].tasks;
     this.sprints = data[1];
+    this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
   }
 
   private getSelectedProjectTasks(): void {
@@ -55,12 +60,10 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   addSprint(): void {
-    const dialogRef = this.dialog.open(CreateSprintDialogComponent, {
+    this.dialog.open(CreateSprintDialogComponent, {
       width: '250px',
       data: {name: 'add-project'}
-    });
-
-    dialogRef.afterClosed()
+    }).afterClosed()
       .pipe(
         filter(Boolean),
         switchMap(() => this.sprintsService.getSprints()),
@@ -72,7 +75,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
   }
 
   taskAddition(id: number, sprintId?: string) {
-    const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
+    this.dialog.open(CreateTaskDialogComponent, {
       width: '350px',
       data: {
         name: 'add-task',
@@ -80,18 +83,24 @@ export class BacklogComponent implements OnInit, OnDestroy {
         sprints: this.sprints,
         sprintId
       }
-    });
-
-    dialogRef.afterClosed()
+    }).afterClosed()
       .pipe(
         filter(Boolean),
         switchMap(() => (sprintId ? this.sprintsService.getSprints() : this.backlogService.getBacklog())),
         takeUntil(this.onDestroy$)
       )
       .subscribe(res => {
-        sprintId
-          ? this.sprints = res
-          : this.tasks = res.tasks;
+        if (sprintId) {
+          this.sprints = res;
+          this.isBacklogExpanded = true;
+          this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
+          const sprintIndex = this.sprints.findIndex(sprint => sprint._id === sprintId);
+          this.isSprintExpanded[sprintIndex] = true;
+        } else {
+          this.tasks = res.tasks;
+          this.isBacklogExpanded = true;
+          this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
+        }
       });
   }
 

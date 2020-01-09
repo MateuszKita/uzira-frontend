@@ -4,40 +4,41 @@
       <h2>Backlog</h2>
     </div>
 
-    <app-sprint-expansion-panel
-      expansionPanelTitle="Backlog"
-      expansionPanelSubtitle="All tasks in Backlog"
-      [dataSource]="tasks"
-      (taskAddition)="taskAddition($event)"
-      sprintId="0">
-    </app-sprint-expansion-panel>
+    <mat-accordion displayMode="flat">
+      <app-sprint-expansion-panel
+        [expanded]="isBacklogExpanded"
+        expansionPanelTitle="Backlog"
+        expansionPanelSubtitle="All tasks in Backlog"
+        [dataSource]="tasks"
+        (taskAddition)="taskAddition($event)"
+        sprintId="0">
+      </app-sprint-expansion-panel>
 
-    <mat-divider class="divider"></mat-divider>
+      <mat-divider class="divider"></mat-divider>
 
-    <div class="sprints-header">
-      <h2>Sprints list</h2>
-      <div class="button-wrapper">
-        <button mat-raised-button
-                color="secondary"
-                class="add-sprint"
-                (click)="addSprint()">
-          Add Sprint
-        </button>
+      <div class="sprints-header">
+        <h2>Sprints list</h2>
+        <div class="button-wrapper">
+          <button mat-raised-button
+                  color="secondary"
+                  class="add-sprint"
+                  (click)="addSprint()">
+            Add Sprint
+          </button>
+        </div>
       </div>
-    </div>
 
-    <ng-container *ngIf="sprints.length; else noSprints">
-      <mat-accordion>
+      <ng-container *ngIf="sprints.length; else noSprints">
         <ng-container *ngFor="let sprint of sprints; index as i">
           <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.index}}"
-                                      expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}
-                                    [{{sprint.active ? 'Active' : 'Inactive'}}]"
+                                      expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}[{{sprint.active ? 'Active' : 'Inactive'}}]"
+                                      [expanded]="isSprintExpanded && isSprintExpanded[i]"
                                       [dataSource]="sprints[i] ? sprints[i].tasks : []"
                                       sprintId="{{sprint._id}}"
                                       (taskAddition)="taskAddition($event, sprint._id)"></app-sprint-expansion-panel>
         </ng-container>
-      </mat-accordion>
-    </ng-container>
+      </ng-container>
+    </mat-accordion>
 
     <ng-template #noSprints>
       <h3>Your sprints list is empty</h3>

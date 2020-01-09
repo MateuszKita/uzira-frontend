@@ -17,11 +17,12 @@ export class CreateTaskDialogComponent implements OnInit {
   public name: string;
   public type: TaskType;
   public types: TaskType[] = [TaskType.DEFECT, TaskType.STORY, TaskType.TASK];
-  public estimation: number;
+  public estimation = -1;
   public estimates: number[] = [0, 1, 3, 5, 8, 13, 20, 40, 100];
   public sprint: number;
   public description = '';
   public isLoading = false;
+  public createButtonDisabled = false;
 
   constructor(
     public dialogRef: MatDialogRef<CreateTaskDialogComponent>,
@@ -43,6 +44,7 @@ export class CreateTaskDialogComponent implements OnInit {
   }
 
   onCreate(): void {
+    this.createButtonDisabled = true;
     const taskData: Task = {
       name: this.name,
       type: this.type,
@@ -61,7 +63,7 @@ export class CreateTaskDialogComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
-          this.dialogRef.close(false);
+          this.createButtonDisabled = false;
         }
       );
   }
