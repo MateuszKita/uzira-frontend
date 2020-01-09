@@ -39,7 +39,9 @@ export class SprintComponent implements OnInit, OnDestroy {
       )
       .subscribe(sprints => {
         this.sprints = sprints;
-        this.selectedSprintId = sprints[sprints.length - 1]._id;
+        if (this.selectedSprintId) {
+          this.selectedSprintId = sprints[sprints.length - 1]._id;
+        }
         this.sprintChanged();
       });
   }
