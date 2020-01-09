@@ -38,7 +38,6 @@ export class CreateProjectDialogComponent {
       (err: HttpErrorResponse) => {
         this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
         this.dialogRef.close();
-        console.error(err);
       }
     );
   }

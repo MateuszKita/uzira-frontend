@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.toastService.openSnackBar(err.error.message || 'Could not log in...', ToastType.ERROR);
-          console.error(err);
         }
       );
   }

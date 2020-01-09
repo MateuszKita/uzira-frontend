@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
               errorMessage = 'Could not create new user!';
           }
           this.toastService.openSnackBar(errorMessage, ToastType.ERROR);
-          console.error(err);
         }
       );
   }

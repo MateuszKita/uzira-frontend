@@ -45,7 +45,7 @@
       <td mat-cell
           *matCellDef="let element; let i = index"
           class="users">
-        <ng-container *ngIf="projectsUsersNames">
+        <ng-container *ngIf="projectsUsersNames; else loadingUsers">
           {{projectsUsersNames[i]}}
           <button mat-icon-button
                   class="panel-add-task"
@@ -53,6 +53,9 @@
             <mat-icon>edit</mat-icon>
           </button>
         </ng-container>
+        <ng-template #loadingUsers>
+          <mat-spinner [diameter]="20"></mat-spinner>
+        </ng-template>
       </td>
     </ng-container>
 
@@ -83,6 +86,10 @@
        class="loader">
     <mat-spinner [diameter]="25"></mat-spinner>
     <h3>Loading projects...</h3>
+  </div>
+  <div *ngIf="!isLoading && dataSource.length === 0"
+       class="loader">
+    <h3>No projects for current user...</h3>
   </div>
 
 </div>

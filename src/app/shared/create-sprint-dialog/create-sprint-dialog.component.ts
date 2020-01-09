@@ -47,7 +47,6 @@ export class CreateSprintDialogComponent {
         (err: HttpErrorResponse) => {
           this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
           this.dialogRef.close(false);
-          console.error(err);
         }
       );
   }

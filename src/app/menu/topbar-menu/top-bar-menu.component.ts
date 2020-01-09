@@ -36,9 +36,6 @@ export class TopBarMenuComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.name = res.name;
-        },
-        (err: HttpErrorResponse) => {
-          console.error(err);
         }
       );
     this.getProjects();
@@ -62,7 +59,7 @@ export class TopBarMenuComponent implements OnInit {
   getProjects(): void {
     this.projectsService.getProjects().subscribe(projects => {
       this.projects = projects;
-      if (projects.length) {
+      if (projects.length > 0) {
         this.selectedProjectId = projects[0]._id;
         this.projectsService.selectedProjectId$.next(this.selectedProjectId);
       }

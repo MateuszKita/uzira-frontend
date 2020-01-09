@@ -30,18 +30,21 @@ export class AuthInterceptorService implements HttpInterceptor {
       : {Authorization: 'Bearer ' + this.securityService.getToken()};
 
     if (req.url.includes('/0/')) {
-      return EMPTY;
+      return next.handle(new HttpRequest('GET', 'null'));
     }
+
     const authRequest = req.clone({
       setHeaders: headers
     });
-    return next.handle(authRequest).pipe(
-      catchError(error => {
-        if (error instanceof HttpErrorResponse && error.status === UNAUTHORIZED) {
-          this.router.navigate(['login']);
-        }
-        throw error;
-      })
-    );
+
+    return next.handle(authRequest)
+      .pipe(
+        catchError(error => {
+          if (error instanceof HttpErrorResponse && error.status === UNAUTHORIZED) {
+            this.router.navigate(['login']);
+          }
+          throw error;
+        })
+      );
   }
 }

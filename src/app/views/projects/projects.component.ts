@@ -63,7 +63,6 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         },
         (err: HttpErrorResponse) => {
           this.toastService.openSnackBar(`Could not delete project`);
-          console.error(err);
         }
       );
   }

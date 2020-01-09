@@ -23,29 +23,30 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        SharedModule,
-        BacklogRoutingModule,
-        MatExpansionModule,
-        MatTableModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDividerModule,
-        MatDatepickerModule,
-        MatSlideToggleModule,
-        MatNativeDateModule,
-        MatSelectModule,
-        FormsModule,
-        MatProgressSpinnerModule
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    BacklogRoutingModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    FormsModule,
+    MatProgressSpinnerModule
+  ],
   declarations: [
     BacklogComponent,
     SprintExpansionPanelComponent,
   ],
   entryComponents: [CreateSprintDialogComponent, CreateTaskDialogComponent]
 })
-export class BacklogModule {}
+export class BacklogModule {
+}

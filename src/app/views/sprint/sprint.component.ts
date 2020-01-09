@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { SprintsService } from 'src/app/core/services/sprints.service';
 import { SprintGeneral } from 'src/app/models/sprint.model';
-import { takeUntil, switchMap, filter } from 'rxjs/operators';
+import { takeUntil, switchMap, filter, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sprint',
@@ -33,8 +33,8 @@ export class SprintComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.projectsService.selectedProjectId$
       .pipe(
-        filter(id => id !== '0'),
         switchMap(() => this.sprintService.getSprints()),
+        finalize(() => this.isLoading = false),
         takeUntil(this.onDestroy$),
       )
       .subscribe(sprints => {
