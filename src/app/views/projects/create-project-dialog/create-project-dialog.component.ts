@@ -23,7 +23,7 @@ export class CreateProjectDialogComponent {
   }
 
   onCancelClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onCreate(): void {
@@ -33,11 +33,11 @@ export class CreateProjectDialogComponent {
           this.projectsService.selectedProjectId$.next(res._id);
         }
         this.toastService.openSnackBar(`Successfully added new Project - '${res.name}'`);
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       },
       (err: HttpErrorResponse) => {
         this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
-        this.dialogRef.close();
+        this.dialogRef.close(false);
       }
     );
   }

@@ -44,8 +44,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe(result => {
-        this.getProjects();
-        this.projectsService.projectsChanged$.next();
+        if (result) {
+          this.getProjects();
+          this.projectsService.projectsChanged$.next();
+        }
       });
   }
 
