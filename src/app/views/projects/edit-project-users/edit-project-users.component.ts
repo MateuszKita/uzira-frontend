@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ToastType } from '../../../models/toast.model';
 import { ToastService } from '../../../core/services/toast.service';
-import { BAD_REQUEST } from 'http-status-codes';
+import { CONFLICT } from 'http-status-codes';
 
 @Component({
   selector: 'app-edit-project-users',
@@ -73,7 +73,7 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.users = [...this.users, user];
       }, err => {
-        if (err.status === BAD_REQUEST && err.error && err.error.message) {
+        if (err.status === CONFLICT && err.error && err.error.message) {
           this.toastService.openSnackBar(err.error.message, ToastType.INFO);
         }
       });
