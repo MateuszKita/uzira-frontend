@@ -1,5 +1,5 @@
 <div mat-dialog-content>
-  <form *ngIf="users"
+  <form *ngIf="projectUsers; else loadingUsers"
         [formGroup]="form">
     <mat-form-field>
       <mat-select formControlName="users"
@@ -8,20 +8,26 @@
           <ngx-mat-select-search formControlName="search"
                                  placeholderLabel="Search for user..."></ngx-mat-select-search>
         </mat-option>
-        <mat-option *ngFor="let user of users"
+        <mat-option *ngFor="let user of allUsers"
                     (click)="addUser(user)">
           {{user.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-chip-list aria-label="Fish selection">
-      <mat-chip *ngFor="let user of users"
+      <mat-chip *ngFor="let user of projectUsers"
                 [removable]="true"
                 (removed)="removeUser(user._id)">{{user.name}}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
   </form>
+  <ng-template #loadingUsers>
+    <div class="loader">
+      <mat-spinner [diameter]="25"></mat-spinner>
+      <h4>Loading project users...</h4>
+    </div>
+  </ng-template>
 </div>
 <div mat-dialog-actions
      class="actions">

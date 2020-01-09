@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ToastType } from '../../../models/toast.model';
 import { ToastService } from '../../../core/services/toast.service';
 import { CONFLICT } from 'http-status-codes';
+import { UsersService } from '../../../shared/users.service';
 
 @Component({
   selector: 'app-edit-project-users',
@@ -23,18 +24,21 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
     search: new FormControl('')
   });
 
-  users: User[];
+  projectUsers: User[];
+  allUsers: User[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { projectId: string },
     public dialogRef: MatDialogRef<EditProjectUsersComponent>,
     private readonly projectsService: ProjectsService,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
+    private readonly usersService: UsersService
   ) {
   }
 
   ngOnInit() {
     this.getProjectUsers();
+    this.getAllUsers();
   }
 
   private getProjectUsers(): void {
@@ -43,7 +47,17 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe(users => {
-        this.users = users;
+        this.projectUsers = users;
+      });
+  }
+
+  private getAllUsers(): void {
+    this.usersService.getAllUsersSimpleList()
+      .pipe(
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(users => {
+        this.allUsers = users;
       });
   }
 
@@ -57,8 +71,8 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe(() => {
-        const userToRemoveIndex = this.users.findIndex(user => user._id === userId);
-        this.users.splice(userToRemoveIndex, 1);
+        const userToRemoveIndex = this.projectUsers.findIndex(user => user._id === userId);
+        this.projectUsers.splice(userToRemoveIndex, 1);
       }, err => {
         if (err.error.message) {
           this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
@@ -74,7 +88,7 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe(() => {
-        this.users = [...this.users, user];
+        this.projectUsers = [...this.projectUsers, user];
       }, err => {
         if (err.status === CONFLICT && err.error && err.error.message) {
           this.toastService.openSnackBar(err.error.message, ToastType.INFO);

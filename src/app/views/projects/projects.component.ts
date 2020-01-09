@@ -36,15 +36,17 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   openCreateProjectDialog(): void {
-    const dialogRef = this.dialog.open(CreateProjectDialogComponent, {
+    this.dialog.open(CreateProjectDialogComponent, {
       width: '250px',
       data: {name: 'add-project'}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.getProjects();
-      this.projectsService.projectsChanged$.next();
-    });
+    }).afterClosed()
+      .pipe(
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(result => {
+        this.getProjects();
+        this.projectsService.projectsChanged$.next();
+      });
   }
 
   deleteProject(id: string) {
@@ -69,9 +71,17 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   editProjectUsers(projectId: string): void {
     this.dialog.open(EditProjectUsersComponent, {
-      width: '400px',
+      minWidth: '250px',
+      maxWidth: '1000px',
+      width: '60vw',
       data: {projectId}
-    });
+    }).afterClosed()
+      .pipe(
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(() => {
+        this.getProjects();
+      });
   }
 
   private getProjects(): void {
