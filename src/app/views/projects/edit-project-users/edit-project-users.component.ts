@@ -46,8 +46,9 @@ export class EditProjectUsersComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.onDestroy$)
       )
-      .subscribe(res => {
-        console.log(res);
+      .subscribe(() => {
+        const userToRemoveIndex = this.users.findIndex(user => user._id === userId);
+        this.users.splice(userToRemoveIndex, 1);
       }, err => {
         if (err.error.message) {
           this.toastService.openSnackBar(err.error.message, ToastType.ERROR);
