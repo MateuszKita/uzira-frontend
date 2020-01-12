@@ -25,11 +25,20 @@ export class TasksService {
     return this.http.patch<any>(this.getTasksUrl(taskId), data);
   }
 
-  getTask(data: Task): Observable<any> {
-    return this.http.get<Task>(this.getTasksUrl(data._id));
+  getTask(taskId: string): Observable<any> {
+    return this.http.get<Task>(this.getTasksUrl(taskId));
   }
 
-  deleteTask(data: Task): Observable<any> {
-    return this.http.delete<any>(this.getTasksUrl(data._id));
+  deleteTask(taskId: string): Observable<any> {
+    return this.http.delete<any>(this.getTasksUrl(taskId));
   }
+
+  moveTaskToBacklog(taskId: string): Observable<any> {
+    return this.http.post<Task>(`${this.getTasksUrl(taskId)}/toBacklog`, null);
+  }
+
+  moveTaskToSprint(taskId: string, sprintId: string): Observable<any> {
+    return this.http.post<Task>(`${this.getTasksUrl(taskId)}/toSprint${sprintId}`, null);
+  }
+
 }

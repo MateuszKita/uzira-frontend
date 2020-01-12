@@ -6,7 +6,7 @@ import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog
 import { ProjectsService } from '../../core/services/projects.service';
 import { catchError, filter, finalize, switchMap, takeUntil } from 'rxjs/operators';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
-import { BehaviorSubject, forkJoin, of, Subject } from 'rxjs';
+import { BehaviorSubject, EMPTY, forkJoin, Observable, of, Subject } from 'rxjs';
 import { SprintsService } from '../../core/services/sprints.service';
 import { Task } from 'src/app/models/task.model';
 
@@ -86,22 +86,36 @@ export class BacklogComponent implements OnInit, OnDestroy {
     }).afterClosed()
       .pipe(
         filter(Boolean),
-        switchMap(() => (sprintId ? this.sprintsService.getSprints() : this.backlogService.getBacklog())),
-        takeUntil(this.onDestroy$)
+        switchMap(() => this.handleBacklogChanges(sprintId)),
       )
-      .subscribe(res => {
-        if (sprintId) {
-          this.sprints = res;
-          this.isBacklogExpanded = true;
-          this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
-          const sprintIndex = this.sprints.findIndex(sprint => sprint._id === sprintId);
-          this.isSprintExpanded[sprintIndex] = true;
-        } else {
-          this.tasks = res.tasks;
-          this.isBacklogExpanded = true;
-          this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
-        }
-      });
+      .subscribe();
+  }
+
+  handleBacklogChanges(sprintId: string): Observable<any> {
+    console.log('@@@', sprintId);
+    return (sprintId ? this.sprintsService.getSprints() : this.backlogService.getBacklog())
+      .pipe(
+        switchMap(res => {
+          sprintId
+            ? this.sprints = res
+            : this.tasks = res.tasks;
+          this.expansionPanelsUpdate(sprintId);
+          return EMPTY;
+        }),
+        takeUntil(this.onDestroy$)
+      );
+  }
+
+  private expansionPanelsUpdate(sprintId: string): void {
+    if (sprintId) {
+      this.isBacklogExpanded = true;
+      this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
+      const sprintIndex = this.sprints.findIndex(sprint => sprint._id === sprintId);
+      this.isSprintExpanded[sprintIndex] = true;
+    } else {
+      this.isBacklogExpanded = true;
+      this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
+    }
   }
 
   ngOnDestroy(): void {
