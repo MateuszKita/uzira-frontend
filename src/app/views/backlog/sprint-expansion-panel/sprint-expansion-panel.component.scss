@@ -9,7 +9,7 @@
   .panel-add-task {
     margin: 0 15px;
 
-    .mat-button-riple {
+    .mat-button-ripple {
       width: 40px;
     }
   }
@@ -22,7 +22,7 @@
     }
 
     .type {
-      width: 30%;
+      width: 20%;
     }
 
     .estimation {
@@ -30,8 +30,20 @@
     }
 
     .assigned {
-      width: 30%;
-
+      width: 25%;
     }
+
+    .edit {
+      width: 5%;
+    }
+
+    .move {
+      width: 5%;
+    }
+
+    .delete {
+      width: 5%;
+    }
+
   }
 }

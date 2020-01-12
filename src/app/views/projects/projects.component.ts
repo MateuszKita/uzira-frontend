@@ -99,6 +99,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       )
       .subscribe(projectsUsers => {
         this.projectsUsersNames = projectsUsers.map(users => users.map(user => user.name).join(', '));
+        this.projectsService.projectsChanged$.next();
       });
   }
 

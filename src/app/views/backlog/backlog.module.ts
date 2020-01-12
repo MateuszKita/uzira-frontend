@@ -20,7 +20,7 @@ import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog
 import { FormsModule } from '@angular/forms';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { SharedModule } from '../../shared/shared.module';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatTooltipModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -40,7 +40,8 @@ import { MatProgressSpinnerModule } from '@angular/material';
     MatNativeDateModule,
     MatSelectModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   declarations: [
     BacklogComponent,

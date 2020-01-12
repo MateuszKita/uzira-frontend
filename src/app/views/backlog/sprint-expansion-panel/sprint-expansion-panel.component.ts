@@ -20,18 +20,39 @@ export class SprintExpansionPanelComponent {
 
   @Input() expansionPanelTitle: string;
   @Input() expansionPanelSubtitle: string;
-  @Input() sprintId: number;
+  @Input() sprintId: string;
   @Input() expanded: boolean;
-  @Output() taskAddition = new EventEmitter<number>();
+
+  @Output() taskAddition = new EventEmitter<string>();
 
   public displayedColumns: string[] = [
     'name',
     'type',
     'estimation',
-    'assigned'
+    'assigned',
+    'edit',
+    'move',
+    'delete',
   ];
+
+  constructor() {
+    console.log(this.sprintId);
+  }
 
   addTask(): void {
     this.taskAddition.emit(this.sprintId);
   }
+
+  editTask(taskId: string): void {
+
+  }
+
+  moveTask(taskId: string): void {
+
+  }
+
+  deleteTask(taskId: string): void {
+
+  }
+
 }
