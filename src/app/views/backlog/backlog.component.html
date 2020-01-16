@@ -1,5 +1,5 @@
 <div class="backlog-view">
-  <ng-container *ngIf="(selectedProjectId$ | async) !== '0' && tasks; else noProjects">
+  <ng-container *ngIf="(selectedProjectId$ | async) !== '0' && !!tasks; else noProjects">
     <div class="sprints-header">
       <h2>Backlog</h2>
     </div>

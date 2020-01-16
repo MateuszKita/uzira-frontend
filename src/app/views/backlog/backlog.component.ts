@@ -42,6 +42,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
     this.tasks = data[0].tasks;
     this.sprints = data[1];
     this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
+    this.isLoading = false;
   }
 
   private getSelectedProjectTasks(): void {
@@ -85,14 +86,12 @@ export class BacklogComponent implements OnInit, OnDestroy {
       }
     }).afterClosed()
       .pipe(
-        filter(Boolean),
         switchMap(() => this.handleBacklogChanges(sprintId)),
       )
       .subscribe();
   }
 
   handleBacklogChanges(sprintId: string): Observable<any> {
-    console.log('@@@', sprintId);
     return (sprintId ? this.sprintsService.getSprints() : this.backlogService.getBacklog())
       .pipe(
         switchMap(res => {

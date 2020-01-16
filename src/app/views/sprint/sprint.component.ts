@@ -33,7 +33,6 @@ export class SprintComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.projectsService.selectedProjectId$
       .pipe(
-        filter(id => id !== '0'),
         switchMap(() => this.sprintService.getSprints()),
         finalize(() => this.isLoading = false),
         takeUntil(this.onDestroy$),
