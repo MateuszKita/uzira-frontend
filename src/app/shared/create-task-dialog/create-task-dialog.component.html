@@ -22,17 +22,17 @@
   <!-- <mat-form-field>
     <input matInput
            [(ngModel)]="assigned"
-           placeholder="Assgined">
+           placeholder="Assigned">
   </mat-form-field> -->
-  <mat-form-field>
-    <mat-select [(ngModel)]="sprint"
-                placeholder="Sprint"
-                [disabled]="data.id || data.id == 0">
-      <mat-option *ngFor="let spr of data.sprints"
-                  [value]="spr.id">Sprint
-        {{spr.id}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+<!--  <mat-form-field>-->
+  <!--    <mat-select [(ngModel)]="sprint"-->
+  <!--                placeholder="Sprint"-->
+  <!--                [disabled]="data.id || data.id == 0">-->
+  <!--      <mat-option *ngFor="let spr of data.sprints"-->
+  <!--                  [value]="spr.id">Sprint-->
+  <!--        {{spr.id}}</mat-option>-->
+  <!--    </mat-select>-->
+  <!--  </mat-form-field>-->
   <mat-form-field>
     <input matInput
            [(ngModel)]="description"

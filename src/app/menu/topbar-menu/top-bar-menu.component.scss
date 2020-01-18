@@ -4,29 +4,35 @@
   justify-content: space-between;
   padding: 0;
 
-  .top-bar__app-logo-and-title__container {
+  .left-side {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    padding: 0 60px 0 10px;
+    align-items: center;
+    width: 500px;
 
-    .top-bar__logo {
-      width: 50px;
-      height: 50px;;
-    }
-
-    .top-bar__app-title {
-      font-weight: 900;
-      font-size: 110%;
+    .top-bar__app-logo-and-title__container {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-  }
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      padding: 0 60px 0 10px;
 
-  .top-bar__select-project__container {
-    font-size: 15px;
-    padding: 15px 20% 0 140px;
+      .top-bar__logo {
+        width: 50px;
+        height: 50px;;
+      }
+
+      .top-bar__app-title {
+        font-weight: 900;
+        font-size: 110%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+
+    .top-bar__select-project__container {
+      font-size: 15px;
+      padding: 15px 0 0 120px;
+    }
   }
 
   .top-bar__user {
