@@ -91,13 +91,22 @@ export class BacklogComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  handleBacklogChanges(sprintId: string): Observable<any> {
-    return (sprintId ? this.sprintsService.getSprints() : this.backlogService.getBacklog())
+  handleBacklogChanges(sprintId: string, all: boolean = false): Observable<any> {
+    return (all
+      ? forkJoin([this.sprintsService.getSprints(), this.backlogService.getBacklog()])
+      : sprintId
+        ? this.sprintsService.getSprints()
+        : this.backlogService.getBacklog())
       .pipe(
         switchMap(res => {
-          sprintId
-            ? this.sprints = res
-            : this.tasks = res.tasks;
+          if (all) {
+            this.sprints = res[0];
+            this.tasks = res[1].tasks;
+          } else {
+            sprintId
+              ? this.sprints = res
+              : this.tasks = res.tasks;
+          }
           this.expansionPanelsUpdate(sprintId);
           return EMPTY;
         }),
@@ -107,13 +116,13 @@ export class BacklogComponent implements OnInit, OnDestroy {
 
   private expansionPanelsUpdate(sprintId: string): void {
     if (sprintId) {
-      this.isBacklogExpanded = true;
-      this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
+      this.isBacklogExpanded = false;
+      this.isSprintExpanded = new Array(this.sprints.length).fill(false);
       const sprintIndex = this.sprints.findIndex(sprint => sprint._id === sprintId);
       this.isSprintExpanded[sprintIndex] = true;
     } else {
+      this.isSprintExpanded = new Array(this.sprints.length).fill(false);
       this.isBacklogExpanded = true;
-      this.isSprintExpanded = new Array(this.sprints.length).map(() => false);
     }
   }
 

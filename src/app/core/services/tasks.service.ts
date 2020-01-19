@@ -38,7 +38,7 @@ export class TasksService {
   }
 
   moveTaskToSprint(taskId: string, sprintId: string): Observable<any> {
-    return this.http.post<Task>(`${this.getTasksUrl(taskId)}/toSprint${sprintId}`, null);
+    return this.http.post<Task>(`${this.getTasksUrl(taskId)}/toSprint/${sprintId}`, null);
   }
 
 }

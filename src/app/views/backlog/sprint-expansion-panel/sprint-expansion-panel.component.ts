@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Task } from 'src/app/models/task.model';
 import { TasksService } from '../../../core/services/tasks.service';
 import { Subject } from 'rxjs';
@@ -7,9 +7,7 @@ import { ToastService } from '../../../core/services/toast.service';
 import { ToastType } from '../../../models/toast.model';
 import { CreateTaskDialogComponent } from '../../../shared/create-task-dialog/create-task-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl, FormGroup } from '@angular/forms';
 import { SprintGeneral } from '../../../models/sprint.model';
-import { MatMenu, MatSelect } from '@angular/material';
 
 @Component({
   selector: 'app-sprint-expansion-panel',
@@ -20,11 +18,6 @@ export class SprintExpansionPanelComponent implements OnDestroy {
 
   private _dataSource: Task[] = [];
   private onDestroy$: Subject<null> = new Subject();
-
-  public form = new FormGroup({
-    sprints: new FormControl([]),
-    search: new FormControl('')
-  });
 
   @Input()
   set dataSource(tasks: Task[]) {
@@ -38,14 +31,12 @@ export class SprintExpansionPanelComponent implements OnDestroy {
   @Input() expansionPanelTitle: string;
   @Input() expansionPanelSubtitle: string;
   @Input() sprintId: string = null;
-  @Input() expanded: boolean;
+  @Input() expanded = false;
   @Input() sprints: SprintGeneral[];
 
   @Output() taskAddition = new EventEmitter<string>();
   @Output() backlogChange = new EventEmitter<string | null>();
-
-  @ViewChild('select', {static: false}) sprintsSelect: MatSelect;
-  @ViewChild('menu', {static: false}) moveMenu: MatMenu;
+  @Output() backlogChangeAll = new EventEmitter<string | null>();
 
   public displayedColumns: string[] = [
     'name',
@@ -97,7 +88,9 @@ export class SprintExpansionPanelComponent implements OnDestroy {
       .pipe(
         takeUntil(this.onDestroy$)
       )
-      .subscribe();
+      .subscribe(() => {
+        this.backlogChangeAll.emit(sprintId);
+      });
   }
 
   deleteTask(taskId: string): void {
@@ -111,13 +104,6 @@ export class SprintExpansionPanelComponent implements OnDestroy {
       }, (error) => {
         this.toastService.openSnackBar(error.error.message || 'Could not delete this Task!', ToastType.ERROR);
       });
-  }
-
-  openSelect(): void {
-    setTimeout(() => {
-      // this.moveMenu.t;
-      this.sprintsSelect.open();
-    }, 500);
   }
 
   ngOnDestroy(): void {

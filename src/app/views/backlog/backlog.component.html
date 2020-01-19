@@ -12,7 +12,8 @@
         [dataSource]="tasks"
         [sprints]="sprints"
         (taskAddition)="taskAddition($event)"
-        (backlogChange)="handleBacklogChanges($event).subscribe()">
+        (backlogChange)="handleBacklogChanges($event).subscribe()"
+        (backlogChangeAll)="handleBacklogChanges($event, true).subscribe()">
       </app-sprint-expansion-panel>
 
       <mat-divider class="divider"></mat-divider>
@@ -31,13 +32,16 @@
 
       <ng-container *ngIf="sprints.length; else noSprints">
         <ng-container *ngFor="let sprint of sprints; index as i">
+          ?? {{!!(isSprintExpanded && isSprintExpanded[i])}}
           <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.index}}"
                                       expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}[{{sprint.active ? 'Active' : 'Inactive'}}]"
-                                      [expanded]="isSprintExpanded && isSprintExpanded[i]"
+                                      [expanded]="!!(isSprintExpanded && isSprintExpanded[i])"
                                       [dataSource]="sprints[i] ? sprints[i].tasks : []"
+                                      [sprints]="sprints"
                                       sprintId="{{sprint._id}}"
                                       (taskAddition)="taskAddition($event, sprint._id)"
-                                      (backlogChange)="handleBacklogChanges($event).subscribe()"></app-sprint-expansion-panel>
+                                      (backlogChange)="handleBacklogChanges($event).subscribe()"
+                                      (backlogChangeAll)="handleBacklogChanges($event, true).subscribe()"></app-sprint-expansion-panel>
         </ng-container>
       </ng-container>
     </mat-accordion>

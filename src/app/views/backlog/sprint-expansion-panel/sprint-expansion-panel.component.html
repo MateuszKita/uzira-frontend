@@ -1,4 +1,5 @@
 <div class="expansion-panel-wrapper">
+  {{expanded | json}}
   <mat-expansion-panel [expanded]="expanded">
     <mat-expansion-panel-header>
       <mat-panel-title class="panel-title">
@@ -86,35 +87,31 @@
         <td mat-cell
             *matCellDef="let element"
             class="move">
-          <button mat-icon-button
-                  [matTooltip]="sprintId ? 'Move task to Backlog' : 'Move task to Sprint'"
-                  [matMenuTriggerFor]="sprintsList"
-                  (click)="sprintId ? moveTask(element._id) : null; openSelect()">
+          <button *ngIf="sprintId; else buttonWithMenuOpen"
+                  mat-icon-button
+                  [matTooltip]="'Move task to Backlog'"
+                  (click)="moveTask(element._id)">
             <mat-icon>
               arrow_right_alt
             </mat-icon>
           </button>
-          <mat-menu #sprintsList="matMenu"
-                    #menu>
-            <form [formGroup]="form">
-              <mat-form-field (click)="$event.stopPropagation()">
-                <mat-select formControlName="sprints"
-                            placeholder="Sprint to move to"
-                            #select>
-                  <mat-option>
-                    <ngx-mat-select-search formControlName="search"
-                                           placeholderLabel="Search for sprint..."></ngx-mat-select-search>
-                  </mat-option>
-                  <button mat-menu-item>
-                    <mat-option *ngFor="let sprint of sprints"
-                                (click)="moveTask(element._id, sprint._id)">
-                      Sprint {{sprint.index}}
-                    </mat-option>
-                  </button>
-                </mat-select>
-              </mat-form-field>
-            </form>
-          </mat-menu>
+          <ng-template #buttonWithMenuOpen>
+            <button mat-icon-button
+                    [matTooltip]="'Move task to Sprint'"
+                    [matMenuTriggerFor]="sprintsList">
+              <mat-icon>
+                arrow_right_alt
+              </mat-icon>
+            </button>
+          </ng-template>
+          <div [hidden]="sprintId">
+            <mat-menu #sprintsList="matMenu">
+              <button mat-menu-item *ngFor="let sprint of sprints"
+                      (click)="moveTask(element._id, sprint._id)">
+                Sprint {{sprint.index}}
+              </button>
+            </mat-menu>
+          </div>
         </td>
       </ng-container>
 
