@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../shared/users.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from 'src/app/models/projects.model';
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { Router } from '@angular/router';
@@ -21,6 +20,8 @@ export class TopBarMenuComponent implements OnInit {
   public projects: Project[] = [];
   public selectedProjectId = '0';
   public name: string;
+
+  private kwaCounter = 0;
 
   constructor(
     private readonly userService: UsersService,
@@ -80,4 +81,15 @@ export class TopBarMenuComponent implements OnInit {
         this.router.navigate(['login']);
       });
   }
+
+  kwa(): void {
+    this.kwaCounter++;
+
+    if (this.kwaCounter === 10) {
+      this.toastService.openSnackBar('Pączuś Kocha Kaczusię!', ToastType.INFO);
+    } else if (this.kwaCounter > 10) {
+      this.toastService.openSnackBar(`Pączuś Kocha Kaczusię x${this.kwaCounter - 10}!`, ToastType.INFO);
+    }
+  }
+
 }

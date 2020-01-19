@@ -1,5 +1,5 @@
 <div mat-dialog-content>
-  <p>Enter the new task data:</p>
+  <p>{{data.name ? 'Update task data:' : 'Enter the new task data:'}}</p>
   <mat-form-field>
     <input matInput
            [(ngModel)]="name"
@@ -50,6 +50,6 @@
           color="primary"
           [disabled]="isLoading || createButtonDisabled"
           (click)="onCreate()">
-    Create
+    {{data.name ? 'Update' : 'Create'}}
   </button>
 </div>

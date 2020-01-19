@@ -2,9 +2,11 @@ import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core
 import { Task } from 'src/app/models/task.model';
 import { TasksService } from '../../../core/services/tasks.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { ToastService } from '../../../core/services/toast.service';
 import { ToastType } from '../../../models/toast.model';
+import { CreateTaskDialogComponent } from '../../../shared/create-task-dialog/create-task-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sprint-expansion-panel',
@@ -45,7 +47,8 @@ export class SprintExpansionPanelComponent implements OnDestroy {
 
   constructor(
     private readonly tasksService: TasksService,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
+    private readonly dialog: MatDialog
   ) {
   }
 
@@ -53,8 +56,22 @@ export class SprintExpansionPanelComponent implements OnDestroy {
     this.taskAddition.emit(this.sprintId);
   }
 
-  editTask(taskId: string): void {
-
+  editTask(task: Task): void {
+    this.dialog.open(CreateTaskDialogComponent, {
+      width: '350px',
+      data: {
+        name: task.name,
+        description: task.description,
+        estimation: task.estimation,
+        type: task.type,
+        id: this.sprintId,
+        sprints: [],
+        taskId: task._id
+      }
+    }).afterClosed()
+      .subscribe(() => {
+        this.backlogChange.emit(this.sprintId);
+      });
   }
 
   moveTask(taskId: string): void {

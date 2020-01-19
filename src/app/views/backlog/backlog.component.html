@@ -11,7 +11,7 @@
         expansionPanelSubtitle="All tasks in Backlog"
         [dataSource]="tasks"
         (taskAddition)="taskAddition($event)"
-        (backlogChange)="handleBacklogChanges($event)">
+        (backlogChange)="handleBacklogChanges($event).subscribe()">
       </app-sprint-expansion-panel>
 
       <mat-divider class="divider"></mat-divider>
@@ -36,7 +36,7 @@
                                       [dataSource]="sprints[i] ? sprints[i].tasks : []"
                                       sprintId="{{sprint._id}}"
                                       (taskAddition)="taskAddition($event, sprint._id)"
-                                      (backlogChange)="handleBacklogChanges($event)"></app-sprint-expansion-panel>
+                                      (backlogChange)="handleBacklogChanges($event).subscribe()"></app-sprint-expansion-panel>
         </ng-container>
       </ng-container>
     </mat-accordion>

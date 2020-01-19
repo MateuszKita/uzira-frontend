@@ -30,7 +30,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
     private readonly backlogService: BacklogService,
     private readonly projectsService: ProjectsService,
     private readonly sprintsService: SprintsService,
-    public readonly dialog: MatDialog
+    private readonly dialog: MatDialog
   ) {
   }
 
