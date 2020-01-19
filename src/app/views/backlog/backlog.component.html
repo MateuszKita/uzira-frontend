@@ -10,6 +10,7 @@
         expansionPanelTitle="Backlog"
         expansionPanelSubtitle="All tasks in Backlog"
         [dataSource]="tasks"
+        [sprints]="sprints"
         (taskAddition)="taskAddition($event)"
         (backlogChange)="handleBacklogChanges($event).subscribe()">
       </app-sprint-expansion-panel>

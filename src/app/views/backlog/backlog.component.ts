@@ -79,7 +79,7 @@ export class BacklogComponent implements OnInit, OnDestroy {
     this.dialog.open(CreateTaskDialogComponent, {
       width: '350px',
       data: {
-        name: 'add-task',
+        // name: 'add-task',
         id,
         sprints: this.sprints,
         sprintId

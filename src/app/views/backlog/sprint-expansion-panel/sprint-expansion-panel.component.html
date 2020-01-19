@@ -88,11 +88,33 @@
             class="move">
           <button mat-icon-button
                   [matTooltip]="sprintId ? 'Move task to Backlog' : 'Move task to Sprint'"
-                  (click)="moveTask(element._id)">
+                  [matMenuTriggerFor]="sprintsList"
+                  (click)="sprintId ? moveTask(element._id) : null; openSelect()">
             <mat-icon>
               arrow_right_alt
             </mat-icon>
           </button>
+          <mat-menu #sprintsList="matMenu"
+                    #menu>
+            <form [formGroup]="form">
+              <mat-form-field (click)="$event.stopPropagation()">
+                <mat-select formControlName="sprints"
+                            placeholder="Sprint to move to"
+                            #select>
+                  <mat-option>
+                    <ngx-mat-select-search formControlName="search"
+                                           placeholderLabel="Search for sprint..."></ngx-mat-select-search>
+                  </mat-option>
+                  <button mat-menu-item>
+                    <mat-option *ngFor="let sprint of sprints"
+                                (click)="moveTask(element._id, sprint._id)">
+                      Sprint {{sprint.index}}
+                    </mat-option>
+                  </button>
+                </mat-select>
+              </mat-form-field>
+            </form>
+          </mat-menu>
         </td>
       </ng-container>
 

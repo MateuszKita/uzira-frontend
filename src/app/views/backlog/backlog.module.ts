@@ -17,16 +17,18 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { SprintExpansionPanelComponent } from './sprint-expansion-panel/sprint-expansion-panel.component';
 import { CreateSprintDialogComponent } from 'src/app/shared/create-sprint-dialog/create-sprint-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateTaskDialogComponent } from 'src/app/shared/create-task-dialog/create-task-dialog.component';
 import { SharedModule } from '../../shared/shared.module';
-import { MatProgressSpinnerModule, MatTooltipModule } from '@angular/material';
+import { MatMenuModule, MatProgressSpinnerModule, MatTooltipModule } from '@angular/material';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     BacklogRoutingModule,
+    ReactiveFormsModule,
     MatExpansionModule,
     MatTableModule,
     MatIconModule,
@@ -41,7 +43,9 @@ import { MatProgressSpinnerModule, MatTooltipModule } from '@angular/material';
     MatSelectModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule,
+    NgxMatSelectSearchModule
   ],
   declarations: [
     BacklogComponent,
