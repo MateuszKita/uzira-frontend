@@ -32,7 +32,6 @@
 
       <ng-container *ngIf="sprints.length; else noSprints">
         <ng-container *ngFor="let sprint of sprints; index as i">
-          ?? {{!!(isSprintExpanded && isSprintExpanded[i])}}
           <app-sprint-expansion-panel expansionPanelTitle="Sprint {{sprint.index}}"
                                       expansionPanelSubtitle="All tasks in Sprint {{sprint.index}}[{{sprint.active ? 'Active' : 'Inactive'}}]"
                                       [expanded]="!!(isSprintExpanded && isSprintExpanded[i])"
