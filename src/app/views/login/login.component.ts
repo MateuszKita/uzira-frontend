@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         (userBody: any) => {
           this.securityService.setToken(userBody.token);
           this.router.navigate(['backlog']);
-          this.toastService.openSnackBar('Successfully logged in!');
+          this.toastService.openSnackBar('Logged in!');
         },
         (err: HttpErrorResponse) => {
           this.toastService.openSnackBar(err.error.message || 'Could not log in...', ToastType.ERROR);

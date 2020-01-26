@@ -21,8 +21,6 @@ export class TopBarMenuComponent implements OnInit {
   public selectedProjectId = '0';
   public name: string;
 
-  private kwaCounter = 0;
-
   constructor(
     private readonly userService: UsersService,
     private readonly projectsService: ProjectsService,
@@ -76,20 +74,10 @@ export class TopBarMenuComponent implements OnInit {
     this.toastService.openSnackBar('Logging out...', ToastType.INFO);
     this.securityService.logout()
       .subscribe(() => {
-        this.toastService.openSnackBar('Successfully logged out!');
+        this.toastService.openSnackBar('Logged out!');
         this.securityService.removeToken();
         this.router.navigate(['login']);
       });
-  }
-
-  kwa(): void {
-    this.kwaCounter++;
-
-    if (this.kwaCounter === 10) {
-      this.toastService.openSnackBar('Pączuś Kocha Kaczusię!', ToastType.INFO);
-    } else if (this.kwaCounter > 10) {
-      this.toastService.openSnackBar(`Pączuś Kocha Kaczusię x${this.kwaCounter - 10}!`, ToastType.INFO);
-    }
   }
 
 }

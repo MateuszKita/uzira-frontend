@@ -19,7 +19,7 @@
       <mat-divider class="divider"></mat-divider>
 
       <div class="sprints-header">
-        <h2>Sprints list</h2>
+        <h2>Sprints' list</h2>
         <div class="button-wrapper">
           <button mat-raised-button
                   color="secondary"
@@ -46,14 +46,14 @@
     </mat-accordion>
 
     <ng-template #noSprints>
-      <h3>Your sprints list is empty</h3>
+      <h3>Your sprints' list is empty</h3>
     </ng-template>
   </ng-container>
 
   <ng-template #noProjects>
     <div class="loader" *ngIf="isLoading; else notLoading">
       <mat-spinner [diameter]="25"></mat-spinner>
-      <h3>Loading backlog and sprints list...</h3>
+      <h3>Loading backlog and sprints' list...</h3>
     </div>
     <ng-template #notLoading>
       <h2>

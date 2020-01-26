@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
         finalize(() => this.isLoading = false)
       )
       .subscribe((res) => {
-          this.toastService.openSnackBar(`Successfully created new user: '${res.user.name}'`);
+          this.toastService.openSnackBar(`New user successfully created: '${res.user.name}'`);
           this.router.navigate(['/login']);
         }, (err: HttpErrorResponse) => {
           let errorMessage: string;

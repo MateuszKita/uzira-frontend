@@ -58,7 +58,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         () => {
-          this.toastService.openSnackBar(`Successfully deleted Project`);
+          this.toastService.openSnackBar(`Project successfully deleted`);
           if (id === this.projectsService.selectedProjectId$.getValue()) {
             this.projectsService.selectedProjectId$.next('0');
           }

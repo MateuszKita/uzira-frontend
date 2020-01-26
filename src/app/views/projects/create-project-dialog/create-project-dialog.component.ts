@@ -32,7 +32,7 @@ export class CreateProjectDialogComponent {
         if (this.projectsService.selectedProjectId$.getValue() === '0') {
           this.projectsService.selectedProjectId$.next(res._id);
         }
-        this.toastService.openSnackBar(`Successfully added new Project - '${res.name}'`);
+        this.toastService.openSnackBar(`New Project successfully added - '${res.name}'`);
         this.dialogRef.close(true);
       },
       (err: HttpErrorResponse) => {
