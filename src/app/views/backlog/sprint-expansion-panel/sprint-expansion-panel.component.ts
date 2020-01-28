@@ -70,7 +70,8 @@ export class SprintExpansionPanelComponent implements OnDestroy {
         status: task.status,
         id: this.sprintId,
         sprints: [],
-        taskId: task._id
+        taskId: task._id,
+        assignedUser: task.assigned
       }
     })
       .afterClosed()

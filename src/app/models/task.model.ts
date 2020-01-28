@@ -1,4 +1,5 @@
 import { TaskStatus, TaskType } from './sprint.model';
+import { User } from './user.model';
 
 export interface Task {
   name?: string;
@@ -6,7 +7,7 @@ export interface Task {
   status?: TaskStatus;
   estimation?: number;
   parent?: string;
-  assigned?: string;
+  assigned?: User;
   sprint?: number;
   description?: string;
   subtasks?: Task[];

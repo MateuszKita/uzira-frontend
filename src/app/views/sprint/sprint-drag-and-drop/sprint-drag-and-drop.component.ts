@@ -62,7 +62,7 @@ export class SprintDragAndDropComponent implements OnInit {
         take(1)
       )
       .subscribe(() => {
-        this.toastService.openSnackBar(`Moved '${data.name}' from '${data.status}' to '${status}'`, ToastType.INFO);
+        this.toastService.openSnackBar(`Moved '${data.name}' to '${status}'`, ToastType.INFO);
       });
   }
 

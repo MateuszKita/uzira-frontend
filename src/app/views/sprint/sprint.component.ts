@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { ProjectsService } from 'src/app/core/services/projects.service';
 import { SprintsService } from 'src/app/core/services/sprints.service';
 import { SprintGeneral } from 'src/app/models/sprint.model';
-import { takeUntil, switchMap, filter, finalize } from 'rxjs/operators';
+import { takeUntil, switchMap, filter, finalize, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sprint',
@@ -33,6 +33,7 @@ export class SprintComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.projectsService.selectedProjectId$
       .pipe(
+        debounceTime(1000),
         switchMap(() => this.sprintService.getSprints()),
         finalize(() => this.isLoading = false),
         takeUntil(this.onDestroy$),
@@ -42,15 +43,19 @@ export class SprintComponent implements OnInit, OnDestroy {
         if (this.sprints.length > 0) {
           this.selectedSprintId = sprints[sprints.length - 1]._id;
         }
-        this.sprintChanged();
+        this.sprintChanged(this.selectedSprintId);
       });
   }
 
-  sprintChanged(): void {
-    this.currentSprint = this.sprints.find(
-      sprint => sprint._id === this.selectedSprintId
-    );
-    this.isLoading = false;
+  sprintChanged(sprintId: string): void {
+    delete this.currentSprint;
+
+    setTimeout(() => {
+      this.currentSprint = this.sprints.find(
+        sprint => sprint._id === sprintId
+      );
+      this.isLoading = false;
+    });
   }
 
   ngOnDestroy(): void {
